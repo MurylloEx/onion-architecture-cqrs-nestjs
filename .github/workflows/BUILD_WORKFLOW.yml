@@ -13,9 +13,9 @@ jobs:
       DEPLOY_REPOSITORY_URL: https://github.com/Search-My-Pet/search-my-pet-api.git
       DEPLOY_REPOSITORY_NAME: search-my-pet-api
       DEPLOY_DIRECTORY: /home/muryllo/Documents/Deploys
-      DEPLOY_BOOTSTRAP_COMMAND: npm run start:dev
-      DEPLOY_LOG_STDOUT_PATH: /home/muryllo/Documents/Deploys/Logs/stdout-search-my-pet-api.dev.log
-      DEPLOY_LOG_STDERR_PATH: /home/muryllo/Documents/Deploys/Logs/stderr-search-my-pet-api.dev.log
+      DEPLOY_BOOTSTRAP_COMMAND: npm run deploy:dev
+      DEPLOY_LOG_STDOUT_PATH: /home/muryllo/Documents/Deploys/Logs
+      DEPLOY_LOG_STDERR_PATH: /home/muryllo/Documents/Deploys/Logs
     steps:
     - name: Deploying into development environment
       uses: appleboy/ssh-action@master
@@ -46,5 +46,14 @@ jobs:
           kill-port ${{ env.DEPLOY_PORT }}
 
           npm install
-          npm run build
-          nohup ${{ env.DEPLOY_BOOTSTRAP_COMMAND }} > ${{ env.DEPLOY_LOG_STDOUT_PATH }} 2> ${{ env.DEPLOY_LOG_STDERR_PATH }} < /dev/null &
+
+          STDOUT_FILE_NAME="stdout-${{ env.DEPLOY_REPOSITORY_NAME }}.${{ env.DEPLOY_BRANCH }}.log"
+          STDERR_FILE_NAME="stderr-${{ env.DEPLOY_REPOSITORY_NAME }}.${{ env.DEPLOY_BRANCH }}.log"
+
+          mkdir -p ${{ env.DEPLOY_LOG_STDOUT_PATH }}
+          mkdir -p ${{ env.DEPLOY_LOG_STDERR_PATH }}
+
+          STDOUT_FILE_PATH="${{ env.DEPLOY_LOG_STDOUT_PATH }}/${STDOUT_FILE_NAME}"
+          STDERR_FILE_PATH="${{ env.DEPLOY_LOG_STDERR_PATH }}/${STDERR_FILE_NAME}"
+
+          nohup ${{ env.DEPLOY_BOOTSTRAP_COMMAND }} > $STDOUT_FILE_PATH 2> $STDERR_FILE_PATH < /dev/null &
