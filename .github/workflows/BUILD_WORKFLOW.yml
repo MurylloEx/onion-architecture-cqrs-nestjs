@@ -21,10 +21,10 @@ jobs:
         script: |
           echo "Running script to deploy into server..."
           cd ${{ env.GITHUB_WORKFLOW }}
-          rm -rf Search-My-Pet
-          git clone https://github.com/Search-My-Pet/search-my-pet-api.git
+          rm -rf search-my-pet-api
+          git clone -b development --single-branch https://github.com/Search-My-Pet/search-my-pet-api.git
           cd search-my-pet-api
           npm install
           npx kill-port 15001
           npm run build
-          nohup npm run start:prod >> ../dev-api.log
+          nohup npm run start:prod >> ../api.dev.log
