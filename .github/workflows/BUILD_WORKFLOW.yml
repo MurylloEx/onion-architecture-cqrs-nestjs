@@ -8,8 +8,14 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     env:
-      GITHUB_WORKFLOW: ~/Documents/Deploys/
+      DEPLOY_PORT: 15001
       DEPLOY_BRANCH: development
+      DEPLOY_REPOSITORY_URL: https://github.com/Search-My-Pet/search-my-pet-api.git
+      DEPLOY_REPOSITORY_NAME: search-my-pet-api
+      DEPLOY_DIRECTORY: ~/Documents/Deploys
+      DEPLOY_BOOTSTRAP_COMMAND: npm run start:dev
+      DEPLOY_LOG_STDOUT_PATH: ~/Documents/Deploys/Logs/stdout-search-my-pet-api.dev.log
+      DEPLOY_LOG_STDERR_PATH: ~/Documents/Deploys/Logs/stderr-search-my-pet-api.dev.log
     steps:
     - name: Deploying into development environment
       uses: appleboy/ssh-action@master
@@ -20,11 +26,22 @@ jobs:
         username: ${{ secrets.SERVER_USERNAME }}
         script: |
           echo "Running script to deploy into server..."
-          cd ${{ env.GITHUB_WORKFLOW }}
-          rm -rf search-my-pet-api
-          git clone -b development --single-branch https://github.com/Search-My-Pet/search-my-pet-api.git
-          cd search-my-pet-api
+
+          BASE_PATH="${{ env.DEPLOY_DIRECTORY }}/${{ env.DEPLOY_BRANCH }}"
+          FULL_PATH="${BASE_PATH}/${{ env.DEPLOY_REPOSITORY_NAME }}"
+
+          if [ -d "$FULL_PATH" ]; then
+            cd $FULL_PATH
+            git reset --hard
+            git pull origin ${{ env.DEPLOY_BRANCH }}
+          else
+            cd $BASE_PATH
+            git clone -b ${{ env.DEPLOY_BRANCH }} --single-branch ${{ env.DEPLOY_REPOSITORY_URL }}
+          fi
+
+          # Kill any process listening TCP connections in that port
+          kill-port ${{ env.DEPLOY_PORT }}
+
           npm install
-          npx kill-port 15001
           npm run build
-          nohup npm run start:prod > ../api.dev.log 2> ../api.dev.error.log < /dev/null &
+          nohup ${{ env.DEPLOY_BOOTSTRAP_COMMAND }} > ${{ env.DEPLOY_LOG_STDOUT_PATH }} 2> ${{ env.DEPLOY_LOG_STDERR_PATH }} < /dev/null &
