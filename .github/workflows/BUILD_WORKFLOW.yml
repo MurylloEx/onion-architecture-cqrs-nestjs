@@ -38,6 +38,7 @@ jobs:
             mkdir -p $BASE_PATH
             cd $BASE_PATH
             git clone -b ${{ env.DEPLOY_BRANCH }} --single-branch ${{ env.DEPLOY_REPOSITORY_URL }}
+            cd ${{ env.DEPLOY_REPOSITORY_NAME }}
           fi
 
           # Kill any process listening TCP connections in that port
