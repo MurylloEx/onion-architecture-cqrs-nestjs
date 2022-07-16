@@ -35,6 +35,7 @@ jobs:
             git reset --hard
             git pull origin ${{ env.DEPLOY_BRANCH }}
           else
+            mkdir -p $BASE_PATH
             cd $BASE_PATH
             git clone -b ${{ env.DEPLOY_BRANCH }} --single-branch ${{ env.DEPLOY_REPOSITORY_URL }}
           fi
