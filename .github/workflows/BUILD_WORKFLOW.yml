@@ -19,6 +19,7 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         username: ${{ secrets.SERVER_USERNAME }}
         script: |
+          echo "Running script to deploy into server..."
           cd ${{ env.GITHUB_WORKFLOW }}
           rm -rf Search-My-Pet
           git clone https://github.com/Search-My-Pet/search-my-pet-api.git
