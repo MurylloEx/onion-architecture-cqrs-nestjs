@@ -12,10 +12,10 @@ jobs:
       DEPLOY_BRANCH: development
       DEPLOY_REPOSITORY_URL: https://github.com/Search-My-Pet/search-my-pet-api.git
       DEPLOY_REPOSITORY_NAME: search-my-pet-api
-      DEPLOY_DIRECTORY: ~/Documents/Deploys
+      DEPLOY_DIRECTORY: /home/muryllo/Documents/Deploys
       DEPLOY_BOOTSTRAP_COMMAND: npm run start:dev
-      DEPLOY_LOG_STDOUT_PATH: ~/Documents/Deploys/Logs/stdout-search-my-pet-api.dev.log
-      DEPLOY_LOG_STDERR_PATH: ~/Documents/Deploys/Logs/stderr-search-my-pet-api.dev.log
+      DEPLOY_LOG_STDOUT_PATH: /home/muryllo/Documents/Deploys/Logs/stdout-search-my-pet-api.dev.log
+      DEPLOY_LOG_STDERR_PATH: /home/muryllo/Documents/Deploys/Logs/stderr-search-my-pet-api.dev.log
     steps:
     - name: Deploying into development environment
       uses: appleboy/ssh-action@master
@@ -26,6 +26,7 @@ jobs:
         username: ${{ secrets.SERVER_USERNAME }}
         script: |
           echo "Running script to deploy into server..."
+          pwd
 
           BASE_PATH="${{ env.DEPLOY_DIRECTORY }}/${{ env.DEPLOY_BRANCH }}"
           FULL_PATH="${BASE_PATH}/${{ env.DEPLOY_REPOSITORY_NAME }}"
