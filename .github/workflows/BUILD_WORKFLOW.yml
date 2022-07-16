@@ -27,4 +27,4 @@ jobs:
           npm install
           npx kill-port 15001
           npm run build
-          nohup npm run start:prod >> ../api.dev.log
+          nohup npm run start:prod < /dev/null & > /dev/null &
