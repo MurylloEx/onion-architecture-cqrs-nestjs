@@ -36,3 +36,6 @@ lerna-debug.log*
 
 # Ignore package lock
 package-lock.json
+
+# Ignore environment files
+*.env
