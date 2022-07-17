@@ -1,0 +1,59 @@
+name: Development Deploy
+on:
+  push:
+    branches: [ development ]
+
+jobs:
+  deployment:
+    name: Deploy
+    runs-on: ubuntu-latest
+    env:
+      DEPLOY_PORT: 15001
+      DEPLOY_BRANCH: development
+      DEPLOY_REPOSITORY_URL: https://github.com/Search-My-Pet/search-my-pet-api.git
+      DEPLOY_REPOSITORY_NAME: search-my-pet-api
+      DEPLOY_DIRECTORY: /home/muryllo/Documents/Deploys
+      DEPLOY_BOOTSTRAP_COMMAND: npm run deploy:dev
+      DEPLOY_LOG_STDOUT_PATH: /home/muryllo/Documents/Deploys/Logs
+      DEPLOY_LOG_STDERR_PATH: /home/muryllo/Documents/Deploys/Logs
+    steps:
+    - name: Deploying into development environment
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        port: ${{ secrets.SERVER_PORT }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        script: |
+          echo "Running script to deploy into server..."
+          pwd
+
+          BASE_PATH="${{ env.DEPLOY_DIRECTORY }}/${{ env.DEPLOY_BRANCH }}"
+          FULL_PATH="${BASE_PATH}/${{ env.DEPLOY_REPOSITORY_NAME }}"
+
+          if [ -d "$FULL_PATH" ]; then
+            cd $FULL_PATH
+            git reset --hard
+            git pull origin ${{ env.DEPLOY_BRANCH }}
+          else
+            mkdir -p $BASE_PATH
+            cd $BASE_PATH
+            git clone -b ${{ env.DEPLOY_BRANCH }} --single-branch ${{ env.DEPLOY_REPOSITORY_URL }}
+            cd ${{ env.DEPLOY_REPOSITORY_NAME }}
+          fi
+
+          # Kill any process listening TCP connections in that port
+          kill-port ${{ env.DEPLOY_PORT }}
+
+          npm install
+
+          STDOUT_FILE_NAME="stdout-${{ env.DEPLOY_REPOSITORY_NAME }}.${{ env.DEPLOY_BRANCH }}.log"
+          STDERR_FILE_NAME="stderr-${{ env.DEPLOY_REPOSITORY_NAME }}.${{ env.DEPLOY_BRANCH }}.log"
+
+          mkdir -p ${{ env.DEPLOY_LOG_STDOUT_PATH }}
+          mkdir -p ${{ env.DEPLOY_LOG_STDERR_PATH }}
+
+          STDOUT_FILE_PATH="${{ env.DEPLOY_LOG_STDOUT_PATH }}/${STDOUT_FILE_NAME}"
+          STDERR_FILE_PATH="${{ env.DEPLOY_LOG_STDERR_PATH }}/${STDERR_FILE_NAME}"
+
+          nohup ${{ env.DEPLOY_BOOTSTRAP_COMMAND }} > $STDOUT_FILE_PATH 2> $STDERR_FILE_PATH < /dev/null &
