@@ -3,7 +3,8 @@ import { registerAs } from '@nestjs/config';
 export enum EnvironmentEnum {
   dev = 'development',
   prod = 'production',
-  local = 'local'
+  local = 'local',
+  test = 'testing'
 }
 
 export type RootConfigType = {
