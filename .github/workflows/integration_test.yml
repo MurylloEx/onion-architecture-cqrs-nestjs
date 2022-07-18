@@ -1,0 +1,44 @@
+name: Testing environment
+on:
+  pull_request:
+    branches: [ development ]
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    env:
+      TEST_BRANCH: development
+      TEST_REPOSITORY_URL: https://github.com/Search-My-Pet/search-my-pet-api.git
+      TEST_REPOSITORY_NAME: search-my-pet-api
+      TEST_DIRECTORY: /home/muryllo/Documents/Tests
+      TEST_COMMAND: npm test
+    steps:
+    - name: Setting up the test environment
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        port: ${{ secrets.SERVER_PORT }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        script: |
+          echo "Running script to test into server..."
+          pwd
+
+          BASE_PATH="${{ env.TEST_DIRECTORY }}/${{ env.TEST_BRANCH }}"
+          FULL_PATH="${BASE_PATH}/${{ env.TEST_REPOSITORY_NAME }}"
+
+          if [ -d "$FULL_PATH" ]; then
+            cd $FULL_PATH
+            git reset --hard
+            git pull origin ${{ env.TEST_BRANCH }}
+          else
+            mkdir -p $BASE_PATH
+            cd $BASE_PATH
+            git clone -b ${{ env.TEST_BRANCH }} --single-branch ${{ env.TEST_REPOSITORY_URL }}
+            cd ${{ env.TEST_REPOSITORY_NAME }}
+          fi
+
+          npm install
+
+          ${{ env.TEST_COMMAND }}
