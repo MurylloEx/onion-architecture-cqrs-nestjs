@@ -31,8 +31,6 @@ jobs:
           BASE_PATH="${{ env.TEST_DIRECTORY }}/${SAFE_BRANCH_NAME}"
           FULL_PATH="${BASE_PATH}/${{ env.TEST_REPOSITORY_NAME }}"
 
-          cd $BASE_PATH
-
           if [ -d "$FULL_PATH" ]; then
             cd $FULL_PATH
             git reset --hard
