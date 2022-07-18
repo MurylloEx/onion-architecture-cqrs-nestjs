@@ -34,8 +34,5 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# Ignore package lock
-package-lock.json
-
 # Ignore environment files
 *.env
