@@ -46,7 +46,7 @@ jobs:
 
           TEST_ENV_FILE="${{ env.TEST_DIRECTORY }}/.env"
 
-          [ ! -f $TEST_ENV_FILE ] || mv $TEST_ENV_FILE $FULL_PATH
+          [ ! -f $TEST_ENV_FILE ] || cp $TEST_ENV_FILE $FULL_PATH
 
           npm install
 
