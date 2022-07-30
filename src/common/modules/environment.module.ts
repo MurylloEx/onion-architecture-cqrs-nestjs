@@ -11,4 +11,4 @@ import { RootConfig, ServerConfig } from 'src/common/config';
     })
   ]
 })
-export class EnvModule {}
+export class EnvironmentModule {}
