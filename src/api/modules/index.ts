@@ -1,2 +1,1 @@
-export * from './app.module';
-export * from './env.module';
+export * from './api.module';
