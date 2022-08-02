@@ -5,4 +5,3 @@ export const EnvironmentSchema = Joi.object({
     .valid('development', 'production', 'local', 'testing')
     .default('local')
 });
-
