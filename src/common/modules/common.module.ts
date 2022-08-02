@@ -1,18 +1,25 @@
 import { Module } from '@nestjs/common';
-import { DomainModule } from 'src/domain/modules';
+import { DomainModule } from 'src/domain';
+
+import { CachingModule } from './caching.module';
 import { DatabaseModule } from './database.module';
-import { EnvironmentModule } from './environment.module';
+import { ServicesModule } from './services.module';
+import { SecurityModule } from './security.module';
 
 @Module({
   imports: [
-    EnvironmentModule,
+    DatabaseModule,
+    ServicesModule,
     DomainModule,
-    DatabaseModule
+    CachingModule,
+    SecurityModule
   ],
   exports: [
-    EnvironmentModule,
+    DatabaseModule,
+    ServicesModule,
     DomainModule,
-    DatabaseModule
+    CachingModule,
+    SecurityModule
   ]
 })
 export class CommonModule {}
