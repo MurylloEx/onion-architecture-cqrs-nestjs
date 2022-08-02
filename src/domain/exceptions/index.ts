@@ -1,1 +1,1 @@
-export * from './not-found-domain.exception';
+export * from './domain.exception';
