@@ -18,7 +18,7 @@ import {
 
 import {
   MessageRepository,
-  MessageService,
+  MessageDomainService,
   Message,
 } from 'src/domain/business/slices/message';
 
@@ -37,8 +37,8 @@ import {
     MessageDeletedHandler,
     MessageUpdatedHandler,
     MessageRepository,
-    MessageService
+    MessageDomainService
   ],
-  exports: [MessageService]
+  exports: [MessageDomainService]
 })
 export class MessageModule { }
