@@ -1,1 +1,1 @@
-export * from './environment.module';
+export * from './configuration-domain.module';

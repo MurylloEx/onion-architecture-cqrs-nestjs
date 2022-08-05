@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
 
-import { MessageModule } from 'src/domain/business';
-import { EnvironmentModule } from 'src/domain/config';
+import { BusinessDomainModule } from 'src/domain/business';
+import { ConfigurationDomainModule } from 'src/domain/config';
 
 @Module({
   imports: [
-    MessageModule,
-    EnvironmentModule
+    BusinessDomainModule,
+    ConfigurationDomainModule
   ],
   exports: [
-    MessageModule,
-    EnvironmentModule
+    BusinessDomainModule,
+    ConfigurationDomainModule
   ]
 })
 export class DomainModule {}
