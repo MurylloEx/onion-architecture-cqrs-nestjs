@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { MessageDto } from 'src/common';
-import { MessageService } from 'src/domain';
+import { MessageDomainService } from 'src/domain';
 
 @Injectable()
-export class MessageDomainService {
+export class MessageService {
 
-  constructor(private messageService: MessageService) {}
+  constructor(private readonly messageService: MessageDomainService) {}
 
   create(title: string, description: string): Promise<MessageDto> {
     return this.messageService.create(title, description);
