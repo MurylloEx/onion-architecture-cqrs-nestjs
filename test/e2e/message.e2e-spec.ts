@@ -24,7 +24,7 @@ describe('MessageController (e2e)', () => {
   it('/message/all (GET)', async () => {
     await request(actualServer)
       .get('/message/all')
-      .expect(200);
+      .expect(403);
   });
 
 });

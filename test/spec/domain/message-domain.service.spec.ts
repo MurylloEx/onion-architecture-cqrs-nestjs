@@ -1,10 +1,11 @@
 import { ModuleMetadata } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { DatabaseModule, ServicesModule, MessageDomainService } from 'src/common';
+import { DatabaseModule } from 'src/common';
+import { MessageModule, MessageDomainService } from 'src/domain';
 
 const TESTING_MODULE: ModuleMetadata = {
   imports: [
-    ServicesModule,
+    MessageModule,
     DatabaseModule
   ]
 };
