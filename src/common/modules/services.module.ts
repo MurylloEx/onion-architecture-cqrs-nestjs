@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
 import { DomainModule } from 'src/domain';
-import { MessageDomainService } from 'src/common/services';
+import { ConfigurationService, MessageService } from 'src/common/services';
 
 @Module({
-  imports: [
-    DomainModule
-  ],
+  imports: [DomainModule],
   providers: [
-    MessageDomainService
+    MessageService,
+    ConfigurationService
   ],
   exports: [
-    MessageDomainService
+    MessageService,
+    ConfigurationService
   ]
 })
 export class ServicesModule {}

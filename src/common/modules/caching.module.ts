@@ -1,15 +1,19 @@
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { CacheInterceptor, CacheModule, Module } from '@nestjs/common';
+import { ConfigurationService } from 'src/common/services';
+
+import { ConfigurationModule } from './configuration.module';
+
+const CacheProvider = { provide: APP_INTERCEPTOR, useClass: CacheInterceptor };
 
 @Module({
   imports: [
-    CacheModule.register({
-      ttl: 60, 
-      max: 1024
+    CacheModule.registerAsync({
+      imports: [ConfigurationModule],
+      useFactory: (configService: ConfigurationService) => configService.configureCache(),
+      inject: [ConfigurationService]
     })
   ],
-  providers: [
-    { provide: APP_INTERCEPTOR, useClass: CacheInterceptor }
-  ]
+  providers: [CacheProvider]
 })
 export class CachingModule {}
