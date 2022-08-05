@@ -1,28 +1,28 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
-import { MessageDomainService, MessageDto, Access, Permissions, AuthorizeGuard } from 'src/common';
+import { MessageService, MessageDto, Access, Permissions, AuthorizeGuard } from 'src/common';
 
 @UseGuards(AuthorizeGuard)
 @Controller('message')
 export class MessageController {
 
-  constructor(private messageDomainService: MessageDomainService) {}
+  constructor(private readonly messageService: MessageService) {}
 
   @Post()
   @Permissions(Access.CREATE_MESSAGE)
   create(@Body() message: MessageDto) {
-    return this.messageDomainService.create(message.title, message.description);
+    return this.messageService.create(message.title, message.description);
   }
 
   @Get('all')
   @Permissions(Access.READ_MESSAGE)
   fetch(): Promise<MessageDto[]> {
-    return this.messageDomainService.fetch();
+    return this.messageService.fetch();
   }
 
   @Get(':id')
   @Permissions(Access.READ_MESSAGE)
   fetchOne(@Param('id') id: string): Promise<MessageDto> {
-    return this.messageDomainService.fetchOne(id);
+    return this.messageService.fetchOne(id);
   }
 
   @Put(':id')
@@ -31,7 +31,7 @@ export class MessageController {
     Access.READ_MESSAGE
   )
   update(@Param('id') id: string, @Body() message: MessageDto): Promise<MessageDto> {
-    return this.messageDomainService.update(id, message);
+    return this.messageService.update(id, message);
   }
 
   @Delete(':id')
@@ -40,7 +40,7 @@ export class MessageController {
     Access.READ_MESSAGE
   )
   delete(@Param('id') id: string) {
-    return this.messageDomainService.delete(id);
+    return this.messageService.delete(id);
   }
 
 }
