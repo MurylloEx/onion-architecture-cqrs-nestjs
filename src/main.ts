@@ -1,13 +1,13 @@
 import * as compression from 'compression';
 import { NestFactory } from '@nestjs/core';
-import { ConfigService } from '@nestjs/config';
 import { ValidationPipe } from '@nestjs/common';
+import { SwaggerModule } from '@nestjs/swagger';
 import { WsAdapter } from '@nestjs/platform-ws';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { ApiModule } from 'src/api';
 
 import {
+  ConfigurationService,
   DomainExceptionFilter,
   HardErrorFilter,
   HttpExceptionFilter
@@ -19,29 +19,19 @@ import {
   VersionInterceptor
 } from 'src/common';
 
-import {
-  ServerConfigType,
-  SERVER_CONFIG,
-} from 'src/domain';
-
-const CORS_CONFIG = {
-  origin: '*',
-  maxAge: 86400
-};
-
-const COMPRESSION_CONFIG = {
-  level: 1,
-  memLevel: 1
-};
-
 async function bootstrap() {
   const app = await NestFactory.create(ApiModule);
+  const config = app.get(ConfigurationService);
 
-  app.setGlobalPrefix('/api/v1');
-  app.enableCors(CORS_CONFIG);
-  app.use(compression(COMPRESSION_CONFIG));
+  app.setGlobalPrefix(config.configureServerGlobalPrefix());
+  app.enableCors(config.configureCors());
+  app.use(compression(config.configureCompression()));
   app.useWebSocketAdapter(new WsAdapter(app));
-  app.useGlobalPipes(new ValidationPipe({ transform: true }));
+  app.useGlobalPipes(new ValidationPipe({ 
+    transform: true,
+    whitelist: true,
+    forbidNonWhitelisted: true
+  }));
   app.useGlobalFilters(
     new DomainExceptionFilter(),
     new HardErrorFilter(),
@@ -53,26 +43,14 @@ async function bootstrap() {
     new VersionInterceptor()
   );
 
-  const config = new DocumentBuilder()
-    .setTitle('Title')
-    .setDescription('Description')
-    .setVersion('Version')
-    .setContact('AuthorName', 'AuthorWebsite', 'AuthorEmail')
-    .setLicense('LicenseName', 'LicenseUrl')
-    .addBearerAuth()
-    .addTag('Tag')
-    .build();
+  const swaggerOptions = config.configureSwagger().build();
+  const document = SwaggerModule.createDocument(app, swaggerOptions);
 
-  const document = SwaggerModule.createDocument(app, config);
-
-  SwaggerModule.setup('SwaggerPath', app, document);
-
-  const configService = app.get(ConfigService);
-  const serverConfig = configService.get<ServerConfigType>(SERVER_CONFIG);
-
-  await app.listen(serverConfig.port, () => {
-    console.log('dfjsdjhfsjdfjksdf')
+  SwaggerModule.setup(config.configureSwaggerPath(), app, document, {
+    
   });
+
+  await app.listen(config.configureServerPort());
 }
 
 bootstrap();
