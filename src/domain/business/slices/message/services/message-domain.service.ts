@@ -15,7 +15,7 @@ import {
 } from 'src/domain/business/slices/message/commands';
 
 @Injectable()
-export class MessageService {
+export class MessageDomainService {
 
   constructor(
     private readonly commandBus: CommandBus,
