@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { MessageDto } from 'src/common';
+import { MessageDto } from 'src/common/dto';
 import { MessageDomainService } from 'src/domain';
 
 @Injectable()
