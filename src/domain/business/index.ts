@@ -1,2 +1,2 @@
-export * from './slices';
 export * from './modules';
+export * from './slices';
