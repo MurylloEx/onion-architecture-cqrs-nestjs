@@ -62,14 +62,16 @@ export class DiscordLoggingDomainService {
     return this.commonLogger.debug({
       message,
       description,
-      json: object
+      json: object,
+      meta: this.metadata
     })
   }
 
   error<T extends Error>(message: string, error: T): Promise<void> {
     return this.commonLogger.error({
       message,
-      error
+      error,
+      meta: this.metadata
     });
   }
 
@@ -83,7 +85,8 @@ export class DiscordLoggingDomainService {
   silly(message: string, description: string): Promise<void> {
     return this.commonLogger.silly({
       message,
-      description
+      description,
+      meta: this.metadata
     });
   }
 
@@ -100,7 +103,8 @@ export class DiscordLoggingDomainService {
     return this.commonLogger.warn({
       message,
       description,
-      json: object
+      json: object,
+      meta: this.metadata
     });
   }
 
