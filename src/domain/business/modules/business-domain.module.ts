@@ -1,12 +1,15 @@
 import { Module } from '@nestjs/common';
+import { LoggingModule } from './logging.module';
 import { MessageModule } from './message.module';
 
 @Module({
   imports: [
-    MessageModule
+    MessageModule,
+    LoggingModule
   ],
   exports: [
-    MessageModule
+    MessageModule,
+    LoggingModule
   ]
 })
 export class BusinessDomainModule { }
