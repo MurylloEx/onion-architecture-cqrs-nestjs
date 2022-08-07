@@ -1,11 +1,18 @@
 import { snakeCase } from 'lodash';
 import { Request, Response } from 'express';
-import { ArgumentsHost, Catch, ExceptionFilter, HttpException, Logger } from '@nestjs/common';
+import {
+  ArgumentsHost,
+  Catch,
+  ExceptionFilter,
+  HttpException
+} from '@nestjs/common';
+
+import { LoggingService } from 'src/common/services';
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter<HttpException> {
-  
-  private readonly logger = new Logger(HttpExceptionFilter.name);
+
+  constructor(private readonly logger: LoggingService) { }
 
   getExceptionName(exception: HttpException) {
     return snakeCase('StatusHttp' + exception.name).toLowerCase();
@@ -20,8 +27,8 @@ export class HttpExceptionFilter implements ExceptionFilter<HttpException> {
 
     delete payload.statusCode;
 
-    if (status >= 500 && status <= 599){
-      this.logger.error(exception.message, exception.stack, exception.name);
+    if (status >= 500 && status <= 599) {
+      this.logger.error('A fatal server error occurred.', payload);
     }
 
     response.status(status).json({
@@ -29,7 +36,7 @@ export class HttpExceptionFilter implements ExceptionFilter<HttpException> {
       path: request.url,
       error: true,
       status: status,
-      code: this.getExceptionName(exception), 
+      code: this.getExceptionName(exception),
       payload
     });
   }

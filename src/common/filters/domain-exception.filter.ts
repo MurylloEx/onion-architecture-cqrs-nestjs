@@ -1,12 +1,18 @@
 import { snakeCase } from 'lodash';
 import { Request, Response } from 'express';
-import { ArgumentsHost, Catch, ExceptionFilter, Logger } from '@nestjs/common';
+import {
+  ArgumentsHost,
+  Catch,
+  ExceptionFilter
+} from '@nestjs/common';
+
 import { DomainException } from 'src/domain';
+import { LoggingService } from 'src/common/services';
 
 @Catch(DomainException)
 export class DomainExceptionFilter implements ExceptionFilter<DomainException> {
 
-  private readonly logger = new Logger(DomainExceptionFilter.name);
+  constructor(private readonly logger: LoggingService) { }
 
   getExceptionName(exception: DomainException) {
     return snakeCase('StatusDomain' + exception.name).toLowerCase();
@@ -21,14 +27,19 @@ export class DomainExceptionFilter implements ExceptionFilter<DomainException> {
 
     delete payload.statusCode;
 
-    this.logger.error(exception.message, exception.stack, exception.name);
+    this.logger.warning(
+      'A domain exception has detected.', 
+      'This is not neccessarily a back-end error, ' +
+      'but a business logic exception.', 
+      payload
+    );
 
     response.status(status).json({
       timestamp: new Date(),
       path: request.url,
       error: true,
       status: status,
-      code: this.getExceptionName(exception), 
+      code: this.getExceptionName(exception),
       payload
     });
   }
