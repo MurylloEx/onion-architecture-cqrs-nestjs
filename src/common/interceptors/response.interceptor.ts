@@ -1,12 +1,12 @@
+import { extension } from 'mime-types';
 import { Observable, map } from 'rxjs';
 import { Request, Response } from 'express';
-import { extension } from 'mime-types';
 
-import { 
-  CallHandler, 
-  ExecutionContext, 
-  Injectable, 
-  NestInterceptor 
+import {
+  CallHandler,
+  ExecutionContext,
+  Injectable,
+  NestInterceptor
 } from '@nestjs/common';
 
 @Injectable()
@@ -17,7 +17,9 @@ export class ResponseInterceptor implements NestInterceptor {
     const request = ctx.getRequest<Request>();
     const response = ctx.getResponse<Response>();
 
-    if (extension(request.get('content-type')) != 'json') {
+    const acceptExtension = extension(request.get('accept')) || 'json';
+
+    if (acceptExtension != 'json') {
       return next.handle();
     }
 
