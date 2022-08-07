@@ -1,5 +1,5 @@
 import { LoggingType } from 'src/domain/business/slices/logging/types';
-import { CreateLoggingCommand } from '../create-logging.command';
+import { CreateLoggingCommand } from 'src/domain/business/slices/logging/commands';
 
 export class CreateLoggingCommandBuilder<T> {
 
