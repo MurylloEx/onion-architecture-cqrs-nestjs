@@ -18,7 +18,8 @@ export const SmtpConfig = registerAs<SmtpConfigSlice>(SMTP_CONFIG, (): any => ({
   from: {
     name: cast(process.env.SMTP_FROM_NAME, 'String'),
     email: cast(process.env.SMTP_FROM_EMAIL, 'String')
-  }
+  },
+  sandbox: cast(process.env.SMTP_SANDBOX, 'Boolean')
 }));
 
 export type SmtpConfigType = ConfigType<typeof SmtpConfig>;
