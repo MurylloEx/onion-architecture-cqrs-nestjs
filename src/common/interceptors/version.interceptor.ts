@@ -7,7 +7,7 @@ import {
   ExecutionContext, 
   GoneException, 
   Injectable, 
-  NestInterceptor 
+  NestInterceptor
 } from '@nestjs/common';
 
 @Injectable()
