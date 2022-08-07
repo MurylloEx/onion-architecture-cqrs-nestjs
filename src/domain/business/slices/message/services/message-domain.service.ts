@@ -37,7 +37,7 @@ export class MessageDomainService {
     return this.commandBus.execute<ICommand, Message>(command);
   }
 
-  updateById(id: string, message: Message) {
+  updateById(id: string, message: Partial<Message>) {
     const command = new UpdateMessageCommand(id, message);
     return this.commandBus.execute<ICommand, Message>(command);
   }
