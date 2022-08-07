@@ -1,10 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity } from 'typeorm';
+import { DomainModel } from 'src/domain/models';
 
 @Entity()
-export class Message {
-
-  @PrimaryGeneratedColumn('uuid')
-  public id: string;
+export class Message extends DomainModel {
 
   @Column()
   public title: string;
