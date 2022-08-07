@@ -25,7 +25,7 @@ export class MessageRepository {
     return this.repository.findOneByOrFail({ id });
   }
 
-  updateById(id: string, message: Message): Promise<UpdateResult> {
+  updateById(id: string, message: Partial<Message>): Promise<UpdateResult> {
     return this.repository.update(id, message);
   }
 
