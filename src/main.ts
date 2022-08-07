@@ -10,7 +10,8 @@ import {
   ConfigurationService,
   DomainExceptionFilter,
   HardErrorFilter,
-  HttpExceptionFilter
+  HttpExceptionFilter,
+  LoggingService
 } from 'src/common';
 
 import {
@@ -21,7 +22,9 @@ import {
 
 async function bootstrap() {
   const app = await NestFactory.create(ApiModule);
+
   const config = app.get(ConfigurationService);
+  const logger = app.get(LoggingService);
 
   app.setGlobalPrefix(config.configureServerGlobalPrefix());
   app.enableCors(config.configureCors());
@@ -33,9 +36,9 @@ async function bootstrap() {
     forbidNonWhitelisted: true
   }));
   app.useGlobalFilters(
-    new DomainExceptionFilter(),
-    new HardErrorFilter(),
-    new HttpExceptionFilter()
+    new DomainExceptionFilter(logger),
+    new HardErrorFilter(logger),
+    new HttpExceptionFilter(logger)
   );
   app.useGlobalInterceptors(
     new ResponseInterceptor(),
@@ -46,11 +49,11 @@ async function bootstrap() {
   const swaggerOptions = config.configureSwagger().build();
   const document = SwaggerModule.createDocument(app, swaggerOptions);
 
-  SwaggerModule.setup(config.configureSwaggerPath(), app, document, {
-    
-  });
+  SwaggerModule.setup(config.configureSwaggerPath(), app, document);
 
-  await app.listen(config.configureServerPort());
+  app.listen(config.configureServerPort())
+    .then(() => logger.deploySuccess())
+    .catch((error) => logger.deployFailed(error));
 }
 
 bootstrap();
