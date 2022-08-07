@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
-import { ExecutionContext, Injectable } from '@nestjs/common';
+import { ExecutionContext, Injectable, Provider } from '@nestjs/common';
 
 @Injectable()
 export class JwtAuthorizeGuard extends AuthGuard('jwt') {
@@ -17,7 +17,7 @@ export class JwtAuthorizeGuard extends AuthGuard('jwt') {
 
 }
 
-export const JwtAuthorizeProvider = {
+export const JwtAuthorizeProvider: Provider = {
   provide: APP_GUARD,
   useClass: JwtAuthorizeGuard
-}
+};
