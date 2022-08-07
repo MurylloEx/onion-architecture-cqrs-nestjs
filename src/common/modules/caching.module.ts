@@ -1,10 +1,13 @@
 import { APP_INTERCEPTOR } from '@nestjs/core';
-import { CacheInterceptor, CacheModule, Module } from '@nestjs/common';
+import { CacheInterceptor, CacheModule, Module, Provider } from '@nestjs/common';
 import { ConfigurationService } from 'src/common/services';
 
 import { ConfigurationModule } from './configuration.module';
 
-const CacheProvider = { provide: APP_INTERCEPTOR, useClass: CacheInterceptor };
+const CacheProvider: Provider = { 
+  provide: APP_INTERCEPTOR, 
+  useClass: CacheInterceptor 
+};
 
 @Module({
   imports: [
