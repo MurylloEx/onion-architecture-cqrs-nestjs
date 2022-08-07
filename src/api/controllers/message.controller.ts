@@ -1,7 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
-import { MessageService, MessageDto, Access, Permissions, AuthorizeGuard } from 'src/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { MessageService, MessageDto, Access, Permissions, Security } from 'src/common';
 
-@UseGuards(AuthorizeGuard)
+@Security()
 @Controller('message')
 export class MessageController {
 
