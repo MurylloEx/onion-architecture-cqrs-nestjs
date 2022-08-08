@@ -38,4 +38,5 @@ lerna-debug.log*
 *.env
 
 # Ignore database directories
-database
+**/*.sqlite
+**/*.db
