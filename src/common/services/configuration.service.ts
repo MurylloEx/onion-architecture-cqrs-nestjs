@@ -29,6 +29,10 @@ import {
 import { Message } from 'src/domain';
 import { StoreConfig } from 'cache-manager';
 
+import { 
+  CreateMessageTableMigration1659920828672 
+} from 'src/database/migrations';
+
 @Injectable()
 export class ConfigurationService {
 
@@ -111,10 +115,15 @@ export class ConfigurationService {
       database: <any>this.database.storage,
       synchronize: this.database.synchronize,
       logging: this.database.logging,
+      migrationsRun: this.database.migrationsEnable,
+      migrationsTableName: this.database.migrationsTable,
       entities: [
         Message
+      ],
+      migrations: [
+        CreateMessageTableMigration1659920828672
       ]
-    }
+    };
   }
 
   configureCache(): Partial<CacheModuleOptions<StoreConfig>> {
