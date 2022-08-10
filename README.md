@@ -25,10 +25,10 @@
 
 # 📌 Tabela de Conteúdo
 
-- [Tecnologias](#💻-tecnologias)
-- [Como fazer o projeto funcionar na sua máquina](#👷-como-fazer-o-projeto-funcionar-na-sua-máquina)
-- [Issues (Problemas)](#🐛-issues-problemas)
-- [Licença](#📃-licença)
+- [Tecnologias](#-tecnologias)
+- [Como fazer o projeto funcionar na sua máquina](#-como-fazer-o-projeto-funcionar-na-sua-máquina)
+- [Issues (Problemas)](#-issues-problemas)
+- [Licença](#-licença)
 
 # 💻 Tecnologias
 
