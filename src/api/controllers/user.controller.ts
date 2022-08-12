@@ -1,6 +1,6 @@
-import { Controller, Get, Post } from '@nestjs/common';
-import { Access, Security, Permissions } from 'src/common';
-import { UserService } from 'src/common/services/user.service';
+import { Controller, Get, Param, Patch } from '@nestjs/common';
+import { Access, Security, Permissions, User, AppVersion, UserDto } from 'src/common';
+import { UserService } from 'src/common/services';
 
 @Security()
 @Controller('user')
@@ -10,26 +10,35 @@ export class UserController {
 
   @Get()
   @Permissions(Access.READ_USER)
-  fetchSelf() {
+  fetchSelf(@User() user: UserDto, @AppVersion() version: string) {
     //Visualizar próprio perfil
   }
 
-  @Get()
+  @Get(':id')
   @Permissions(
     Access.READ_USER, 
     Access.READ_ANOTHER_USER
   )
-  fetchOne() {
+  fetchOne(@Param('id') id: number) {
     //Visualizar perfil de outro usuário
   }
 
-  @Get()
+  @Get('all')
   @Permissions(
     Access.READ_USER, 
     Access.READ_ANOTHER_USER
   )
   fetch() {
     //Visualizar vários perfis por um conjunto de ids
+  }
+
+  @Patch()
+  @Permissions(
+    Access.UPDATE_USER,
+    Access.READ_USER
+  )
+  updatePartially() {
+    //Atualizar parcialmente o perfil do usuário
   }
 
 }
