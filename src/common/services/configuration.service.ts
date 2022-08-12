@@ -1,3 +1,4 @@
+import { StoreConfig } from 'cache-manager';
 import { JwtModuleOptions } from '@nestjs/jwt';
 import { DocumentBuilder } from '@nestjs/swagger';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
@@ -27,11 +28,10 @@ import {
 } from 'src/domain';
 
 import { Message } from 'src/domain';
-import { StoreConfig } from 'cache-manager';
 
 import { 
   CreateMessageTableMigration1659920828672 
-} from 'src/database/migrations';
+} from 'src/domain';
 
 @Injectable()
 export class ConfigurationService {
