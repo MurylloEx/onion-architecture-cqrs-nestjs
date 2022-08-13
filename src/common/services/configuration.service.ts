@@ -27,7 +27,10 @@ import {
   SmtpConfigType
 } from 'src/domain';
 
-import { Message } from 'src/domain';
+import { 
+  Message, 
+  User
+} from 'src/domain';
 
 import { 
   CreateMessageTableMigration1659920828672 
@@ -118,7 +121,8 @@ export class ConfigurationService {
       migrationsRun: this.database.migrationsEnable,
       migrationsTableName: this.database.migrationsTable,
       entities: [
-        Message
+        Message,
+        User
       ],
       migrations: [
         CreateMessageTableMigration1659920828672
