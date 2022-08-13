@@ -19,8 +19,8 @@ export class UserController {
     Access.READ_USER, 
     Access.READ_ANOTHER_USER
   )
-  fetchOne(@Param('id') id: number) {
-    //Visualizar perfil de outro usuário
+  fetchOne(@Param('id') id: string): Promise<UserDto> {
+    return this.userService.fetchOne(id);
   }
 
   @Get('all')
@@ -29,7 +29,6 @@ export class UserController {
     Access.READ_ANOTHER_USER
   )
   fetch() {
-    //Visualizar vários perfis por um conjunto de ids
   }
 
   @Patch()
