@@ -1,3 +1,4 @@
+import { BucketConfig } from './bucket.config';
 import { CacheConfig } from './cache.config';
 import { CompressionConfig } from './compression.config';
 import { DatabaseConfig } from './database.config';
@@ -8,6 +9,7 @@ import { SecurityConfig } from './security.config';
 import { ServerConfig } from './server.config';
 import { SmtpConfig } from './smtp.config';
 
+export * from './bucket.config';
 export * from './cache.config';
 export * from './compression.config';
 export * from './database.config';
@@ -19,6 +21,7 @@ export * from './server.config';
 export * from './smtp.config';
 
 export const ConfigSlices = [
+  BucketConfig,
   CacheConfig,
   CompressionConfig,
   DatabaseConfig,
