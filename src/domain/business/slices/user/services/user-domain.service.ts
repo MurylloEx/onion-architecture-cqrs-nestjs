@@ -11,7 +11,7 @@ import {
   CreateUserCommand,
   DeleteUserCommand,
   UpdatePasswordCommand,
-  UpdateUserCommand
+  UpdateUserCommand,
 } from 'src/domain/business/slices/user/commands';
 
 import { User } from 'src/domain/business/slices/user/models';
@@ -69,6 +69,6 @@ export class UserDomainService {
     const command = new UpdatePasswordCommand(
       userId, code, password
     );
-    return this.commandBus.execute<ICommand, User>(command);
+    return this.commandBus.execute<ICommand, boolean>(command);
   }
 }

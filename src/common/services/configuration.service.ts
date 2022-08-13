@@ -79,6 +79,7 @@ export class ConfigurationService {
         in: "header",
         name: "x-app-version",
       })
+      .addSecurityRequirements("bearer", ["bearer"])
       .addSecurityRequirements("x-app-version", ["x-app-version"])
       .setTitle(this.oas.title)
       .setDescription(this.oas.description)
