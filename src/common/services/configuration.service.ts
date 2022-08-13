@@ -74,6 +74,12 @@ export class ConfigurationService {
     return new DocumentBuilder()
       .addTag(this.oas.tag)
       .addBearerAuth()
+      .addSecurity("x-app-version", {
+        type: "apiKey",
+        in: "header",
+        name: "x-app-version",
+      })
+      .addSecurityRequirements("x-app-version", ["x-app-version"])
       .setTitle(this.oas.title)
       .setDescription(this.oas.description)
       .setVersion(this.oas.version)

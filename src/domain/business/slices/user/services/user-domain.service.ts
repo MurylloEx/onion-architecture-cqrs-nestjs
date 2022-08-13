@@ -10,6 +10,7 @@ import {
 import {
   CreateUserCommand,
   DeleteUserCommand,
+  UpdatePasswordCommand,
   UpdateUserCommand
 } from 'src/domain/business/slices/user/commands';
 
@@ -64,4 +65,10 @@ export class UserDomainService {
     return this.commandBus.execute<ICommand, User>(command);
   }
 
+  updatePassword(userId: string, code: string, password: string) {
+    const command = new UpdatePasswordCommand(
+      userId, code, password
+    );
+    return this.commandBus.execute<ICommand, User>(command);
+  }
 }
