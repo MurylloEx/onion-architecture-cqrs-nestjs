@@ -3,4 +3,4 @@ export enum BucketActionType {
   Read = 'read',
   Update = 'update',
   Remove = 'remove'
-};
+}
