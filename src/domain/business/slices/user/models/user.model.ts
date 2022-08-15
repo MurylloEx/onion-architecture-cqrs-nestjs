@@ -5,12 +5,6 @@ import { DomainModel } from 'src/domain/models';
 export class User extends DomainModel {
 
   @Column()
-  public sub: string;
-
-  @Column()
-  public iat: number;
-
-  @Column()
   public fullName: string;
 
   @Column()
