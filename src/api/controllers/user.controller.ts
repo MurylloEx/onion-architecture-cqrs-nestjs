@@ -1,23 +1,32 @@
-import { Body, Controller, Get, HttpCode, Param, Patch, Put } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
-import { Access, Security, Permissions, User, AppVersion, UserDto, UpdatePasswordDto } from 'src/common';
+import { Body, Controller, Get, HttpCode, Param, Patch, Put } from '@nestjs/common';
 import { UserService } from 'src/common/services';
+import {
+  Access,
+  Security,
+  Permissions,
+  Jwt,
+  AppVersion,
+  JwtDto,
+  UserDto,
+  UpdatePasswordDto
+} from 'src/common';
 
 @Security()
 @Controller('user')
 export class UserController {
 
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) { }
 
   @Get()
   @Permissions(Access.READ_USER)
-  fetchSelf(@User() user: UserDto, @AppVersion() version: string) {
+  fetchSelf(@Jwt() jwt: JwtDto, @AppVersion() version: string) {
     //Visualizar próprio perfil
   }
 
   @Get(':id')
   @Permissions(
-    Access.READ_USER, 
+    Access.READ_USER,
     Access.READ_ANOTHER_USER
   )
   fetchOne(@Param('id') id: string): Promise<UserDto> {
@@ -26,7 +35,7 @@ export class UserController {
 
   @Get('all')
   @Permissions(
-    Access.READ_USER, 
+    Access.READ_USER,
     Access.READ_ANOTHER_USER
   )
   fetch() {
@@ -41,8 +50,8 @@ export class UserController {
     //Atualizar parcialmente o perfil do usuário
   }
 
-  @ApiOperation({ summary: "Atualiza a senha do usuário" })
-  @Put("password")
+  @ApiOperation({ summary: 'Atualiza a senha do usuário' })
+  @Put('password')
   //@Permissions(Access.UPDATE_PASSWORD)
   @HttpCode(204)
   updatePassword(
