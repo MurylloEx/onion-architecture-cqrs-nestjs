@@ -1,16 +1,6 @@
-import { ApiOperation } from '@nestjs/swagger';
-import { Body, Controller, Get, HttpCode, Param, Patch, Put } from '@nestjs/common';
+import { Controller, Get, Param, Patch } from '@nestjs/common';
 import { UserService } from 'src/common/services';
-import {
-  Access,
-  Security,
-  Permissions,
-  Jwt,
-  AppVersion,
-  JwtDto,
-  UserDto,
-  UpdatePasswordDto
-} from 'src/common';
+import { Access, Security, Permissions, Jwt, JwtDto, AppVersion, UserDto } from 'src/common';
 
 @Security()
 @Controller('user')
@@ -39,6 +29,7 @@ export class UserController {
     Access.READ_ANOTHER_USER
   )
   fetch() {
+    //Listar todos os perfis de usuários do sistema
   }
 
   @Patch()
@@ -48,18 +39,6 @@ export class UserController {
   )
   updatePartially() {
     //Atualizar parcialmente o perfil do usuário
-  }
-
-  @ApiOperation({ summary: 'Atualiza a senha do usuário' })
-  @Put('password')
-  //@Permissions(Access.UPDATE_PASSWORD)
-  @HttpCode(204)
-  updatePassword(
-    @Body() data: UpdatePasswordDto,
-    //@Res({ passthrough: true }) { user }: any
-  ) {
-    //return this.userService.updatePassword(user.id, data);
-    return this.userService.updatePassword('1', data);
   }
 
 }
