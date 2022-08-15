@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TEST_BRANCH: ${{ github.head_ref || github.ref_name }} 
-      TEST_REPOSITORY_URL: https://github.com/Search-My-Pet/search-my-pet-api.git
-      TEST_REPOSITORY_NAME: search-my-pet-api
+      TEST_REPOSITORY_URL: https://github.com/inclusive-pet/inclusive-pet-api.git
+      TEST_REPOSITORY_NAME: inclusive-pet-api
       TEST_DIRECTORY: /home/muryllo/Documents/Tests
       TEST_COMMAND: npm test
     steps:
@@ -50,5 +50,10 @@ jobs:
 
           ${{ env.TEST_COMMAND }}
 
-          cd ${{ env.TEST_DIRECTORY }}
-          rm -rf $SAFE_BRANCH_NAME
+          if [ $? -eq 0 ]; then
+            cd ${{ env.TEST_DIRECTORY }}
+            rm -rf $SAFE_BRANCH_NAME
+          else
+            echo -e "Tests failed. Check out the logs and try again"
+            exit 1
+          fi
