@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, FindManyOptions, Repository, UpdateResult } from 'typeorm';
 
 import { Bucket } from 'src/domain/business/slices/bucket/models';
+import { BucketActionType, BucketType } from 'src/domain/business/slices/bucket/types';
 
 @Injectable()
 export class BucketRepository {
@@ -13,8 +14,8 @@ export class BucketRepository {
   ) {}
 
   create(
-    type: string,
-    actionType: string,
+    type: BucketType,
+    actionType: BucketActionType,
     referenceId: string,
     extraInfo: string
   ): Promise<Bucket> {
