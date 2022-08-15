@@ -10,8 +10,8 @@ jobs:
     env:
       DEPLOY_PORT: 15000
       DEPLOY_BRANCH: main
-      DEPLOY_REPOSITORY_URL: https://github.com/Search-My-Pet/search-my-pet-api.git
-      DEPLOY_REPOSITORY_NAME: search-my-pet-api
+      DEPLOY_REPOSITORY_URL: https://github.com/inclusive-pet/inclusive-pet-api.git
+      DEPLOY_REPOSITORY_NAME: inclusive-pet-api
       DEPLOY_DIRECTORY: /home/muryllo/Documents/Deploys
       DEPLOY_BOOTSTRAP_COMMAND: npm run deploy:prod
       DEPLOY_LOG_STDOUT_PATH: /home/muryllo/Documents/Deploys/Logs
