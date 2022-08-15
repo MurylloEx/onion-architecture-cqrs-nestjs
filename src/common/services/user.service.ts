@@ -7,11 +7,11 @@ export class UserService {
 
   constructor(private readonly userDomainService: UserDomainService) {}
 
-  fetch(): Promise<UserDto[]> {
+  fetch(): Promise<Partial<UserDto>[]> {
     return this.userDomainService.fetch();
   }
 
-  fetchOne(id: string): Promise<UserDto> {
+  fetchOne(id: string): Promise<Partial<UserDto>> {
     return this.userDomainService.fetchById(id);
   }
 

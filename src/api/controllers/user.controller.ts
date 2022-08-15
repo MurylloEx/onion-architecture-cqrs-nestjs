@@ -19,7 +19,7 @@ export class UserController {
     Access.READ_USER, 
     Access.READ_ANOTHER_USER
   )
-  fetchOne(@Param('id') id: string): Promise<UserDto> {
+  fetchOne(@Param('id') id: string): Promise<Partial<UserDto>> {
     return this.userService.fetchOne(id);
   }
 
