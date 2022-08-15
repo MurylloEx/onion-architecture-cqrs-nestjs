@@ -1,4 +1,4 @@
-import { Exclude, Expose } from "class-transformer";
+import { Exclude, Expose } from 'class-transformer';
 import { 
   IsEmail, 
   IsNumber, 
@@ -6,7 +6,7 @@ import {
   IsString, 
   Length, 
   MinLength
-} from "class-validator";
+} from 'class-validator';
 
 @Exclude()
 export class UserDto {

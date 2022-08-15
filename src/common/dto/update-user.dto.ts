@@ -2,7 +2,7 @@ import {
   IsPhoneNumber, 
   IsString, 
   Length
-} from "class-validator";
+} from 'class-validator';
 
 export class UpdateUserDto {
 

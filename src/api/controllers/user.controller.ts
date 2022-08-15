@@ -1,8 +1,9 @@
+import { ApiOperation } from '@nestjs/swagger';
 import { Body, Controller, Get, Param, Patch } from '@nestjs/common';
+
+import { UpdateUserDto } from 'src/common/dto';
 import { UserService } from 'src/common/services';
 import { Access, Security, Permissions, User, AppVersion, UserDto } from 'src/common';
-import { ApiOperation } from '@nestjs/swagger';
-import { UpdateUserDto } from 'src/common/dto/update-user.dto';
 
 @Security()
 @Controller('users')
@@ -10,7 +11,7 @@ export class UserController {
 
   constructor(private readonly userService: UserService) {}
 
-  @Get('')
+  @Get()
   @Permissions(
     Access.READ_USER, 
     Access.READ_ANOTHER_USER
@@ -34,8 +35,8 @@ export class UserController {
     return this.userService.fetchOne(id);
   }
 
-  @ApiOperation({description: "Atualiza as informações do usuário"})
-  @Patch("me")
+  @ApiOperation({description: 'Atualiza as informações do usuário' })
+  @Patch('me')
   @Permissions(
     Access.UPDATE_USER,
     Access.READ_USER
