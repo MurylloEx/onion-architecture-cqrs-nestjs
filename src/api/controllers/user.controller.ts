@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Patch } from '@nestjs/common';
 
 import { UpdateUserDto } from 'src/common/dto';
 import { UserService } from 'src/common/services';
-import { Access, Security, Permissions, Jwt, JwtDto, AppVersion, UserDto } from 'src/common';
+import { Access, Security, Permissions, Jwt, JwtDto, UserDto } from 'src/common';
 
 @Security()
 @Controller('/user')
@@ -16,13 +16,13 @@ export class UserController {
     Access.READ_ANOTHER_USER
   )
   fetch() {
-    //Listar todos os perfis de usuários do sistema
+    return this.userService.fetch();
   }
 
   @Get('/me')
   @Permissions(Access.READ_USER)
-  fetchSelf(@Jwt() jwt: JwtDto, @AppVersion() version: string) {
-    //Visualizar próprio perfil
+  fetchSelf(@Jwt() jwt: JwtDto) {
+    return this.userService.fetchOne(jwt.id);
   }
 
   @Get('/:id')
