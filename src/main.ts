@@ -1,8 +1,8 @@
 import * as compression from 'compression';
-import { NestFactory } from '@nestjs/core';
-import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule } from '@nestjs/swagger';
 import { WsAdapter } from '@nestjs/platform-ws';
+import { NestFactory, Reflector } from '@nestjs/core';
+import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 
 import { ApiModule } from 'src/api';
 
@@ -23,6 +23,7 @@ import {
 async function bootstrap() {
   const app = await NestFactory.create(ApiModule);
 
+  const reflector = app.get(Reflector);
   const config = app.get(ConfigurationService);
   const logger = app.get(LoggingService);
 
@@ -43,7 +44,8 @@ async function bootstrap() {
   app.useGlobalInterceptors(
     new ResponseInterceptor(),
     new TimeoutInterceptor(),
-    new VersionInterceptor()
+    new VersionInterceptor(),
+    new ClassSerializerInterceptor(reflector)
   );
 
   const swaggerOptions = config.configureSwagger().build();
