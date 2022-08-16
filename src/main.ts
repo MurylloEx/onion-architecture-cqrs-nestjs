@@ -36,9 +36,9 @@ async function bootstrap() {
     forbidNonWhitelisted: true
   }));
   app.useGlobalFilters(
-    new DomainExceptionFilter(logger),
     new HardErrorFilter(logger),
-    new HttpExceptionFilter(logger)
+    new HttpExceptionFilter(logger),
+    new DomainExceptionFilter(logger)
   );
   app.useGlobalInterceptors(
     new ResponseInterceptor(),
