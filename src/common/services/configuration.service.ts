@@ -1,3 +1,4 @@
+import { StoreConfig } from 'cache-manager';
 import { JwtModuleOptions } from '@nestjs/jwt';
 import { DocumentBuilder } from '@nestjs/swagger';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
@@ -26,12 +27,14 @@ import {
   SmtpConfigType
 } from 'src/domain';
 
-import { Message } from 'src/domain';
-import { StoreConfig } from 'cache-manager';
+import { 
+  Message, 
+  User
+} from 'src/domain';
 
 import { 
   CreateMessageTableMigration1659920828672 
-} from 'src/database/migrations';
+} from 'src/domain';
 
 @Injectable()
 export class ConfigurationService {
@@ -71,6 +74,13 @@ export class ConfigurationService {
     return new DocumentBuilder()
       .addTag(this.oas.tag)
       .addBearerAuth()
+      .addSecurity('x-app-version', {
+        type: 'apiKey',
+        in: 'header',
+        name: 'x-app-version',
+      })
+      .addSecurityRequirements('bearer', ['bearer'])
+      .addSecurityRequirements('x-app-version', ['x-app-version'])
       .setTitle(this.oas.title)
       .setDescription(this.oas.description)
       .setVersion(this.oas.version)
@@ -118,7 +128,8 @@ export class ConfigurationService {
       migrationsRun: this.database.migrationsEnable,
       migrationsTableName: this.database.migrationsTable,
       entities: [
-        Message
+        Message,
+        User
       ],
       migrations: [
         CreateMessageTableMigration1659920828672

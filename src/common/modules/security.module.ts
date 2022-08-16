@@ -17,7 +17,8 @@ import { ConfigurationModule } from './configuration.module';
       imports: [ConfigurationModule],
       useFactory: (configService: ConfigurationService) => configService.configureJwt(),
       inject: [ConfigurationService]
-    })
+    }),
+    ConfigurationModule
   ],
   providers: [
     JwtStrategy,
