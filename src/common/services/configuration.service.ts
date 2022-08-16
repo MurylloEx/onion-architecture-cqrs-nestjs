@@ -3,6 +3,7 @@ import { JwtModuleOptions } from '@nestjs/jwt';
 import { DocumentBuilder } from '@nestjs/swagger';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ThrottlerModuleOptions } from '@nestjs/throttler';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { CacheModuleOptions, Inject, Injectable } from '@nestjs/common';
 
 import {
@@ -27,13 +28,16 @@ import {
   SmtpConfigType
 } from 'src/domain';
 
-import { 
-  Message, 
+import {
+  Bucket,
+  Logging,
+  Message,
   User
 } from 'src/domain';
 
-import { 
-  CreateMessageTableMigration1659920828672 
+import {
+  CreateMessageTableMigration1659920828672,
+  CreateBucketTableMigration1660506725676
 } from 'src/domain';
 
 @Injectable()
@@ -56,17 +60,17 @@ export class ConfigurationService {
     public readonly server: ServerConfigType,
     @Inject(SmtpConfig.KEY)
     public readonly smtp: SmtpConfigType
-  ) {}
+  ) { }
 
-  configureServerGlobalPrefix() {
+  configureServerGlobalPrefix(): string {
     return this.server.globalPrefix;
   }
 
-  configureServerPort() {
+  configureServerPort(): number {
     return this.server.port;
   }
 
-  configureSwaggerPath() {
+  configureSwaggerPath(): string {
     return this.oas.path;
   }
 
@@ -74,34 +78,36 @@ export class ConfigurationService {
     return new DocumentBuilder()
       .addTag(this.oas.tag)
       .addBearerAuth()
-      .addSecurity('x-app-version', {
+      .addSecurity('X-App-Version', {
         type: 'apiKey',
         in: 'header',
         name: 'x-app-version',
       })
-      .addSecurityRequirements('bearer', ['bearer'])
-      .addSecurityRequirements('x-app-version', ['x-app-version'])
+      .addSecurityRequirements('X-App-Version', ['x-app-version'])
       .setTitle(this.oas.title)
       .setDescription(this.oas.description)
       .setVersion(this.oas.version)
       .setLicense(
-        this.oas.license.name, 
+        this.oas.license.name,
         this.oas.license.website
       )
       .setContact(
-        this.oas.contact.author.name, 
-        this.oas.contact.author.website, 
+        this.oas.contact.author.name,
+        this.oas.contact.author.website,
         this.oas.contact.author.email
       );
   }
 
   configureCors() {
-    return this.security.cors;
+    return {
+      origin: this.security.cors.origin,
+      maxAge: this.security.cors.maxAge,
+    };
   }
 
   configureCompression() {
-    return { 
-      level: this.compression.level, 
+    return {
+      level: this.compression.level,
       memLevel: this.compression.memoryLevel
     };
   }
@@ -127,11 +133,15 @@ export class ConfigurationService {
       logging: this.database.logging,
       migrationsRun: this.database.migrationsEnable,
       migrationsTableName: this.database.migrationsTable,
+      namingStrategy: new SnakeNamingStrategy(),
       entities: [
+        Bucket,
+        Logging,
         Message,
         User
       ],
       migrations: [
+        CreateBucketTableMigration1660506725676,
         CreateMessageTableMigration1659920828672
       ]
     };
@@ -139,7 +149,7 @@ export class ConfigurationService {
 
   configureCache(): Partial<CacheModuleOptions<StoreConfig>> {
     return {
-      ttl: this.cache.ttl, 
+      ttl: this.cache.ttl,
       max: this.cache.max
     };
   }

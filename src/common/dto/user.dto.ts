@@ -1,10 +1,10 @@
 import { Exclude, Expose } from 'class-transformer';
-import { 
-  IsEmail, 
-  IsNumber, 
-  IsPhoneNumber, 
-  IsString, 
-  Length, 
+import {
+  IsDefined,
+  IsEmail,
+  IsPhoneNumber,
+  IsString,
+  Length,
   MinLength
 } from 'class-validator';
 
@@ -13,13 +13,6 @@ export class UserDto {
 
   @IsString()
   public id: string;
-
-  @IsString()
-  public sub: string;
-  
-  @Exclude()
-  @IsNumber()
-  public iat: number;
 
   @Expose()
   @IsString()
@@ -33,22 +26,26 @@ export class UserDto {
 
   @Expose()
   @IsPhoneNumber('BR')
+  @IsDefined()
   public phone: string;
-  
+
   @Expose()
   @IsEmail()
+  @IsDefined()
   public email: string;
-  
+
   @IsString()
   @MinLength(6)
   public password: string;
-  
+
   @Exclude()
   @IsString()
+  @IsDefined()
   public pushToken: string;
 
   @Expose()
   @IsString()
+  @IsDefined()
   public pictureId: string;
 
 }
