@@ -7,16 +7,19 @@ export class UserService {
 
   constructor(private readonly userDomainService: UserDomainService) { }
 
-  fetch(): Promise<UserDto[]> {
-    return this.userDomainService.fetch();
+  async fetch(): Promise<UserDto[]> {
+    const entities = await this.userDomainService.fetch();
+    return entities.map(entity => entity.toDto(UserDto));
   }
 
-  fetchOne(id: string): Promise<UserDto> {
-    return this.userDomainService.fetchById(id);
+  async fetchOne(id: string): Promise<UserDto> {
+    const entity = await this.userDomainService.fetchById(id);
+    return entity.toDto(UserDto);
   }
 
-  updateUser(userId: string, data: UpdateUserDto) {
-    return this.userDomainService.updateById(userId, data);
+  async updateUser(userId: string, data: UpdateUserDto): Promise<UserDto> {
+    const entity = await this.userDomainService.updateById(userId, data);
+    return entity.toDto(UserDto);
   }
 
 }
