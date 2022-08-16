@@ -79,12 +79,21 @@ export class ConfigurationService {
   configureSwagger(): DocumentBuilder {
     return new DocumentBuilder()
       .addTag(this.oas.tag)
-      .addBearerAuth()
+      .addSecurity('Authorization', {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        in: 'header',
+        name: 'authorization',
+        description: 'The bearer token in JWT format.'
+      })
       .addSecurity('X-App-Version', {
         type: 'apiKey',
         in: 'header',
         name: 'x-app-version',
+        description: 'The current acceptable app version'
       })
+      .addSecurityRequirements('Authorization', ['authorization'])
       .addSecurityRequirements('X-App-Version', ['x-app-version'])
       .setTitle(this.oas.title)
       .setDescription(this.oas.description)
