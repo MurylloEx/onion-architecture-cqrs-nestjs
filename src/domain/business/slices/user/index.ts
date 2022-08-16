@@ -1,6 +1,6 @@
 export * from './commands';
 export * from './events';
-// export * from './exceptions';
+export * from './exceptions';
 export * from './handlers';
 export * from './migrations';
 export * from './models';
