@@ -8,7 +8,6 @@ import {
   MinLength
 } from 'class-validator';
 
-@Exclude()
 export class UserDto {
 
   @IsString()
@@ -36,6 +35,7 @@ export class UserDto {
 
   @IsString()
   @MinLength(6)
+  @Exclude()
   public password: string;
 
   @Exclude()
