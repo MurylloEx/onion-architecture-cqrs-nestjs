@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { UserDomainService } from 'src/domain';
-import { UpdatePasswordDto, UserDto } from 'src/common/dto';
+import { UpdateUserDto, UserDto } from 'src/common/dto';
 
 @Injectable()
 export class UserService {
 
-  constructor(private readonly userDomainService: UserDomainService) {}
+  constructor(private readonly userDomainService: UserDomainService) { }
 
   fetch(): Promise<UserDto[]> {
     return this.userDomainService.fetch();
@@ -15,7 +15,8 @@ export class UserService {
     return this.userDomainService.fetchById(id);
   }
 
-  updatePassword(userId: string, data: UpdatePasswordDto) {
-    return this.userDomainService.updatePassword(userId, data.code, data.password);
+  updateUser(userId: string, data: UpdateUserDto) {
+    return this.userDomainService.updateById(userId, data);
   }
+
 }
