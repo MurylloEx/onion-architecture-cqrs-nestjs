@@ -12,9 +12,9 @@ export class CreateLoggingHandler<T> implements ICommandHandler<CreateLoggingCom
   ) {}
 
   async execute(command: CreateLoggingCommand<T>): Promise<Logging> {
-    const errorPropertyNames = Object.getOwnPropertyNames(command.error);
-    const errorJson = JSON.stringify(command.error, errorPropertyNames);
-    const contentJson = JSON.stringify(command.object);
+    const errorPropertyNames = Object.getOwnPropertyNames(command.error ?? {}); 
+    const errorJson = JSON.stringify(command.error, errorPropertyNames) ?? '';
+    const contentJson = JSON.stringify(command.object) ?? '';
 
     return await this.repository.create(
       command.type,
