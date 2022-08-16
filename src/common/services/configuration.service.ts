@@ -36,8 +36,10 @@ import {
 } from 'src/domain';
 
 import {
+  CreateLoggingTableMigration1660625313012,
   CreateMessageTableMigration1659920828672,
-  CreateBucketTableMigration1660506725676
+  CreateBucketTableMigration1660506725676,
+  CreateUserTableMigration1660624358399
 } from 'src/domain';
 
 @Injectable()
@@ -125,6 +127,24 @@ export class ConfigurationService {
     };
   }
 
+  configureEntities(): Function[] {
+    return [
+      Bucket,
+      Logging,
+      Message,
+      User
+    ];
+  }
+
+  configureMigrations(): Function[] {
+    return [
+      CreateBucketTableMigration1660506725676,
+      CreateLoggingTableMigration1660625313012,
+      CreateMessageTableMigration1659920828672,
+      CreateUserTableMigration1660624358399
+    ];
+  }
+
   configureTypeOrm(): TypeOrmModuleOptions {
     return {
       type: this.database.type,
@@ -134,16 +154,8 @@ export class ConfigurationService {
       migrationsRun: this.database.migrationsEnable,
       migrationsTableName: this.database.migrationsTable,
       namingStrategy: new SnakeNamingStrategy(),
-      entities: [
-        Bucket,
-        Logging,
-        Message,
-        User
-      ],
-      migrations: [
-        CreateBucketTableMigration1660506725676,
-        CreateMessageTableMigration1659920828672
-      ]
+      entities: this.configureEntities(),
+      migrations: this.configureMigrations()
     };
   }
 
