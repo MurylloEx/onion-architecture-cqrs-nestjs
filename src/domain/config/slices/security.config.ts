@@ -1,5 +1,5 @@
-import { ConfigType, registerAs } from '@nestjs/config';
 import { cast } from 'typeable';
+import { ConfigType, registerAs } from '@nestjs/config';
 
 export type SecurityThrottler = {
   ttl: number;
@@ -14,6 +14,8 @@ export type SecurityCors = {
 export type SecurityJwt = {
   symmetricKey: string;
   ignoreExpiration: boolean;
+  issuer: string;
+  expiration: string;
 }
 
 export type SecurityConfigSlice = {
@@ -35,7 +37,9 @@ export const SecurityConfig = registerAs<SecurityConfigSlice>(SECURITY_CONFIG, (
   },
   jwt: {
     symmetricKey: cast(process.env.SECURITY_JWT_SYMMETRIC_KEY, 'String'),
-    ignoreExpiration: cast(process.env.SECURITY_JWT_IGNORE_EXPIRATION, 'Boolean')
+    ignoreExpiration: cast(process.env.SECURITY_JWT_IGNORE_EXPIRATION, 'Boolean'),
+    issuer: cast(process.env.SECURITY_JWT_ISSUER, 'String'),
+    expiration: cast(process.env.SECURITY_JWT_EXPIRATION, 'String')
   }
 }));
 
