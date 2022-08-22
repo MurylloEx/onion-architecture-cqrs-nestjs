@@ -4,7 +4,10 @@ import { CommandBus, QueryBus, ICommand, IQuery } from '@nestjs/cqrs';
 
 import {
   FetchUsersQuery,
-  FetchOneUserQuery
+  FetchOneUserQuery,
+  FetchOneUserByEmailQuery,
+  FetchOneUserByNickNameQuery,
+  VerifyIfUserExistsByEmailOrNickNameQuery
 } from 'src/domain/business/slices/user/queries';
 
 import {
@@ -23,14 +26,29 @@ export class UserDomainService {
     private readonly queryBus: QueryBus
   ) {}
 
-  fetch(options?: FindManyOptions<User>) {
+  fetch(options?: FindManyOptions<User>): Promise<User[]> {
     const query = new FetchUsersQuery(options);
     return this.queryBus.execute<IQuery, User[]>(query);
   }
 
-  fetchById(id: string) {
+  fetchById(id: string): Promise<User> {
     const query = new FetchOneUserQuery(id);
     return this.queryBus.execute<IQuery, User>(query);
+  }
+
+  fetchByEmail(email: string): Promise<User> {
+    const query = new FetchOneUserByEmailQuery(email);
+    return this.queryBus.execute<IQuery, User>(query);
+  }
+
+  fetchByNickName(nickName: string): Promise<User> {
+    const query = new FetchOneUserByNickNameQuery(nickName);
+    return this.queryBus.execute<IQuery, User>(query);
+  }
+
+  verifyIfExists(email: string, nickName: string): Promise<boolean> {
+    const query = new VerifyIfUserExistsByEmailOrNickNameQuery(email, nickName);
+    return this.queryBus.execute<IQuery, boolean>(query);
   }
 
   create(
