@@ -6,7 +6,7 @@ export class CreateLoggingCommandBuilder<T> {
   private type: LoggingType;
   private serviceName: string;
   private message: string;
-  private description?: string;
+  private description: string;
   private object?: T;
   private error?: Error;
 
