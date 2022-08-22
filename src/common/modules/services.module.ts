@@ -1,24 +1,47 @@
 import { Module } from '@nestjs/common';
 import { DomainModule } from 'src/domain';
 import { 
-  ConfigurationService, 
-  LoggingService, 
-  MessageService, 
+  AuthenticationService,
+  BucketService,
+  ConfigurationService,
+  ConfirmationService,
+  LoggingService,
+  MessageService,
+  RecoveryService,
   UserService
 } from 'src/common/services';
 
+import { CachingModule } from './caching.module';
+import { DatabaseModule } from './database.module';
+import { SecurityModule } from './security.module';
+import { ConfigurationModule } from './configuration.module';
+
 @Module({
-  imports: [DomainModule],
+  imports: [
+    DomainModule,
+    CachingModule,
+    DatabaseModule,
+    SecurityModule,
+    ConfigurationModule
+  ],
   providers: [
-    MessageService,
+    AuthenticationService,
+    BucketService,
     ConfigurationService,
+    ConfirmationService,
     LoggingService,
+    MessageService,
+    RecoveryService,
     UserService
   ],
   exports: [
-    MessageService,
+    AuthenticationService,
+    BucketService,
     ConfigurationService,
+    ConfirmationService,
     LoggingService,
+    MessageService,
+    RecoveryService,
     UserService
   ]
 })

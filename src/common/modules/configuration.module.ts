@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ConfigurationDomainModule } from 'src/domain';
+import { DomainModule } from 'src/domain';
 import { ConfigurationService } from 'src/common/services';
 
 @Module({
-  imports: [ConfigurationDomainModule],
+  imports: [DomainModule],
   providers: [ConfigurationService],
   exports: [ConfigurationService]
 })
