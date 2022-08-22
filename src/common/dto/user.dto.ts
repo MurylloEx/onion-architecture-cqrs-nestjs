@@ -1,5 +1,6 @@
-import { Exclude, Expose } from 'class-transformer';
+import { Exclude } from 'class-transformer';
 import {
+  IsDate,
   IsDefined,
   IsEmail,
   IsPhoneNumber,
@@ -13,29 +14,25 @@ export class UserDto {
   @IsString()
   public id: string;
 
-  @Expose()
   @IsString()
   @Length(4, 64)
   public fullName: string;
 
-  @Expose()
   @IsString()
   @Length(4, 32)
   public nickName: string;
 
-  @Expose()
   @IsPhoneNumber('BR')
   @IsDefined()
   public phone: string;
 
-  @Expose()
   @IsEmail()
   @IsDefined()
   public email: string;
 
+  @Exclude()
   @IsString()
   @MinLength(6)
-  @Exclude()
   public password: string;
 
   @Exclude()
@@ -43,9 +40,19 @@ export class UserDto {
   @IsDefined()
   public pushToken: string;
 
-  @Expose()
   @IsString()
   @IsDefined()
   public pictureId: string;
+
+  @IsDate()
+  public createdAt: Date;
+
+  @Exclude()
+  @IsDate()
+  public updatedAt: Date;
+
+  @Exclude()
+  @IsDate()
+  public deletedAt: Date;
 
 }
