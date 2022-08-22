@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Patch } from '@nestjs/common';
 
 import { UpdateUserDto } from 'src/common/dto';
 import { UserService } from 'src/common/services';
-import { Access, Security, Permissions, Jwt, JwtDto, UserDto } from 'src/common';
+import { Access, Security, Permissions, Jwt, JwtDto } from 'src/common';
 
 @Security()
 @Controller('/user')
@@ -30,7 +30,7 @@ export class UserController {
     Access.READ_USER,
     Access.READ_ANOTHER_USER
   )
-  fetchOne(@Param('id') id: string): Promise<Partial<UserDto>> {
+  fetchOne(@Param('id') id: string) {
     return this.userService.fetchOne(id);
   }
 
@@ -40,7 +40,7 @@ export class UserController {
     Access.READ_USER
   )
   updatePartially(@Jwt() jwt: JwtDto, @Body() body: UpdateUserDto) {
-    return this.userService.updateUser(jwt.id, body);
+    return this.userService.updateById(jwt.id, body);
   }
 
 }
