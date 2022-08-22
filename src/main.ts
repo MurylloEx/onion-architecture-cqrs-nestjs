@@ -44,7 +44,7 @@ async function bootstrap() {
   app.useGlobalInterceptors(
     new ResponseInterceptor(),
     new TimeoutInterceptor(),
-    new VersionInterceptor(),
+    new VersionInterceptor(config),
     new ClassSerializerInterceptor(reflector)
   );
 
