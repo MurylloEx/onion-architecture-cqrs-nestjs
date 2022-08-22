@@ -44,7 +44,9 @@ export class DomainModel extends BaseEntity {
 
   toDto<T>(dtoClass: ClassConstructor<T>): T {
     const plain = instanceToPlain(this);
-    return plainToInstance<T, Record<string, any>>(dtoClass, plain);
+    return plainToInstance<T, Record<string, any>>(dtoClass, plain, { 
+      excludeExtraneousValues: true 
+    });
   }
 
 }
