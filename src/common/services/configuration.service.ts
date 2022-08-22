@@ -3,21 +3,13 @@ import { JwtModuleOptions } from '@nestjs/jwt';
 import { DocumentBuilder } from '@nestjs/swagger';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ThrottlerModuleOptions } from '@nestjs/throttler';
-import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
-import { CacheModuleOptions, Inject, Injectable } from '@nestjs/common';
+import { CacheModuleOptions, Injectable } from '@nestjs/common';
+
+import { ConfigurationDomainService } from 'src/domain';
 
 import {
-  CacheConfig,
-  CompressionConfig,
-  DatabaseConfig,
-  OasConfig,
-  RootConfig,
-  SecurityConfig,
-  ServerConfig,
-  SmtpConfig
-} from 'src/domain';
-
-import {
+  AppConfigType,
+  BucketConfigType,
   CacheConfigType,
   CompressionConfigType,
   DatabaseConfigType,
@@ -28,151 +20,99 @@ import {
   SmtpConfigType
 } from 'src/domain';
 
-import {
-  Bucket,
-  Logging,
-  Message,
-  User
-} from 'src/domain';
-
-import {
-  CreateLoggingTableMigration1660625313012,
-  CreateMessageTableMigration1659920828672,
-  CreateBucketTableMigration1660506725676,
-  CreateUserTableMigration1660624358399
-} from 'src/domain';
-
 @Injectable()
 export class ConfigurationService {
 
   constructor(
-    @Inject(CacheConfig.KEY)
-    public readonly cache: CacheConfigType,
-    @Inject(CompressionConfig.KEY)
-    public readonly compression: CompressionConfigType,
-    @Inject(DatabaseConfig.KEY)
-    public readonly database: DatabaseConfigType,
-    @Inject(OasConfig.KEY)
-    public readonly oas: OasConfigType,
-    @Inject(RootConfig.KEY)
-    public readonly root: RootConfigType,
-    @Inject(SecurityConfig.KEY)
-    public readonly security: SecurityConfigType,
-    @Inject(ServerConfig.KEY)
-    public readonly server: ServerConfigType,
-    @Inject(SmtpConfig.KEY)
-    public readonly smtp: SmtpConfigType
+    private readonly configurationDomainService: ConfigurationDomainService
   ) { }
 
+  get app(): AppConfigType {
+    return this.configurationDomainService.app;
+  }
+
+  get bucket(): BucketConfigType {
+    return this.configurationDomainService.bucket;
+  }
+
+  get cache(): CacheConfigType {
+    return this.configurationDomainService.cache;
+  }
+
+  get compression(): CompressionConfigType {
+    return this.configurationDomainService.compression;
+  }
+
+  get database(): DatabaseConfigType {
+    return this.configurationDomainService.database;
+  }
+
+  get oas(): OasConfigType {
+    return this.configurationDomainService.oas;
+  }
+
+  get root(): RootConfigType {
+    return this.configurationDomainService.root;
+  }
+
+  get security(): SecurityConfigType {
+    return this.configurationDomainService.security;
+  }
+
+  get server(): ServerConfigType {
+    return this.configurationDomainService.server;
+  }
+
+  get smtp(): SmtpConfigType {
+    return this.configurationDomainService.smtp;
+  }
+
   configureServerGlobalPrefix(): string {
-    return this.server.globalPrefix;
+    return this.configurationDomainService.configureServerGlobalPrefix();
   }
 
   configureServerPort(): number {
-    return this.server.port;
+    return this.configurationDomainService.configureServerPort()
   }
 
   configureSwaggerPath(): string {
-    return this.oas.path;
+    return this.configurationDomainService.configureSwaggerPath();
   }
 
   configureSwagger(): DocumentBuilder {
-    return new DocumentBuilder()
-      .addTag(this.oas.tag)
-      .addSecurity('Authorization', {
-        type: 'http',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
-        in: 'header',
-        name: 'authorization',
-        description: 'The bearer token in JWT format.'
-      })
-      .addSecurity('X-App-Version', {
-        type: 'apiKey',
-        in: 'header',
-        name: 'x-app-version',
-        description: 'The current acceptable app version'
-      })
-      .addSecurityRequirements('Authorization', ['authorization'])
-      .addSecurityRequirements('X-App-Version', ['x-app-version'])
-      .setTitle(this.oas.title)
-      .setDescription(this.oas.description)
-      .setVersion(this.oas.version)
-      .setLicense(
-        this.oas.license.name,
-        this.oas.license.website
-      )
-      .setContact(
-        this.oas.contact.author.name,
-        this.oas.contact.author.website,
-        this.oas.contact.author.email
-      );
+    return this.configurationDomainService.configureSwagger();
   }
 
   configureCors() {
-    return {
-      origin: this.security.cors.origin,
-      maxAge: this.security.cors.maxAge,
-    };
+    return this.configurationDomainService.configureCors();
   }
 
   configureCompression() {
-    return {
-      level: this.compression.level,
-      memLevel: this.compression.memoryLevel
-    };
+    return this.configurationDomainService.configureCompression();
   }
 
   configureThrottler(): ThrottlerModuleOptions {
-    return {
-      ttl: this.security.throttler.ttl,
-      limit: this.security.throttler.limit
-    };
+    return this.configurationDomainService.configureThrottler();
   }
 
   configureJwt(): JwtModuleOptions {
-    return {
-      secret: this.security.jwt.symmetricKey
-    };
-  }
-
-  configureEntities(): Function[] {
-    return [
-      Bucket,
-      Logging,
-      Message,
-      User
-    ];
-  }
-
-  configureMigrations(): Function[] {
-    return [
-      CreateBucketTableMigration1660506725676,
-      CreateLoggingTableMigration1660625313012,
-      CreateMessageTableMigration1659920828672,
-      CreateUserTableMigration1660624358399
-    ];
+    return this.configurationDomainService.configureJwt();
   }
 
   configureTypeOrm(): TypeOrmModuleOptions {
-    return {
-      type: this.database.type,
-      database: <any>this.database.storage,
-      synchronize: this.database.synchronize,
-      logging: this.database.logging,
-      migrationsRun: this.database.migrationsEnable,
-      migrationsTableName: this.database.migrationsTable,
-      namingStrategy: new SnakeNamingStrategy(),
-      entities: this.configureEntities(),
-      migrations: this.configureMigrations()
-    };
+    return this.configurationDomainService.configureTypeOrm();
   }
 
   configureCache(): Partial<CacheModuleOptions<StoreConfig>> {
-    return {
-      ttl: this.cache.ttl,
-      max: this.cache.max
-    };
+    return this.configurationDomainService.configureCache();
+  }
+
+  configureEntities(): Function[] {
+    return this.configurationDomainService.configureEntities();
+  }
+
+  configureMigrations(): Function[] {
+    return this.configurationDomainService.configureMigrations();
   }
 
 }
