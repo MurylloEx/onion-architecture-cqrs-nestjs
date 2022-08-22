@@ -17,8 +17,8 @@ export class UserService {
     return entity.toDto(UserDto);
   }
 
-  async updateUser(userId: string, data: UpdateUserDto): Promise<UserDto> {
-    const entity = await this.userDomainService.updateById(userId, data);
+  async updateById(userId: string, user: UpdateUserDto): Promise<UserDto> {
+    const entity = await this.userDomainService.updateById(userId, user);
     return entity.toDto(UserDto);
   }
 
