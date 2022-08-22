@@ -45,6 +45,7 @@ export class LoggingDomainService {
       .withServiceName(this.serverConfig.name)
       .withMessage(message)
       .withError(error)
+      .withDescription(error.message)
       .build();
 
     this.discordLoggingDomainService.error(message, error);
