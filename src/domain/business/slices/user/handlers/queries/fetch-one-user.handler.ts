@@ -8,14 +8,10 @@ import { UserNotFoundDomainException } from 'src/domain/business/slices/user/exc
 @QueryHandler(FetchOneUserQuery)
 export class FetchOneUserHandler implements IQueryHandler<FetchOneUserQuery> {
 
-  constructor(private repository: UserRepository) {}
+  constructor(private readonly repository: UserRepository) {}
 
   async execute(query: FetchOneUserQuery): Promise<User> {
-    try {
-      return await this.repository.fetchById(query.id);
-    } catch (error: any) {
-      throw new UserNotFoundDomainException();
-    }
+    return await this.repository.fetchById(query.id);
   }
 
 }
