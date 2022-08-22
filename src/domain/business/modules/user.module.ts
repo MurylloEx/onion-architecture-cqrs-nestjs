@@ -7,7 +7,10 @@ import {
   DeleteUserHandler,
   FetchUserHandler, 
   FetchOneUserHandler,
-  UpdateUserHandler
+  UpdateUserHandler,
+  FetchOneUserByEmailHandler,
+  FetchOneUserByNickNameHandler,
+  VerifyIfUserExistsByEmailOrNickNameHandler
 } from 'src/domain/business/slices/user';
 
 import { 
@@ -31,6 +34,9 @@ import {
     CreateUserHandler,
     FetchOneUserHandler,
     FetchUserHandler,
+    FetchOneUserByEmailHandler,
+    FetchOneUserByNickNameHandler,
+    VerifyIfUserExistsByEmailOrNickNameHandler,
     UpdateUserHandler,
     DeleteUserHandler,
     UserCreatedEventHandler,
