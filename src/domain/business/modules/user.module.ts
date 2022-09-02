@@ -10,6 +10,7 @@ import {
   UpdateUserHandler,
   FetchOneUserByEmailHandler,
   FetchOneUserByNickNameHandler,
+  FetchOneUserByRecoveryCodeQuery,
   VerifyIfUserExistsByEmailOrNickNameHandler
 } from 'src/domain/business/slices/user';
 
@@ -36,6 +37,7 @@ import {
     FetchUserHandler,
     FetchOneUserByEmailHandler,
     FetchOneUserByNickNameHandler,
+    FetchOneUserByRecoveryCodeQuery,
     VerifyIfUserExistsByEmailOrNickNameHandler,
     UpdateUserHandler,
     DeleteUserHandler,

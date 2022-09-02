@@ -23,14 +23,16 @@ export class ChangePasswordHandler implements ICommandHandler<ChangePasswordComm
       throw new InvalidRecoveryCodeDomainException();
     }
 
+    const user = await this.userDomainService.fetchByRecoveryCode(command.recoveryCode);
     const recovery = await this.repository.fetchByCode(command.recoveryCode);
+
     const hashedPassword = await hash(command.newPassword, 10);
 
-    await this.userDomainService.updateById(recovery.user.id, {
+    await this.userDomainService.updateById(user.id, {
       password: hashedPassword
     });
 
-    await this.repository.deleteByUserId(recovery.user.id);
+    await this.repository.deleteByUserId(user.id);
 
     return recovery;
   }

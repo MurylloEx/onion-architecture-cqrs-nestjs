@@ -7,6 +7,7 @@ import {
   FetchOneUserQuery,
   FetchOneUserByEmailQuery,
   FetchOneUserByNickNameQuery,
+  FetchOneUserByRecoveryCodeQuery,
   VerifyIfUserExistsByEmailOrNickNameQuery
 } from 'src/domain/business/slices/user/queries';
 
@@ -80,6 +81,11 @@ export class UserDomainService {
   deleteById(id: string) {
     const command = new DeleteUserCommand(id);
     return this.commandBus.execute<ICommand, User>(command);
+  }
+
+  fetchByRecoveryCode(code: string) {
+    const query = new FetchOneUserByRecoveryCodeQuery(code);
+    return this.queryBus.execute<IQuery, User>(query);
   }
 
 }

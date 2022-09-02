@@ -66,6 +66,18 @@ export class UserRepository {
     }
   }
 
+  fetchByRecoveryCode(code: string): Promise<User> {
+    try {
+      return this.repository.findOneByOrFail({
+        recoveries: {
+          code
+        }
+      });
+    } catch (error: any) {
+      throw new UserNotFoundDomainException();
+    }
+  }
+
   async verifyIfUserExistsByEmailOrNickName(
     email: string, 
     nickName: string
