@@ -1,0 +1,121 @@
+<mjml>
+  <mj-head>
+    <mj-title>Inclusive Pet</mj-title>
+    <mj-preview>Inclusive Pet</mj-preview>
+    <mj-attributes>
+      <mj-all font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"></mj-all>
+      <mj-text 
+        font-weight="400" 
+        font-size="16px" 
+        font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+        line-height="24px" 
+        color="#000000">
+      </mj-text>
+    </mj-attributes>
+    <mj-style inline="inline">
+      .body-section {
+        -webkit-box-shadow: 1px 4px 11px 0px rgba(0, 0, 0, 0.15);
+        -moz-box-shadow: 1px 4px 11px 0px rgba(0, 0, 0, 0.15);
+        box-shadow: 1px 4px 11px 0px rgba(0, 0, 0, 0.15);
+      }
+    </mj-style>
+  </mj-head>
+  <mj-body background-color="#fff" width="600px">
+    <mj-section 
+      full-width="full-width" 
+      background-color="#fff" 
+      padding-bottom="0"
+    >
+      <mj-column width="100%">
+        <mj-image 
+          src="https://imgur.com/PZMwJel.png" 
+          width="600px" 
+          alt="" 
+          padding="0"
+        />
+      </mj-column>
+    </mj-section>
+    <mj-wrapper 
+      padding-top="0" 
+      padding-bottom="0" 
+      css-class="body-section"
+    >
+      <mj-section 
+        background-color="#ffffff" 
+        padding-left="15px" 
+        padding-right="15px"
+      >
+        <mj-column width="100%">
+          <mj-text 
+            color="#212b35" 
+            font-weight="bold" 
+            font-size="20px"
+            align="center"
+          >
+            Ei! Está chegando o dia de cuidar do seu PET!
+          </mj-text>
+          <mj-text 
+            color="#637381" 
+            font-size="16px" 
+            align="justify"
+          >
+            Olá <b>${{ user_name }}</b>! faltam <b>${{ remaining_days }}</b> dias para o dia da 
+            vacina de <b>${{ vaccine_name }}</b> que está marcada para o dia <b>${{ vaccine_date }}</b>! 
+            Lembre sempre de manter seu pet vacinado, cuide do seu animal de estimação e o 
+            mantenha sempre saudável.
+          </mj-text>
+          <mj-divider border-color="#F45E43"></mj-divider>
+        </mj-column>
+      </mj-section>
+
+      <mj-section 
+        padding-left="35px" 
+        padding-right="35px" 
+        padding-top="0px"
+      >
+        <mj-column vertical-align="top">
+          <mj-text color="#EA3541" font-size="14px" >
+            <b>${{ dosage_number }}º dose</b>
+          </mj-text>
+          <mj-text color="#EA3541" font-size="14px">
+            <b>${{ dosage_name }}</b>
+          </mj-text>
+        </mj-column>
+
+        <mj-column vertical-align="top">
+          <mj-text 
+            color="#EA3541" 
+            font-size="14px" 
+            padding-bottom="30px" 
+            align="right"
+          >
+            <b>${{ dosage_date }}</b>
+          </mj-text>
+        </mj-column>
+      </mj-section>
+
+      <mj-section 
+        background-color="#ffffff" 
+        padding-left="15px" 
+        padding-right="15px"
+      >
+        <mj-column>
+          <mj-divider 
+            border-color="#F45E43" 
+            padding-top="0px">
+          </mj-divider>
+          <mj-text 
+            align="center"
+            color="#637381" 
+            font-size="14px" 
+            padding-bottom="30px" 
+            padding-top="30px"
+          >
+            Este é um email automático, por favor não responda.
+          </mj-text>
+        </mj-column>
+      </mj-section>
+    </mj-wrapper>
+
+  </mj-body>
+</mjml>

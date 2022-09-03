@@ -1,0 +1,9 @@
+Ei! Está chegando o dia de cuidar do seu PET!
+
+Olá ${{ user_name }}! faltam ${{ remaining_days }} dias para o dia da vacina de ${{ vaccine_name }} que está marcada para o dia ${{ vaccine_date }}! 
+Lembre sempre de manter seu pet vacinado, cuide do seu animal de estimação e o mantenha sempre saudável.
+
+Nome: ${{ dosage_name }} - ${{ dosage_number }}º dose
+Data: ${{ dosage_date }}
+
+Este é um email automático, por favor não responda.

@@ -9,6 +9,7 @@ export type SmtpFrom = {
 export type SmtpConfigSlice = {
   key: string;
   from: SmtpFrom;
+  sandbox: boolean;
 }
 
 export const SMTP_CONFIG = 'SMTP_CONFIG';
