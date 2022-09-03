@@ -4,6 +4,7 @@ import { BucketModule } from './bucket.module';
 import { LoggingModule } from './logging.module';
 import { MessageModule } from './message.module';
 import { UserModule } from './user.module';
+import { NotificationModule } from './notification.module';
 
 @Module({
   imports: [
@@ -11,14 +12,16 @@ import { UserModule } from './user.module';
     BucketModule,
     MessageModule,
     LoggingModule,
-    UserModule
+    UserModule,
+    NotificationModule
   ],
   exports: [
     AuthenticationModule,
     BucketModule,
     MessageModule,
     LoggingModule,
-    UserModule
+    UserModule,
+    NotificationModule
   ]
 })
 export class BusinessDomainModule { }

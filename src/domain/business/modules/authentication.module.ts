@@ -51,12 +51,14 @@ import {
 
 import { UserModule } from './user.module';
 import { BucketModule } from './bucket.module';
+import { NotificationModule } from './notification.module';
 
 @Module({
   imports: [
     CqrsModule,
     UserModule,
     BucketModule,
+    NotificationModule,
     ConfigurationDomainModule,
     TypeOrmModule.forFeature([
       Authentication,
