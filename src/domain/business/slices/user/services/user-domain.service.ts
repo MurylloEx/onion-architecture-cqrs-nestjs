@@ -47,6 +47,11 @@ export class UserDomainService {
     return this.queryBus.execute<IQuery, User>(query);
   }
 
+  fetchByRecoveryCode(code: string) {
+    const query = new FetchOneUserByRecoveryCodeQuery(code);
+    return this.queryBus.execute<IQuery, User>(query);
+  }
+
   verifyIfExists(email: string, nickName: string): Promise<boolean> {
     const query = new VerifyIfUserExistsByEmailOrNickNameQuery(email, nickName);
     return this.queryBus.execute<IQuery, boolean>(query);
@@ -81,11 +86,6 @@ export class UserDomainService {
   deleteById(id: string) {
     const command = new DeleteUserCommand(id);
     return this.commandBus.execute<ICommand, User>(command);
-  }
-
-  fetchByRecoveryCode(code: string) {
-    const query = new FetchOneUserByRecoveryCodeQuery(code);
-    return this.queryBus.execute<IQuery, User>(query);
   }
 
 }
