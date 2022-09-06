@@ -29,7 +29,10 @@ export class AuthenticationService {
       credentials.pushToken,
       ipAddress
     );
-    return entity.toDto(AuthenticationDto);
+    const authentication = entity.toDto(AuthenticationDto);
+    authentication.user = entity.user.toDto(UserDto);
+
+    return authentication;
   }
 
 }
