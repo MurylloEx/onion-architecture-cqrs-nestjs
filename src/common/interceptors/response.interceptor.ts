@@ -1,6 +1,7 @@
 import { extension } from 'mime-types';
 import { Observable, map } from 'rxjs';
 import { Request, Response } from 'express';
+import { Reflector } from '@nestjs/core';
 
 import {
   CallHandler,
@@ -12,8 +13,20 @@ import {
 @Injectable()
 export class ResponseInterceptor implements NestInterceptor {
 
+  constructor(private readonly reflector: Reflector) { }
+
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+    const isIgnored = this.reflector.getAllAndOverride<boolean>('aop:ignore-response-default', [
+      context.getHandler(),
+      context.getClass()
+    ]);
+
+    if (isIgnored) {
+      return next.handle();
+    }
+    
     const ctx = context.switchToHttp();
+
     const request = ctx.getRequest<Request>();
     const response = ctx.getResponse<Response>();
 
