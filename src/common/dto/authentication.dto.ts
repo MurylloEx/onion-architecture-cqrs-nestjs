@@ -1,5 +1,6 @@
 import { Exclude } from 'class-transformer';
 import { IsUUID, IsDefined, IsString, IsDate } from 'class-validator';
+import { UserDto } from './user.dto';
 
 export class AuthenticationDto {
 
@@ -27,5 +28,8 @@ export class AuthenticationDto {
   @Exclude()
   @IsDate()
   public deletedAt: Date;
+
+  @IsDefined()
+  public user: UserDto;
 
 }
