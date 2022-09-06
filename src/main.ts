@@ -1,4 +1,5 @@
 import { join } from 'path';
+import { json } from 'express';
 import * as compression from 'compression';
 import { SwaggerModule } from '@nestjs/swagger';
 import { WsAdapter } from '@nestjs/platform-ws';
@@ -34,6 +35,7 @@ async function bootstrap() {
   app.useStaticAssets(join(__dirname, 'assets/static'));
   app.setBaseViewsDir(join(__dirname, 'assets/views'));
   app.use(compression(config.configureCompression()));
+  app.use(json({ limit: '10mb' }));
   app.enableCors(config.configureCors());
   app.useWebSocketAdapter(new WsAdapter(app));
   app.useGlobalPipes(new ValidationPipe({ 
