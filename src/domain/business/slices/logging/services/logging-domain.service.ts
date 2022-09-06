@@ -1,11 +1,11 @@
 import { FindManyOptions } from 'typeorm';
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CommandBus, ICommand, IQuery, QueryBus } from '@nestjs/cqrs';
 
-import { ServerConfig, ServerConfigType } from 'src/domain/config';
 import { Logging } from 'src/domain/business/slices/logging/models';
 import { LoggingType } from 'src/domain/business/slices/logging/types';
 import { FetchLoggingsQuery } from 'src/domain/business/slices/logging/queries';
+import { ConfigurationDomainService, ServerConfigType } from 'src/domain/config';
 import { CreateLoggingCommandBuilder } from 'src/domain/business/slices/logging/commands';
 
 import { DiscordLoggingDomainService } from './discord-logging-domain.service';
@@ -13,13 +13,17 @@ import { DiscordLoggingDomainService } from './discord-logging-domain.service';
 @Injectable()
 export class LoggingDomainService {
 
+  private readonly serverConfig: ServerConfigType;
+
   constructor(
-    @Inject(ServerConfig.KEY)
-    private readonly serverConfig: ServerConfigType,
-    private readonly commandBus: CommandBus,
-    private readonly queryBus: QueryBus,
-    private readonly discordLoggingDomainService: DiscordLoggingDomainService
-  ) { }
+    protected readonly commandBus: CommandBus,
+    protected readonly queryBus: QueryBus,
+    protected readonly configurationDomainService: ConfigurationDomainService,
+    protected readonly discordLoggingDomainService: DiscordLoggingDomainService
+  ) 
+  {
+    this.serverConfig = configurationDomainService.server;
+  }
 
   debug<T>(message: string, description: string, object: T): void {
     if (!this.serverConfig.debug)
@@ -28,6 +32,7 @@ export class LoggingDomainService {
     const command = new CreateLoggingCommandBuilder<T>()
       .withType(LoggingType.Debug)
       .withServiceName(this.serverConfig.name)
+      .withDescription(description)
       .withMessage(message)
       .withObject(object)
       .build();
@@ -91,6 +96,7 @@ export class LoggingDomainService {
       .withServiceName(this.serverConfig.name)
       .withMessage(message)
       .withDescription(description)
+      .withObject(object)
       .build();
 
     this.discordLoggingDomainService.verbose(message, description, object);
