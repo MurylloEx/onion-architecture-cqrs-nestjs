@@ -12,6 +12,8 @@ import {
   CacheConfig,
   CompressionConfig,
   DatabaseConfig,
+  DiscordConfig,
+  DiscordConfigType,
   OasConfig,
   RootConfig,
   SecurityConfig,
@@ -63,6 +65,8 @@ export class ConfigurationDomainService {
     public readonly bucket: BucketConfigType,
     @Inject(CacheConfig.KEY)
     public readonly cache: CacheConfigType,
+    @Inject(DiscordConfig.KEY)
+    public readonly discord: DiscordConfigType,
     @Inject(CompressionConfig.KEY)
     public readonly compression: CompressionConfigType,
     @Inject(DatabaseConfig.KEY)
