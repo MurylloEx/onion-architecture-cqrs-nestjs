@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Mailer, MailerResponse, MailerSandboxResult } from '@muryllo/mailer';
 import { ConfigurationDomainService } from 'src/domain/config';
 import { UserDomainService } from 'src/domain/business/slices/user';
+import { LoggingDomainService } from 'src/domain/business/slices/logging';
 
 @Injectable()
 export class EmailNotificationDomainService {
@@ -12,6 +13,7 @@ export class EmailNotificationDomainService {
   private readonly smtpFromEmail: string;
 
   constructor(
+    private readonly loggingService: LoggingDomainService,
     private readonly userDomainService: UserDomainService,
     private readonly configurationDomainService: ConfigurationDomainService
   ) {
@@ -24,7 +26,20 @@ export class EmailNotificationDomainService {
   }
 
   private sandboxCallback(result: MailerSandboxResult) {
-    console.log(result);
+    this.loggingService.verbose(
+      'Email sent to sandbox', 
+      'This email was sandboxed and not sent to the recipient.' + 
+      'To send properly this email, set SMTP_SANDBOX to false.', 
+      {
+        sender: result.sender,
+        to: result.to,
+        subject: result.subject,
+        mjmlTemplate: result.mjmlTemplatePath,
+        textTemplate: result.textTemplatePath,
+        text: result.text_body,
+        values: result.values,
+      }
+    );
   }
 
   private getTemplate(templateName: string, extension: string) {
@@ -39,7 +54,7 @@ export class EmailNotificationDomainService {
       .from(this.smtpFromName, this.smtpFromEmail)
       .mjmlTemplate(this.getTemplate(templateName, 'mjml'))
       .textTemplate(this.getTemplate(templateName, 'txt'))
-      .sandbox(this.smtpSandbox, this.sandboxCallback);
+      .sandbox(this.smtpSandbox, (result) => this.sandboxCallback(result));
   }
 
   async sendWelcomeEmail(
@@ -93,7 +108,7 @@ export class EmailNotificationDomainService {
       .set('dosage_number', dosageNumber)
       .set('dosage_name', dosageName)
       .set('dosage_date', dosageDate);
-    
+
     return mail.send();
   }
 
