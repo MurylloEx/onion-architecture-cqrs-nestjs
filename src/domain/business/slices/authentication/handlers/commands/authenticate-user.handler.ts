@@ -27,29 +27,33 @@ export class AuthenticateUserHandler implements ICommandHandler<AuthenticateUser
   ) {}
 
   async execute(command: AuthenticateUserCommand): Promise<Authentication> {
-    const user = await this.userDomainService.fetchByEmail(command.email);
-    const isPasswordValid = await compare(command.password, user.password);
+    try {
+      const user = await this.userDomainService.fetchByEmail(command.email);
+      const isPasswordValid = await compare(command.password, user.password);
 
-    if (!isPasswordValid) {
+      if (!isPasswordValid) {
+        throw new InvalidUserCredentialsDomainException();
+      }
+
+      const isConfirmedAccount = await this.confirmationRepository.fetchByUserId(user.id);
+  
+      if (!isConfirmedAccount) {
+        throw new AccountNotConfirmedYetDomainException();
+      }
+  
+      const updatedUser = await this.userDomainService.updateById(user.id, {
+        pushToken: command.pushToken
+      });
+      const token = await this.jwtDomainService.sign(user.id, {...updatedUser});
+  
+      return await this.authenticationRepository.create(
+        updatedUser,
+        command.ipAddress,
+        token,
+      );
+    } catch (error) {
       throw new InvalidUserCredentialsDomainException();
     }
-
-    const isConfirmedAccount = await this.confirmationRepository.fetchByUserId(user.id);
-
-    if (!isConfirmedAccount) {
-      throw new AccountNotConfirmedYetDomainException();
-    }
-
-    const updatedUser = await this.userDomainService.updateById(user.id, {
-      pushToken: command.pushToken
-    });
-    const token = await this.jwtDomainService.sign(user.id, {...updatedUser});
-
-    return await this.authenticationRepository.create(
-      updatedUser,
-      command.ipAddress,
-      token,
-    );
   }
 
 }
