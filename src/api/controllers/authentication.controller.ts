@@ -1,8 +1,10 @@
-import { Request } from 'express';
-import { Body, Controller, Get, Param, Post, Put, Req } from '@nestjs/common';
+import { Request, Response } from 'express';
+import { Body, Controller, Get, Param, Post, Put, Req, Res } from '@nestjs/common';
 import {
   AuthenticationService,
   ConfirmationService,
+  IgnoreAppVersion,
+  IgnoreResponseDefault,
   RecoveryDto,
   RecoveryService,
   UserSignInDto,
@@ -28,9 +30,15 @@ export class AuthenticationController {
     return this.authenticationService.authenticateUser(credentials, request.ip);
   }
 
+  @IgnoreAppVersion()
+  @IgnoreResponseDefault()
   @Get('/confirm/:confirmationCode')
-  confirmAccount(@Param('confirmationCode') confirmationCode: string) {
-    return this.confirmationService.confirmAccount(confirmationCode);
+  async confirmAccount(
+    @Param('confirmationCode') confirmationCode: string, 
+    @Res() response: Response
+  ) {
+    const confirmation = await this.confirmationService.confirmAccount(confirmationCode);
+    response.render('confirmation', { confirmation });
   }
 
   @Post('/recovery/request/:userEmail')

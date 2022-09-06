@@ -9,9 +9,13 @@ export class ConfirmationService {
     private readonly confirmationDomainService: ConfirmationDomainService
   ) {}
 
-  async confirmAccount(confirmationCode: string) {
-    const entity = await this.confirmationDomainService.confirmAccount(confirmationCode);
-    return entity.toDto(ConfirmationDto);
+  async confirmAccount(confirmationCode: string): Promise<ConfirmationDto | false> {
+    try {
+      const entity = await this.confirmationDomainService.confirmAccount(confirmationCode);
+      return entity.toDto(ConfirmationDto);
+    } catch (error) {
+      return false;
+    }
   }
 
 }
