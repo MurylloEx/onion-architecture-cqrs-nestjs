@@ -5,10 +5,12 @@ import {
   ConfirmationService,
   IgnoreAppVersion,
   IgnoreResponseDefault,
-  RecoveryDto,
-  RecoveryService,
+  UserDto,
   UserSignInDto,
-  UserSignUpDto
+  UserSignUpDto,
+  AuthenticationDto,
+  RecoveryDto,
+  RecoveryService
 } from 'src/common';
 
 @Controller('/authentication')
@@ -21,12 +23,16 @@ export class AuthenticationController {
   ) { }
 
   @Post('/signup')
-  registerUser(@Body() user: UserSignUpDto) {
+  registerUser(@Body() user: UserSignUpDto): Promise<UserDto> {
     return this.authenticationService.registerUser(user);
   }
 
   @Post('/signin') 
-  authenticateUser(@Req() request: Request, @Body() credentials: UserSignInDto) {
+  authenticateUser(
+    @Req() request: Request, 
+    @Body() credentials: UserSignInDto
+  ): Promise<AuthenticationDto> 
+  {
     return this.authenticationService.authenticateUser(credentials, request.ip);
   }
 
@@ -36,18 +42,27 @@ export class AuthenticationController {
   async confirmAccount(
     @Param('confirmationCode') confirmationCode: string, 
     @Res() response: Response
-  ) {
+  ): Promise<void> 
+  {
     const confirmation = await this.confirmationService.confirmAccount(confirmationCode);
-    response.render('confirmation', { confirmation });
+    response.render('confirmation', { 
+      confirmation: Boolean(confirmation)
+    });
   }
 
   @Post('/recovery/request/:userEmail')
-  requestRecoveryCode(@Param('userEmail') userEmail: string) {
+  requestRecoveryCode(
+    @Param('userEmail') userEmail: string
+  ): Promise<RecoveryDto> 
+  {
     return this.recoveryService.requestRecoveryCode(userEmail);
   }
 
   @Get('/recovery/check/:recoveryCode')
-  checkRecoveryCode(@Param('recoveryCode') recoveryCode: string) {
+  checkRecoveryCode(
+    @Param('recoveryCode') recoveryCode: string
+  ): Promise<boolean> 
+  {
     return this.recoveryService.checkRecoveryCode(recoveryCode);
   }
 
@@ -55,7 +70,8 @@ export class AuthenticationController {
   changePassword(
     @Param('recoveryCode') recoveryCode: string,
     @Body() recovery: RecoveryDto
-  ) {
+  ): Promise<UserDto> 
+  {
     return this.recoveryService.changePassword(recoveryCode, recovery);
   }
 
