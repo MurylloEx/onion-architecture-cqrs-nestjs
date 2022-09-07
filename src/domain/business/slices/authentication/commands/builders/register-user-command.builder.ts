@@ -7,6 +7,7 @@ export class RegisterUserCommandBuilder {
   private phone: string;
   private email: string;
   private password: string;
+  private descriptor: number;
   private pushToken: string;
   private pictureBuffer: Buffer;
 
@@ -35,6 +36,11 @@ export class RegisterUserCommandBuilder {
     return this;
   }
 
+  withDescriptor(descriptor: number): RegisterUserCommandBuilder {
+    this.descriptor = descriptor;
+    return this;
+  }
+
   withPushToken(pushToken: string): RegisterUserCommandBuilder {
     this.pushToken = pushToken;
     return this;
@@ -52,6 +58,7 @@ export class RegisterUserCommandBuilder {
       this.phone,
       this.email,
       this.password,
+      this.descriptor,
       this.pushToken,
       this.pictureBuffer
     );
