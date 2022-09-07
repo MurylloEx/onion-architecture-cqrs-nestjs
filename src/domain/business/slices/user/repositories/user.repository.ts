@@ -19,6 +19,7 @@ export class UserRepository {
     phone: string,
     email: string,
     password: string,
+    descriptor: number,
     pushToken: string,
     pictureId: string
   ): Promise<User> {
@@ -28,6 +29,7 @@ export class UserRepository {
       phone,
       email,
       password,
+      descriptor,
       pushToken,
       pictureId
     });
