@@ -63,6 +63,7 @@ export class UserDomainService {
     phone: string,
     email: string,
     password: string,
+    descriptor: number,
     pushToken: string,
     pictureId: string
   ) {
@@ -72,6 +73,7 @@ export class UserDomainService {
       phone,
       email,
       password,
+      descriptor,
       pushToken,
       pictureId
     );

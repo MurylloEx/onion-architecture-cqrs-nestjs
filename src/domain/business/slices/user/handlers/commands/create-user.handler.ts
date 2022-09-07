@@ -20,6 +20,7 @@ export class CreateUserHandler implements ICommandHandler<CreateUserCommand> {
       command.phone,
       command.email,
       command.password,
+      command.descriptor,
       command.pushToken,
       command.pictureId
     );
