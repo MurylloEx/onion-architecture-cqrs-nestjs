@@ -3,9 +3,13 @@ import {
   IsDate,
   IsDefined,
   IsEmail,
+  IsInt,
+  IsNumber,
   IsPhoneNumber,
+  IsPositive,
   IsString,
   Length,
+  Max,
   MinLength
 } from 'class-validator';
 
@@ -34,6 +38,13 @@ export class UserDto {
   @IsString()
   @MinLength(6)
   public password: string;
+
+  @Exclude()
+  @IsInt()
+  @IsNumber()
+  @IsPositive()
+  @Max(Number.MAX_SAFE_INTEGER)
+  public descriptor: number;
 
   @Exclude()
   @IsString()
