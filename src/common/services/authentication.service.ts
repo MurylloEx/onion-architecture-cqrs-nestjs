@@ -1,6 +1,15 @@
 import { Injectable } from '@nestjs/common';
+
+import { Access } from 'src/common/security/access';
+import { createDescriptor } from 'src/common/security/parser';
 import { AuthenticationDomainService } from 'src/domain';
-import { AuthenticationDto, UserDto, UserSignInDto, UserSignUpDto } from 'src/common/dto';
+
+import {
+  AuthenticationDto,
+  UserDto,
+  UserSignInDto,
+  UserSignUpDto
+} from 'src/common/dto';
 
 @Injectable()
 export class AuthenticationService {
@@ -10,12 +19,14 @@ export class AuthenticationService {
   ) {}
 
   async registerUser(user: UserSignUpDto): Promise<UserDto> {
+    const userDescriptor = createDescriptor(Object.values(Access), Access);
     const entity = await this.authenticationDomainService.registerUser(
       user.fullName,
       user.nickName,
       user.phone,
       user.email,
       user.password,
+      userDescriptor,
       user.pushToken,
       user.pictureBuffer
     );
