@@ -1,5 +1,20 @@
-import { IsPhoneNumber, IsString } from 'class-validator';
-import { Column, Entity, JoinColumn, OneToMany, OneToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  OneToOne
+} from 'typeorm';
+
+import {
+  IsInt,
+  IsNumber,
+  IsPhoneNumber,
+  IsPositive,
+  IsString,
+  Max
+} from 'class-validator';
+
 import { DomainModel } from 'src/domain/models';
 import { Authentication, Confirmation, Recovery } from 'src/domain/business/slices/authentication';
 
@@ -33,6 +48,13 @@ export class User extends DomainModel {
   @IsString()
   @Column()
   public pictureId: string;
+
+  @IsInt()
+  @IsNumber()
+  @IsPositive()
+  @Max(Number.MAX_SAFE_INTEGER)
+  @Column()
+  public descriptor: number;
 
   @OneToOne(() => Confirmation, confirmation => confirmation.user)
   @JoinColumn()
