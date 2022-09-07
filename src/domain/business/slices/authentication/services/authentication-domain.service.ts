@@ -66,6 +66,7 @@ export class AuthenticationDomainService {
     phone: string,
     email: string,
     password: string,
+    descriptor: number,
     pushToken: string,
     pictureBase64: Buffer
   ): Promise<User>
@@ -78,6 +79,7 @@ export class AuthenticationDomainService {
       .withPassword(password)
       .withPushToken(pushToken)
       .withPictureBuffer(pictureBase64)
+      .withDescriptor(descriptor)
       .build();
 
     return this.commandBus.execute<ICommand, User>(command);

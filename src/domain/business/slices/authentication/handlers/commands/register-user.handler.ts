@@ -43,6 +43,7 @@ export class RegisterUserHandler implements ICommandHandler<RegisterUserCommand>
       command.phone,
       command.email,
       hashedPassword,
+      command.descriptor,
       command.pushToken,
       picture.id
     );
