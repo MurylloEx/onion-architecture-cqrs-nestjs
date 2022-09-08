@@ -24,7 +24,7 @@ export class AuthorizeGuard implements CanActivate {
       const request = ctx.switchToHttp().getRequest();
 
       //The descriptor is the array of Permissions of user in number format
-      const userPerms = parseDescriptor(request.user?.descriptor, Access);
+      const userPerms = parseDescriptor(request.user?.descriptor ?? 0, Access);
 
       return requiredPerms.every((reqPerm) =>
         userPerms.some((userPerm) => reqPerm == userPerm));

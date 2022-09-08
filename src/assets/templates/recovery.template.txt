@@ -1,0 +1,6 @@
+Olá ${{ user_name }}, você recentemente solicitou a recuperação de senha da sua conta no Inclusive Pet? Use o codigo abaixo para liberar o acesso no seu app.
+
+Código: ${{ recovery_code }}
+
+Se você não solicitou a mudança de senha por favor ignorar esse e-mail.
+Este é um email automático, por favor não responda.

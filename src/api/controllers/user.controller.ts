@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Param, Patch } from '@nestjs/common';
 
-import { UpdateUserDto } from 'src/common/dto';
+import { UpdateUserProfileDto } from 'src/common/dto';
 import { UserService } from 'src/common/services';
-import { Access, Security, Permissions, Jwt, JwtDto, AppVersion, UserDto } from 'src/common';
+import { Access, Security, Permissions, Jwt, JwtDto } from 'src/common';
 
 @Security()
 @Controller('/user')
@@ -16,13 +16,13 @@ export class UserController {
     Access.READ_ANOTHER_USER
   )
   fetch() {
-    //Listar todos os perfis de usuários do sistema
+    return this.userService.fetch();
   }
 
   @Get('/me')
   @Permissions(Access.READ_USER)
-  fetchSelf(@Jwt() jwt: JwtDto, @AppVersion() version: string) {
-    //Visualizar próprio perfil
+  fetchSelf(@Jwt() jwt: JwtDto) {
+    return this.userService.fetchOne(jwt.id);
   }
 
   @Get('/:id')
@@ -30,7 +30,7 @@ export class UserController {
     Access.READ_USER,
     Access.READ_ANOTHER_USER
   )
-  fetchOne(@Param('id') id: string): Promise<Partial<UserDto>> {
+  fetchOne(@Param('id') id: string) {
     return this.userService.fetchOne(id);
   }
 
@@ -39,8 +39,8 @@ export class UserController {
     Access.UPDATE_USER,
     Access.READ_USER
   )
-  updatePartially(@Jwt() jwt: JwtDto, @Body() body: UpdateUserDto) {
-    return this.userService.updateUser(jwt.id, body);
+  updatePartially(@Jwt() jwt: JwtDto, @Body() body: UpdateUserProfileDto) {
+    return this.userService.updateProfileById(jwt.id, body);
   }
 
 }

@@ -1,4 +1,4 @@
 export * from './create-user.handler';
 export * from './delete-user.handler';
 export * from './update-user.handler';
-export * from './update-password.handler';
+export * from './update-user-profile.handler';

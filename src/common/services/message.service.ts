@@ -7,24 +7,29 @@ export class MessageService {
 
   constructor(private readonly messageDomainService: MessageDomainService) {}
 
-  create(title: string, description: string): Promise<MessageDto> {
-    return this.messageDomainService.create(title, description);
+  async create(title: string, description: string): Promise<MessageDto> {
+    const entity = await this.messageDomainService.create(title, description);
+    return entity.toDto(MessageDto);
   }
 
-  fetch(): Promise<MessageDto[]> {
-    return this.messageDomainService.fetch();
+  async fetch(): Promise<MessageDto[]> {
+    const entities = await this.messageDomainService.fetch();
+    return entities.map(entity => entity.toDto(MessageDto));
   }
 
-  fetchOne(id: string): Promise<MessageDto> {
-    return this.messageDomainService.fetchById(id);
+  async fetchOne(id: string): Promise<MessageDto> {
+    const entity = await this.messageDomainService.fetchById(id);
+    return entity.toDto(MessageDto);
   }
 
-  update(id: string, message: MessageDto): Promise<MessageDto> {
-    return this.messageDomainService.updateById(id, message);
+  async update(id: string, message: MessageDto): Promise<MessageDto> {
+    const entity = await this.messageDomainService.updateById(id, message);
+    return entity.toDto(MessageDto);
   }
 
-  delete(id: string): Promise<MessageDto> {
-    return this.messageDomainService.deleteById(id);
+  async delete(id: string): Promise<MessageDto> {
+    const entity = await this.messageDomainService.deleteById(id);
+    return entity.toDto(MessageDto);
   }
 
 }

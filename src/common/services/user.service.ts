@@ -1,22 +1,39 @@
 import { Injectable } from '@nestjs/common';
 import { UserDomainService } from 'src/domain';
-import { UpdateUserDto, UserDto } from 'src/common/dto';
+import { UpdateUserDto, UpdateUserProfileDto, UserDto } from 'src/common/dto';
 
 @Injectable()
 export class UserService {
 
-  constructor(private readonly userDomainService: UserDomainService) { }
+  constructor(
+    private readonly userDomainService: UserDomainService
+  ) {}
 
-  fetch(): Promise<UserDto[]> {
-    return this.userDomainService.fetch();
+  async fetch(): Promise<UserDto[]> {
+    const entities = await this.userDomainService.fetch();
+    return entities.map(entity => entity.toDto(UserDto));
   }
 
-  fetchOne(id: string): Promise<UserDto> {
-    return this.userDomainService.fetchById(id);
+  async fetchOne(id: string): Promise<UserDto> {
+    const entity = await this.userDomainService.fetchById(id);
+    return entity.toDto(UserDto);
   }
 
-  updateUser(userId: string, data: UpdateUserDto) {
-    return this.userDomainService.updateById(userId, data);
+  async updateById(userId: string, user: UpdateUserDto): Promise<UserDto> {
+    const entity = await this.userDomainService.updateById(userId, user);
+    return entity.toDto(UserDto);
+  }
+
+  async updateProfileById(userId: string, user: UpdateUserProfileDto): Promise<UserDto> {
+    const entity = await this.userDomainService.updateProfileById(
+      userId,
+      user.fullName,
+      user.nickName,
+      user.phone,
+      user.email,
+      user.pictureBuffer
+    );
+    return entity.toDto(UserDto);
   }
 
 }

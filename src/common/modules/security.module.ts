@@ -6,19 +6,27 @@ import { JwtAuthorizeProvider, JwtStrategy, ThrottlerProvider } from 'src/common
 
 import { ConfigurationModule } from './configuration.module';
 
+const ThrottlerModuleAsync = ThrottlerModule.forRootAsync({
+  imports: [ConfigurationModule],
+  useFactory: (configService: ConfigurationService) => configService.configureThrottler(),
+  inject: [ConfigurationService]
+});
+
+const JwtModuleAsync = JwtModule.registerAsync({
+  imports: [ConfigurationModule],
+  useFactory: (configService: ConfigurationService) => configService.configureJwt(),
+  inject: [ConfigurationService]
+});
+
 @Module({
   imports: [
-    ThrottlerModule.forRootAsync({
-      imports: [ConfigurationModule],
-      useFactory: (configService: ConfigurationService) => configService.configureThrottler(),
-      inject: [ConfigurationService]
-    }),
-    JwtModule.registerAsync({
-      imports: [ConfigurationModule],
-      useFactory: (configService: ConfigurationService) => configService.configureJwt(),
-      inject: [ConfigurationService]
-    }),
+    JwtModuleAsync,
+    ThrottlerModuleAsync,
     ConfigurationModule
+  ],
+  exports: [
+    JwtModuleAsync,
+    ThrottlerModuleAsync,
   ],
   providers: [
     JwtStrategy,

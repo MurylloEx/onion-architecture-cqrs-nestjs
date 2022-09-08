@@ -1,10 +1,14 @@
-import { 
-  IsPhoneNumber, 
-  IsString, 
+import {
+  IsEmail,
+  IsPhoneNumber,
+  IsString,
   Length
 } from 'class-validator';
 
 export class UpdateUserDto {
+
+  @IsString()
+  public id: string;
 
   @IsString()
   @Length(4, 64)
@@ -17,7 +21,7 @@ export class UpdateUserDto {
   @IsPhoneNumber('BR')
   public phone: string;
 
-  @IsString()
-  public pictureId: string;
+  @IsEmail()
+  public email: string;
 
 }

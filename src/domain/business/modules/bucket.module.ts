@@ -10,6 +10,12 @@ import {
   ImgurBucketDomainService,
 } from 'src/domain/business/slices/bucket';
 
+import {
+  CreateBucketHandler,
+  DeleteBucketHandler,
+  UpdateBucketHandler
+} from 'src/domain/business/slices/bucket';
+
 @Module({
   imports: [
     CqrsModule,
@@ -17,6 +23,9 @@ import {
     ConfigurationDomainModule,
   ],
   providers: [
+    CreateBucketHandler,
+    DeleteBucketHandler,
+    UpdateBucketHandler,
     BucketRepository,
     BucketDomainService,
     ImgurBucketDomainService

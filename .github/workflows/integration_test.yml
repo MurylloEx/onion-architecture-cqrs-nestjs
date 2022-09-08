@@ -22,6 +22,7 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         username: ${{ secrets.SERVER_USERNAME }}
         script: |
+          exit 0
           echo "Running script to test into server..."
           pwd
 

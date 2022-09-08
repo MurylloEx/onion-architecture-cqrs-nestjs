@@ -1,0 +1,12 @@
+Olá ${{ user_name }}, seja bem vindo ao Inclusive Pet!
+
+Agradeçemos o seu cadastro no aplicativo Inclusive Pet! Nele será possível:
+
+- Anunciar PET desaparecido: Caso um dos seus animais de estimação se perca você pode compartilhar um post na comunidade, buscando ajuda para encontra-lo e até oferecer recompensas.
+- Anunciar PET para cruzamento: Você pode compartilhar a fotinha do seu pet para buscar outro dono de pet que esteja interessado em ter filhotinhos!
+- Anunciar PET para Adoção: É possivel também divulgar animais para adoção.
+- Acompanhar o cronograma vacinal: Cadastre as vacinas do seu pet e receba um lembrete quando a data estiver proxima.
+
+Para confirmar o cadastro da sua conta, acesse o seguinte link ou cole-o no seu navegador.
+
+Link: ${{confirmation_url}}

@@ -1,13 +1,11 @@
 import DiscordLogger from 'node-discord-logger';
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { hostname, arch, endianness, type, version } from 'os';
 
 import { 
-  DiscordConfig, 
+  ConfigurationDomainService,
   DiscordConfigType, 
-  RootConfig, 
   RootConfigType, 
-  ServerConfig, 
   ServerConfigType 
 } from 'src/domain/config';
 
@@ -20,17 +18,20 @@ export class DiscordLoggingDomainService {
   private readonly commonLogger: DiscordLogger;
   private readonly metadata: MetaType;
 
+  protected readonly rootConfig: RootConfigType;
+  protected readonly serverConfig: ServerConfigType;
+  protected readonly discordConfig: DiscordConfigType;
+
   constructor(
-    @Inject(RootConfig.KEY)
-    protected readonly rootConfig: RootConfigType,
-    @Inject(ServerConfig.KEY)
-    protected readonly serverConfig: ServerConfigType,
-    @Inject(DiscordConfig.KEY)
-    protected readonly discordConfig: DiscordConfigType
+    protected readonly configurationDomainService: ConfigurationDomainService,
   ) {
+    this.rootConfig = configurationDomainService.root;
+    this.serverConfig = configurationDomainService.server;
+    this.discordConfig = configurationDomainService.discord;
+
     const settings = {
-      icon: discordConfig.iconUrl,
-      serviceName: serverConfig.name,
+      icon: this.discordConfig.iconUrl,
+      serviceName: this.serverConfig.name,
       defaultMeta: {
         'Process ID': process.pid,
         'Host': hostname(),
@@ -48,12 +49,12 @@ export class DiscordLoggingDomainService {
     };
 
     this.deployLogger = new DiscordLogger({
-      hook: discordConfig.webhook.deployUrl,
+      hook: this.discordConfig.webhook.deployUrl,
       ...settings
     });
 
     this.commonLogger = new DiscordLogger({
-      hook: discordConfig.webhook.commonUrl,
+      hook: this.discordConfig.webhook.commonUrl,
       ...settings
     });
   }

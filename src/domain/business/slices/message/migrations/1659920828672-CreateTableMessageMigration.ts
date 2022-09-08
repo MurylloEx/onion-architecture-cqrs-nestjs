@@ -17,7 +17,7 @@ export class CreateMessageTableMigration1659920828672 implements MigrationInterf
   }
 
   async down(queryRunner: QueryRunner): Promise<void> {
-    queryRunner.query(`DROP TABLE 'message'`);
+    queryRunner.query(`DROP TABLE IF EXISTS 'message'`);
   }
 
 }

@@ -4,14 +4,18 @@ import { CommandBus, QueryBus, ICommand, IQuery } from '@nestjs/cqrs';
 
 import {
   FetchUsersQuery,
-  FetchOneUserQuery
+  FetchOneUserQuery,
+  FetchOneUserByEmailQuery,
+  FetchOneUserByNickNameQuery,
+  FetchOneUserByRecoveryCodeQuery,
+  VerifyIfUserExistsByEmailOrNickNameQuery
 } from 'src/domain/business/slices/user/queries';
 
 import {
   CreateUserCommand,
   DeleteUserCommand,
-  UpdatePasswordCommand,
   UpdateUserCommand,
+  UpdateUserProfileCommand,
 } from 'src/domain/business/slices/user/commands';
 
 import { User } from 'src/domain/business/slices/user/models';
@@ -24,39 +28,80 @@ export class UserDomainService {
     private readonly queryBus: QueryBus
   ) {}
 
-  fetch(options?: FindManyOptions<User>) {
+  fetch(options?: FindManyOptions<User>): Promise<User[]> {
     const query = new FetchUsersQuery(options);
     return this.queryBus.execute<IQuery, User[]>(query);
   }
 
-  fetchById(id: string) {
+  fetchById(id: string): Promise<User> {
     const query = new FetchOneUserQuery(id);
     return this.queryBus.execute<IQuery, User>(query);
   }
 
+  fetchByEmail(email: string): Promise<User> {
+    const query = new FetchOneUserByEmailQuery(email);
+    return this.queryBus.execute<IQuery, User>(query);
+  }
+
+  fetchByNickName(nickName: string): Promise<User> {
+    const query = new FetchOneUserByNickNameQuery(nickName);
+    return this.queryBus.execute<IQuery, User>(query);
+  }
+
+  fetchByRecoveryCode(code: string) {
+    const query = new FetchOneUserByRecoveryCodeQuery(code);
+    return this.queryBus.execute<IQuery, User>(query);
+  }
+
+  verifyIfExists(email: string, nickName: string): Promise<boolean> {
+    const query = new VerifyIfUserExistsByEmailOrNickNameQuery(email, nickName);
+    return this.queryBus.execute<IQuery, boolean>(query);
+  }
+
   create(
-    userName: string,
+    fullName: string,
     nickName: string,
     phone: string,
     email: string,
     password: string,
+    descriptor: number,
     pushToken: string,
-    pictureId: string
+    pictureBuffer: Buffer
   ) {
     const command = new CreateUserCommand(
-      userName,
+      fullName,
       nickName,
       phone,
       email,
       password,
+      descriptor,
       pushToken,
-      pictureId
+      pictureBuffer
     );
     return this.commandBus.execute<ICommand, User>(command);
   }
 
-  updateById(id: string, user: Partial<User>) {
+  updateById(id: string, user: Partial<User>): Promise<User> {
     const command = new UpdateUserCommand(id, user);
+    return this.commandBus.execute<ICommand, User>(command);
+  }
+
+  updateProfileById(
+    id: string,
+    fullName?: string,
+    nickName?: string,
+    phone?: string,
+    email?: string,
+    pictureBuffer?: Buffer
+  ) {
+    const command = new UpdateUserProfileCommand(
+      id,
+      fullName,
+      nickName,
+      phone,
+      email,
+      pictureBuffer
+    );
     return this.commandBus.execute<ICommand, User>(command);
   }
 
@@ -65,10 +110,4 @@ export class UserDomainService {
     return this.commandBus.execute<ICommand, User>(command);
   }
 
-  updatePassword(userId: string, code: string, password: string) {
-    const command = new UpdatePasswordCommand(
-      userId, code, password
-    );
-    return this.commandBus.execute<ICommand, boolean>(command);
-  }
 }

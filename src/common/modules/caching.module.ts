@@ -9,14 +9,15 @@ const CacheProvider: Provider = {
   useClass: CacheInterceptor 
 };
 
+const CacheModuleAsync = CacheModule.registerAsync({
+  imports: [ConfigurationModule],
+  useFactory: (configService: ConfigurationService) => configService.configureCache(),
+  inject: [ConfigurationService]
+});
+
 @Module({
-  imports: [
-    CacheModule.registerAsync({
-      imports: [ConfigurationModule],
-      useFactory: (configService: ConfigurationService) => configService.configureCache(),
-      inject: [ConfigurationService]
-    })
-  ],
-  providers: [CacheProvider]
+  imports: [CacheModuleAsync],
+  providers: [CacheProvider],
+  exports: [CacheModuleAsync]
 })
 export class CachingModule {}

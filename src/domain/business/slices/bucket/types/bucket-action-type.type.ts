@@ -1,6 +1,6 @@
 export enum BucketActionType {
-  Create = 'create',
-  Read = 'read',
-  Update = 'update',
-  Remove = 'remove'
+  Create = 'created',
+  Read = 'fetched',
+  Update = 'updated',
+  Remove = 'removed'
 }

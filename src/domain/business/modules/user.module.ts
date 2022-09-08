@@ -5,16 +5,21 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { 
   CreateUserHandler,
   DeleteUserHandler,
+  UpdateUserHandler,
   FetchUserHandler, 
   FetchOneUserHandler,
-  UpdateUserHandler,
-  UpdatePasswordHandler
+  FetchOneUserByEmailHandler,
+  FetchOneUserByNickNameHandler,
+  FetchOneUserByRecoveryCodeQuery,
+  FetchOneUserByRecoveryCodeHandler,
+  VerifyIfUserExistsByEmailOrNickNameHandler,
 } from 'src/domain/business/slices/user';
 
 import { 
   UserCreatedEventHandler, 
   UserDeletedEventHandler, 
   UserUpdatedEventHandler,
+  UpdateUserProfileHandler
 } from 'src/domain/business/slices/user';
 
 import { 
@@ -23,17 +28,25 @@ import {
   UserRepository,
 } from 'src/domain/business/slices/user';
 
+import { BucketModule } from './bucket.module';
+
 @Module({
   imports: [
     CqrsModule,
+    BucketModule,
     TypeOrmModule.forFeature([User])
   ],
   providers: [
     CreateUserHandler,
     FetchOneUserHandler,
     FetchUserHandler,
+    FetchOneUserByEmailHandler,
+    FetchOneUserByNickNameHandler,
+    FetchOneUserByRecoveryCodeQuery,
+    FetchOneUserByRecoveryCodeHandler,
+    VerifyIfUserExistsByEmailOrNickNameHandler,
     UpdateUserHandler,
-    UpdatePasswordHandler,
+    UpdateUserProfileHandler,
     DeleteUserHandler,
     UserCreatedEventHandler,
     UserDeletedEventHandler,
