@@ -11,7 +11,11 @@ export class FetchOneUserHandler implements IQueryHandler<FetchOneUserQuery> {
   constructor(private readonly repository: UserRepository) {}
 
   async execute(query: FetchOneUserQuery): Promise<User> {
-    return await this.repository.fetchById(query.id);
+    try {
+      return await this.repository.fetchById(query.id);
+    } catch (error) {
+      throw new UserNotFoundDomainException();
+    }
   }
 
 }
