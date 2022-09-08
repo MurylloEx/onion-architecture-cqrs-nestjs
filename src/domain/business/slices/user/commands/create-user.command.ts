@@ -9,6 +9,6 @@ export class CreateUserCommand implements ICommand {
     public readonly password: string,
     public readonly descriptor: number,
     public readonly pushToken: string,
-    public readonly pictureId: string
+    public readonly pictureBuffer: Buffer
   ) {}
 }
