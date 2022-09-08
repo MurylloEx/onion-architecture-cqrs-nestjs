@@ -15,6 +15,7 @@ import {
   CreateUserCommand,
   DeleteUserCommand,
   UpdateUserCommand,
+  UpdateUserProfileCommand,
 } from 'src/domain/business/slices/user/commands';
 
 import { User } from 'src/domain/business/slices/user/models';
@@ -58,30 +59,49 @@ export class UserDomainService {
   }
 
   create(
-    userName: string,
+    fullName: string,
     nickName: string,
     phone: string,
     email: string,
     password: string,
     descriptor: number,
     pushToken: string,
-    pictureId: string
+    pictureBuffer: Buffer
   ) {
     const command = new CreateUserCommand(
-      userName,
+      fullName,
       nickName,
       phone,
       email,
       password,
       descriptor,
       pushToken,
-      pictureId
+      pictureBuffer
     );
     return this.commandBus.execute<ICommand, User>(command);
   }
 
-  updateById(id: string, user: Partial<User>) {
+  updateById(id: string, user: Partial<User>): Promise<User> {
     const command = new UpdateUserCommand(id, user);
+    return this.commandBus.execute<ICommand, User>(command);
+  }
+
+  updateProfileById(
+    id: string,
+    fullName?: string,
+    nickName?: string,
+    phone?: string,
+    email?: string,
+    pictureBuffer?: Buffer
+  ) {
+    const command = new UpdateUserProfileCommand(
+      id,
+      fullName,
+      nickName,
+      phone,
+      email,
+      pictureBuffer
+    );
     return this.commandBus.execute<ICommand, User>(command);
   }
 
