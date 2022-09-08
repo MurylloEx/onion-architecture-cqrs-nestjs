@@ -9,10 +9,12 @@ export class VerifyIfUserExistsByEmailOrNickNameHandler implements IQueryHandler
   constructor(private readonly repository: UserRepository) {}
 
   async execute(query: VerifyIfUserExistsByEmailOrNickNameQuery): Promise<boolean> {
-    return await this.repository.verifyIfUserExistsByEmailOrNickName(
+    const { emailAvailable, nickNameAvailable } = await this.repository.verifyUserAvailability(
       query.userEmail, 
       query.userNickName
     );
+
+    return emailAvailable && nickNameAvailable;
   }
 
 }
