@@ -3,7 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { FindManyOptions, Repository, UpdateResult } from 'typeorm';
 
 import { User } from 'src/domain/business/slices/user/models';
-import { UserNotFoundDomainException } from '../exceptions';
+import { UserAvailability } from 'src/domain/business/slices/user/types';
+import { UserNotFoundDomainException } from 'src/domain/business/slices/user/exceptions';
 
 @Injectable()
 export class UserRepository {
@@ -80,15 +81,14 @@ export class UserRepository {
     }
   }
 
-  async verifyIfUserExistsByEmailOrNickName(
-    email: string, 
-    nickName: string
-  ): Promise<boolean> 
-  {
-    return await this.repository.countBy([
-      { email },
-      { nickName }
-    ]) > 0;
+  async verifyUserAvailability(email: string, nickName: string): Promise<UserAvailability> {
+    const emailCount = await this.repository.countBy({ email });
+    const nickNameCount = await this.repository.countBy({ nickName });
+
+    return {
+      emailAvailable: emailCount === 0,
+      nickNameAvailable: nickNameCount === 0
+    };
   }
 
   updateById(id: string, user: Partial<User>): Promise<UpdateResult> {
