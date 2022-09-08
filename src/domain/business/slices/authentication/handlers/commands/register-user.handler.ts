@@ -3,11 +3,9 @@ import { v4 as uuid } from 'uuid';
 import { CommandHandler, EventBus, ICommandHandler } from '@nestjs/cqrs';
 
 import { UserDomainService } from 'src/domain/business/slices/user';
-import { BucketDomainService } from 'src/domain/business/slices/bucket';
 import { UserRegisteredEvent } from 'src/domain/business/slices/authentication/events';
 import { RegisterUserCommand } from 'src/domain/business/slices/authentication/commands';
 import { ConfirmationRepository } from 'src/domain/business/slices/authentication/repositories';
-import { UserAlreadyRegisteredDomainException } from 'src/domain/business/slices/authentication/exceptions';
 
 @CommandHandler(RegisterUserCommand)
 export class RegisterUserHandler implements ICommandHandler<RegisterUserCommand> {
@@ -15,26 +13,10 @@ export class RegisterUserHandler implements ICommandHandler<RegisterUserCommand>
   constructor(
     private readonly eventBus: EventBus,
     private readonly userDomainService: UserDomainService,
-    private readonly bucketDomainService: BucketDomainService,
     private readonly confirmationRepository: ConfirmationRepository
   ) {}
 
   async execute(command: RegisterUserCommand) {
-    const isUserAlreadyRegistered = await this.userDomainService.verifyIfExists(
-      command.email, 
-      command.nickName
-    );
-
-    if (isUserAlreadyRegistered) {
-      throw new UserAlreadyRegisteredDomainException();
-    }
-
-    const picture = await this.bucketDomainService.createImage(
-      command.pictureBuffer, 
-      command.nickName, 
-      command.fullName
-    );
-
     const hashedPassword = await hash(command.password, 10);
 
     const createdUser = await this.userDomainService.create(
@@ -45,7 +27,7 @@ export class RegisterUserHandler implements ICommandHandler<RegisterUserCommand>
       hashedPassword,
       command.descriptor,
       command.pushToken,
-      picture.id
+      command.pictureBuffer
     );
 
     let isCodeAlreadyUsed = false;
