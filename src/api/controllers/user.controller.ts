@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Patch } from '@nestjs/common';
 
-import { UpdateUserDto } from 'src/common/dto';
+import { UpdateUserProfileDto } from 'src/common/dto';
 import { UserService } from 'src/common/services';
 import { Access, Security, Permissions, Jwt, JwtDto } from 'src/common';
 
@@ -39,8 +39,8 @@ export class UserController {
     Access.UPDATE_USER,
     Access.READ_USER
   )
-  updatePartially(@Jwt() jwt: JwtDto, @Body() body: UpdateUserDto) {
-    return this.userService.updateById(jwt.id, body);
+  updatePartially(@Jwt() jwt: JwtDto, @Body() body: UpdateUserProfileDto) {
+    return this.userService.updateProfileById(jwt.id, body);
   }
 
 }
