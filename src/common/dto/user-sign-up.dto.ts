@@ -1,4 +1,3 @@
-import { Transform } from 'class-transformer';
 import {
   IsDefined,
   IsEmail,
@@ -8,7 +7,7 @@ import {
   MinLength
 } from 'class-validator';
 
-const PICTURE_BUFFER_PREFIX = new RegExp(/^data:image\/(png|jpeg|jpg);base64,/);
+import { SafeBufferTransform } from 'src/common/security';
 
 export class UserSignUpDto {
 
@@ -37,7 +36,7 @@ export class UserSignUpDto {
   public pushToken: string;
 
   @IsDefined()
-  @Transform(({ value }) => Buffer.from(value.replace(PICTURE_BUFFER_PREFIX, ''), 'base64'))
+  @SafeBufferTransform()
   public pictureBuffer: Buffer;
 
 }
