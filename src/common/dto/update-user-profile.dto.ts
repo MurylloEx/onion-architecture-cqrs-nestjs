@@ -9,7 +9,7 @@ import {
 
 import { SafeBufferTransform } from 'src/common/security';
 
-export class UpdateUserDto {
+export class UpdateUserProfileDto {
 
   @IsString()
   @Length(4, 64)
