@@ -1,5 +1,6 @@
 export * from './authentication.dto';
 export * from './bucket.dto';
+export * from './change-password.dto';
 export * from './confirmation.dto';
 export * from './imgur-response.dto';
 export * from './jwt.dto';

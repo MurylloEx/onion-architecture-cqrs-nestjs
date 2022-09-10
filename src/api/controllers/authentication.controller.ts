@@ -10,7 +10,8 @@ import {
   UserSignUpDto,
   AuthenticationDto,
   RecoveryDto,
-  RecoveryService
+  RecoveryService,
+  ChangePasswordDto
 } from 'src/common';
 
 @Controller('/authentication')
@@ -69,7 +70,7 @@ export class AuthenticationController {
   @Put('/recovery/change/:recoveryCode')
   changePassword(
     @Param('recoveryCode') recoveryCode: string,
-    @Body() recovery: RecoveryDto
+    @Body() recovery: ChangePasswordDto
   ): Promise<UserDto> 
   {
     return this.recoveryService.changePassword(recoveryCode, recovery);

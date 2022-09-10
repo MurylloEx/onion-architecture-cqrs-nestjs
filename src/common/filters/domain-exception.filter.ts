@@ -15,7 +15,7 @@ export class DomainExceptionFilter implements ExceptionFilter<DomainException> {
   constructor(private readonly logger: LoggingService) { }
 
   getExceptionName(exception: DomainException) {
-    return snakeCase('StatusDomain' + exception.name).toLowerCase();
+    return snakeCase('Status' + exception.name).toLowerCase();
   }
 
   catch(exception: DomainException, host: ArgumentsHost) {

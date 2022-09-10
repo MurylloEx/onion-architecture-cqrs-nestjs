@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TEST_BRANCH: ${{ github.head_ref || github.ref_name }} 
-      TEST_REPOSITORY_URL: https://github.com/Search-My-Pet/search-my-pet-api.git
-      TEST_REPOSITORY_NAME: search-my-pet-api
+      TEST_REPOSITORY_URL: https://github.com/inclusive-pet-api/inclusive-pet-api.git
+      TEST_REPOSITORY_NAME: inclusive-pet-api
       TEST_DIRECTORY: /home/muryllo/Documents/Tests
       TEST_COMMAND: npm test
     steps:
