@@ -10,17 +10,12 @@ import {
 export class Bucket extends DomainModel {
 
   @IsString()
-  @IsIn(['imgur'])
+  @IsIn(Object.values(BucketType))
   @Column()
   public type: BucketType;
 
   @IsString()
-  @IsIn([
-    'created', 
-    'fetched',
-    'updated', 
-    'deleted'
-  ])
+  @IsIn(Object.values(BucketActionType))
   @Column()
   public actionType: BucketActionType;
 
