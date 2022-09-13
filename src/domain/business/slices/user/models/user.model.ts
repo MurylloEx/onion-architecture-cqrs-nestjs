@@ -16,7 +16,14 @@ import {
 } from 'class-validator';
 
 import { DomainModel } from 'src/domain/models';
-import { Authentication, Confirmation, Recovery } from 'src/domain/business/slices/authentication';
+
+import { Pet } from 'src/domain/business/slices/pet/models';
+
+import { 
+  Authentication,
+  Confirmation,
+  Recovery
+} from 'src/domain/business/slices/authentication/models';
 
 @Entity()
 export class User extends DomainModel {
@@ -67,5 +74,9 @@ export class User extends DomainModel {
   @OneToMany(() => Authentication, recovery => recovery.user)
   @JoinColumn()
   public authentications: Authentication[];
+
+  @OneToMany(() => Pet, pet => pet.user)
+  @JoinColumn()
+  public pets: Pet[];
 
 }
