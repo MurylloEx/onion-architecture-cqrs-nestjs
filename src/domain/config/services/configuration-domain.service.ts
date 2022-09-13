@@ -41,7 +41,8 @@ import {
   Message,
   Confirmation,
   Recovery,
-  User
+  User,
+  Pet
 } from 'src/domain/business';
 
 import {
@@ -188,7 +189,8 @@ export class ConfigurationDomainService {
       Logging,
       Message,
       User,
-      Recovery
+      Recovery,
+      Pet
     ];
   }
 
