@@ -1,4 +1,5 @@
 import { 
+  IsBoolean,
   IsDefined, 
   IsInt, 
   IsNumber, 
@@ -53,6 +54,10 @@ export class CreatePetDto {
   @IsNumber()
   @IsInt()
   public age: number;
+
+  @IsDefined()
+  @IsBoolean()
+  public hasPedigree: boolean;
 
   @IsString()
   @IsDefined()

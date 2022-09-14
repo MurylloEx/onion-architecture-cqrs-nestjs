@@ -92,4 +92,7 @@ export class PetDto {
   @Exclude()
   public user: UserDto;
 
+  @Exclude()
+  public deletedAt: Date;
+
 }
