@@ -10,6 +10,7 @@ export class CreatePetCommandBuilder {
   private color: string = 'Não informado';
   private sex: string = 'Não informado';
   private age: number = 0;
+  private hasPedigree: boolean = false;
   private description: string = 'Não há descrição';
   private habits: string = 'Não informado';
   private allergies: string = 'Não informado';
@@ -56,6 +57,11 @@ export class CreatePetCommandBuilder {
     return this;
   }
 
+  withHasPedigree(value: boolean) {
+    this.hasPedigree = value;
+    return this;
+  }
+
   withDescription(value: string) {
     this.description = value;
     return this;
@@ -91,6 +97,7 @@ export class CreatePetCommandBuilder {
       this.color,
       this.sex,
       this.age,
+      this.hasPedigree,
       this.description,
       this.habits,
       this.allergies,

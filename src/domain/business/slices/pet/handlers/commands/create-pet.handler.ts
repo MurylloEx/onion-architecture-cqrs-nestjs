@@ -25,7 +25,7 @@ export class CreatePetHandler implements ICommandHandler<CreatePetCommand> {
     );
 
     try {
-      const createdPet = await this.repository.create(
+      return await this.repository.create(
         user,
         command.name,
         command.species,
@@ -34,14 +34,13 @@ export class CreatePetHandler implements ICommandHandler<CreatePetCommand> {
         command.color,
         command.sex,
         command.age,
+        command.hasPedigree,
         command.description,
         command.habits,
         command.allergies,
         command.fears,
         picture.id
       );
-
-      return createdPet;
     } catch (error) {
       throw new CannotCreatePetDomainException();
     }

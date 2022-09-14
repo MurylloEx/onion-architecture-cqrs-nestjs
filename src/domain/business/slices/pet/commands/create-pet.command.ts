@@ -10,6 +10,7 @@ export class CreatePetCommand implements ICommand {
     public readonly color: string,
     public readonly sex: string,
     public readonly age: number,
+    public readonly hasPedigree: boolean,
     public readonly description: string,
     public readonly habits: string,
     public readonly allergies: string,

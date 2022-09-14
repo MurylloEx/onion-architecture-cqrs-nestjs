@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreatePetDto } from 'src/common/dto';
+import { CreatePetDto, PetDto } from 'src/common/dto';
 import { PetDomainService } from 'src/domain';
 
 @Injectable()
@@ -9,12 +9,13 @@ export class PetService {
     private readonly petDomainService: PetDomainService
   ) { }
 
-  fetchOwnPets(userId: string) {
-    return this.petDomainService.fetchOwnPets(userId);
+  async fetchOwnPets(userId: string): Promise<PetDto[]> {
+    const entities = await this.petDomainService.fetchOwnPets(userId);
+    return entities.map(entity => entity.toDto(PetDto));
   }
 
-  createPet(userId: string, pet: CreatePetDto) {
-    return this.petDomainService.createPet(
+  async createPet(userId: string, pet: CreatePetDto): Promise<PetDto> {
+    const entity = await this.petDomainService.createPet(
       userId,
       pet.name,
       pet.species,
@@ -23,16 +24,19 @@ export class PetService {
       pet.color,
       pet.sex,
       pet.age,
+      pet.hasPedigree,
       pet.description,
       pet.habits,
       pet.allergies,
       pet.fears,
       pet.pictureBuffer
     );
+    return entity.toDto(PetDto);
   }
 
-  deletePet(id: string) {
-    return this.petDomainService.deletePet(id);
+  async deletePet(id: string): Promise<PetDto> {
+    const entity = await this.petDomainService.deletePet(id);
+    return entity.toDto(PetDto);
   }
 
 }

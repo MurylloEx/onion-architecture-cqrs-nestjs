@@ -31,6 +31,7 @@ export class PetDomainService {
     color: string,
     sex: string,
     age: number,
+    hasPedigree: boolean,
     description: string,
     habits: string,
     allergies: string,
@@ -46,6 +47,7 @@ export class PetDomainService {
       .withColor(color)
       .withSex(sex)
       .withAge(age)
+      .withHasPedigree(hasPedigree)
       .withDescription(description)
       .withHabits(habits)
       .withAllergies(allergies)
