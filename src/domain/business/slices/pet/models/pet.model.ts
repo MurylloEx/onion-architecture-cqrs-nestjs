@@ -1,5 +1,6 @@
 import { Column, Entity, ManyToOne } from 'typeorm';
 import {
+  IsBoolean,
   IsDefined,
   IsInt,
   IsNumber,
@@ -63,6 +64,11 @@ export class Pet extends DomainModel {
   @IsInt()
   @Column()
   public age: number;
+
+  @IsBoolean()
+  @IsDefined()
+  @Column()
+  public hasPedigree: boolean;
 
   @IsString()
   @IsDefined()
