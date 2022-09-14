@@ -21,7 +21,6 @@ jobs:
         port: ${{ secrets.SERVER_PORT }}
         key: ${{ secrets.PRIVATE_KEY }}
         username: ${{ secrets.SERVER_USERNAME }}
-        script_stop: true
         script: |
           echo "Running script to test into server..."
           pwd
