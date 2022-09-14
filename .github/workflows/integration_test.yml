@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TEST_BRANCH: ${{ github.head_ref || github.ref_name }} 
-      TEST_REPOSITORY_URL: https://github.com/inclusive-pet-api/inclusive-pet-api.git
+      TEST_REPOSITORY_URL: https://github.com/inclusive-pet/inclusive-pet-api.git
       TEST_REPOSITORY_NAME: inclusive-pet-api
       TEST_DIRECTORY: /home/muryllo/Documents/Tests
       TEST_COMMAND: npm test
@@ -31,11 +31,6 @@ jobs:
 
           BASE_PATH="${{ env.TEST_DIRECTORY }}/${SAFE_BRANCH_NAME}"
           FULL_PATH="${BASE_PATH}/${{ env.TEST_REPOSITORY_NAME }}"
-
-          echo $BASE_PATH
-          echo $FULL_PATH
-          exit 0
-
 
           if [ -d "$FULL_PATH" ]; then
             cd $FULL_PATH
