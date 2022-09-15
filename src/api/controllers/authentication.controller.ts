@@ -1,3 +1,4 @@
+import { ApiTags } from '@nestjs/swagger';
 import { Request, Response } from 'express';
 import { Body, Controller, Get, Param, Post, Put, Req, Res } from '@nestjs/common';
 import {
@@ -14,6 +15,7 @@ import {
   ChangePasswordDto
 } from 'src/common';
 
+@ApiTags('Autenticação')
 @Controller('/authentication')
 export class AuthenticationController {
 

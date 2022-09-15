@@ -1,6 +1,8 @@
+import { ApiTags } from '@nestjs/swagger';
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { MessageService, MessageDto, Access, Permissions, Security } from 'src/common';
 
+@ApiTags('Mensagens')
 @Security()
 @Controller('message')
 export class MessageController {

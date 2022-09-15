@@ -7,6 +7,7 @@ import {
   ConfirmationService,
   LoggingService,
   MessageService,
+  PetService,
   RecoveryService,
   UserService
 } from 'src/common/services';
@@ -31,6 +32,7 @@ import { ConfigurationModule } from './configuration.module';
     ConfirmationService,
     LoggingService,
     MessageService,
+    PetService,
     RecoveryService,
     UserService
   ],
@@ -41,6 +43,7 @@ import { ConfigurationModule } from './configuration.module';
     ConfirmationService,
     LoggingService,
     MessageService,
+    PetService,
     RecoveryService,
     UserService
   ]
