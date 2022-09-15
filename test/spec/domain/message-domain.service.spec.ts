@@ -25,7 +25,7 @@ describe('MessageDomainService (Domain)', () => {
 
   it('should return an empty array', async () => {
     const fetchSut = await actualService.fetch();
-    expect(fetchSut).toEqual([1]);
+    expect(fetchSut).toEqual([]);
   });
 
 });
