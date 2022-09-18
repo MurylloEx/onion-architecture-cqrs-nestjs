@@ -3,6 +3,7 @@ export * from './bucket.dto';
 export * from './change-password.dto';
 export * from './confirmation.dto';
 export * from './create-pet.dto';
+export * from './establishment.dto';
 export * from './imgur-response.dto';
 export * from './jwt.dto';
 export * from './message.dto';
