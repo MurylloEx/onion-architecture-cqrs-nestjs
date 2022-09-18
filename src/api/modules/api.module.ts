@@ -3,6 +3,7 @@ import { CommonModule } from 'src/common';
 import { WebSockGateway } from 'src/api/gateways';
 import {
   AuthenticationController,
+  EstablishmentController,
   MessageController,
   PetController,
   UserController
@@ -12,6 +13,7 @@ import {
   imports: [CommonModule],
   controllers: [
     AuthenticationController,
+    EstablishmentController,
     MessageController,
     PetController,
     UserController

@@ -42,7 +42,8 @@ import {
   Confirmation,
   Recovery,
   User,
-  Pet
+  Pet,
+  Establishment
 } from 'src/domain/business';
 
 import {
@@ -186,6 +187,7 @@ export class ConfigurationDomainService {
       Authentication,
       Bucket,
       Confirmation,
+      Establishment,
       Logging,
       Message,
       User,
