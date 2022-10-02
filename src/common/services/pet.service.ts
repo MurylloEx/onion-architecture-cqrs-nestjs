@@ -9,13 +9,13 @@ export class PetService {
     private readonly petDomainService: PetDomainService
   ) { }
 
-  async fetchOwnPets(userId: string): Promise<PetDto[]> {
-    const entities = await this.petDomainService.fetchOwnPets(userId);
+  async fetchOwn(userId: string): Promise<PetDto[]> {
+    const entities = await this.petDomainService.fetchOwn(userId);
     return entities.map(entity => entity.toDto(PetDto));
   }
 
-  async createPet(userId: string, pet: CreatePetDto): Promise<PetDto> {
-    const entity = await this.petDomainService.createPet(
+  async create(userId: string, pet: CreatePetDto): Promise<PetDto> {
+    const entity = await this.petDomainService.create(
       userId,
       pet.name,
       pet.species,
@@ -34,8 +34,8 @@ export class PetService {
     return entity.toDto(PetDto);
   }
 
-  async deletePet(id: string): Promise<PetDto> {
-    const entity = await this.petDomainService.deletePet(id);
+  async delete(id: string): Promise<PetDto> {
+    const entity = await this.petDomainService.delete(id);
     return entity.toDto(PetDto);
   }
 
