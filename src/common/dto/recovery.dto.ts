@@ -1,5 +1,5 @@
 import { Exclude } from 'class-transformer';
-import { IsString, MinLength } from 'class-validator';
+import { IsDate, IsString } from 'class-validator';
 import { UserDto } from './user.dto';
 
 export class RecoveryDto {
@@ -10,5 +10,13 @@ export class RecoveryDto {
   @Exclude()
   @IsString()
   public code: string;
+
+  @Exclude()
+  @IsDate()
+  public updatedAt: Date;
+
+  @Exclude()
+  @IsDate()
+  public deletedAt: Date;
 
 }
