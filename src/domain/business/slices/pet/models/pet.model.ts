@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import {
   IsBoolean,
   IsDefined,
@@ -11,7 +11,8 @@ import {
 } from 'class-validator';
 
 import { DomainModel } from 'src/domain/models';
-import { User } from 'src/domain/business/slices/user';
+import { User } from 'src/domain/business/slices/user/models';
+import { Post } from 'src/domain/business/slices/feed/models';
 
 @Entity()
 export class Pet extends DomainModel {
@@ -103,8 +104,11 @@ export class Pet extends DomainModel {
   @Column()
   public pictureId: string;
 
-  @IsDefined()
   @ManyToOne(() => User, user => user.pets)
   public user: User;
+
+  @OneToMany(() => Post, post => post.pet)
+  @JoinColumn()
+  public posts: Post[];
 
 }
