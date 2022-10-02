@@ -1,5 +1,6 @@
 import { Exclude } from 'class-transformer';
 import { 
+  IsDate,
   IsDefined, 
   IsInt, 
   IsNumber, 
@@ -93,6 +94,11 @@ export class PetDto {
   public user: UserDto;
 
   @Exclude()
+  @IsDate()
+  public updatedAt: Date;
+
+  @Exclude()
+  @IsDate()
   public deletedAt: Date;
 
 }
