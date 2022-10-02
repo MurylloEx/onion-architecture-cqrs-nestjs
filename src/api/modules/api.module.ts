@@ -4,6 +4,7 @@ import { WebSockGateway } from 'src/api/gateways';
 import {
   AuthenticationController,
   EstablishmentController,
+  FeedController,
   MessageController,
   PetController,
   UserController
@@ -14,6 +15,7 @@ import {
   controllers: [
     AuthenticationController,
     EstablishmentController,
+    FeedController,
     MessageController,
     PetController,
     UserController
