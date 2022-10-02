@@ -43,7 +43,9 @@ import {
   Recovery,
   User,
   Pet,
-  Establishment
+  Establishment,
+  Post,
+  PostFilterRule
 } from 'src/domain/business';
 
 import {
@@ -192,7 +194,9 @@ export class ConfigurationDomainService {
       Message,
       User,
       Recovery,
-      Pet
+      Pet,
+      Post,
+      PostFilterRule,
     ];
   }
 
