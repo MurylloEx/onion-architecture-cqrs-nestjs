@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, UpdateResult } from 'typeorm';
 
-import { User } from 'src/domain/business/slices/user';
+import { User } from 'src/domain/business/slices/user/models';
 import { Pet } from 'src/domain/business/slices/pet/models';
 
 @Injectable()
