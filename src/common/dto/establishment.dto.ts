@@ -10,7 +10,8 @@ import {
   IsInt,
   IsPhoneNumber,
   IsLatitude,
-  IsLongitude
+  IsLongitude,
+  IsDate
 } from 'class-validator';
 
 export class EstablishmentDto {
@@ -43,6 +44,11 @@ export class EstablishmentDto {
   public longitude: number;
 
   @Exclude()
+  @IsDate()
+  public updatedAt: Date;
+
+  @Exclude()
+  @IsDate()
   public deletedAt: Date;
 
 }
