@@ -31,7 +31,7 @@ export class DomainExceptionFilter implements ExceptionFilter<DomainException> {
       'A domain exception has detected.', 
       'This is not neccessarily a back-end error, ' +
       'but a business logic exception.', 
-      payload
+      payload?.message ?? 'No description provided.'
     );
 
     response.status(status).json({
