@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CommandBus, ICommand, IQuery, QueryBus } from '@nestjs/cqrs';
 
 import { Pet } from 'src/domain/business/slices/pet/models';
-import { FetchOwnPetsQuery } from 'src/domain/business/slices/pet/queries';
+import { FetchOnePetQuery, FetchOwnPetsQuery } from 'src/domain/business/slices/pet/queries';
 
 import { 
   DeletePetCommand, 
@@ -17,12 +17,17 @@ export class PetDomainService {
     private readonly queryBus: QueryBus
   ) { }
 
-  fetchOwnPets(userId: string): Promise<Pet[]> {
+  fetchById(id: string): Promise<Pet> {
+    const query = new FetchOnePetQuery(id);
+    return this.queryBus.execute<IQuery, Pet>(query);
+  }
+
+  fetchOwn(userId: string): Promise<Pet[]> {
     const query = new FetchOwnPetsQuery(userId);
     return this.queryBus.execute<IQuery, Pet[]>(query);
   }
 
-  createPet(
+  create(
     userId: string,
     name: string,
     species: string,
@@ -57,7 +62,7 @@ export class PetDomainService {
     return this.commandBus.execute<ICommand, Pet>(command);
   }
 
-  deletePet(id: string): Promise<Pet> {
+  delete(id: string): Promise<Pet> {
     const command = new DeletePetCommand(id);
     return this.commandBus.execute<ICommand, Pet>(command);
   }

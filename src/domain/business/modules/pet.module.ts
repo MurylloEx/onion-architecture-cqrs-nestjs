@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import {
   CreatePetHandler,
   DeletePetHandler,
+  FetchOnePetHandler,
   FetchOwnPetsHandler,
 } from 'src/domain/business/slices/pet';
 
@@ -16,7 +17,7 @@ import {
 
 import { UserModule } from './user.module';
 import { BucketModule } from './bucket.module';
-
+ 
 @Module({
   imports: [
     CqrsModule,
@@ -28,6 +29,7 @@ import { BucketModule } from './bucket.module';
     CreatePetHandler,
     DeletePetHandler,
     FetchOwnPetsHandler,
+    FetchOnePetHandler,
     PetRepository,
     PetDomainService
   ],

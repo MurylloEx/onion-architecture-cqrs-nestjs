@@ -1,5 +1,5 @@
 export enum PetPermissions {
   CREATE_PET = 'create_pet',
   DELETE_PET = 'delete_pet',
-  FETCH_OWN_PETS = 'fetch_own_pets'
+  READ_OWN_PETS = 'read_own_pets'
 };

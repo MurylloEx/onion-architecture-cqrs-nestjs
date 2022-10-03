@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { DomainModule } from 'src/domain';
-import { 
+import {
   AuthenticationService,
   BucketService,
   ConfigurationService,
@@ -9,6 +9,7 @@ import {
   LoggingService,
   MessageService,
   PetService,
+  PostService,
   RecoveryService,
   UserService
 } from 'src/common/services';
@@ -35,6 +36,7 @@ import { ConfigurationModule } from './configuration.module';
     LoggingService,
     MessageService,
     PetService,
+    PostService,
     RecoveryService,
     UserService
   ],
@@ -47,8 +49,9 @@ import { ConfigurationModule } from './configuration.module';
     LoggingService,
     MessageService,
     PetService,
+    PostService,
     RecoveryService,
     UserService
   ]
 })
-export class ServicesModule {}
+export class ServicesModule { }

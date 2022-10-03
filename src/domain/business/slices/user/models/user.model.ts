@@ -18,7 +18,7 @@ import {
 import { DomainModel } from 'src/domain/models';
 
 import { Pet } from 'src/domain/business/slices/pet/models';
-
+import { Post } from 'src/domain/business/slices/feed/models';
 import { 
   Authentication,
   Confirmation,
@@ -78,5 +78,9 @@ export class User extends DomainModel {
   @OneToMany(() => Pet, pet => pet.user)
   @JoinColumn()
   public pets: Pet[];
+
+  @OneToMany(() => Post, post => post.user)
+  @JoinColumn()
+  public posts: Post[];
 
 }
