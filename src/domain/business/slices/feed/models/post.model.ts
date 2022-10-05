@@ -63,26 +63,23 @@ export class Post extends DomainModel {
   @Column()
   public reports: number;
 
-  @IsDefined()
   @IsDate()
   @ValidateIfPostTypeIs(PostType.LOST)
   @AssignIfPostTypeIs(PostType.LOST)
-  @Column()
+  @Column({ nullable: true })
   public lostDate?: Date;
 
-  @IsDefined()
   @IsNumber()
   @IsPositive()
   @ValidateIfPostTypeIs(PostType.LOST)
   @AssignIfPostTypeIs(PostType.LOST)
-  @Column()
+  @Column({ nullable: true })
   public lostReward?: number;
 
-  @IsDefined()
   @IsString()
   @ValidateIfPostTypeIs(PostType.LOST)
   @AssignIfPostTypeIs(PostType.LOST)
-  @Column()
+  @Column({ nullable: true })
   public lostCircumstance?: string;
 
   @IsDefined()

@@ -87,7 +87,9 @@ export class PostService {
   }
 
   async fetch(): Promise<PostDto[]> {
-    const entities = await this.postDomainService.fetch();
+    const entities = await this.postDomainService.fetch({
+      relations: ['user', 'pet']
+    });
 
     return entities.map(entity => {
       const transferObject = entity.toDto(PostDto);
