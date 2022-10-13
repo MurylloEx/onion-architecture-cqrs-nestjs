@@ -6,7 +6,7 @@ import { UserDto } from './user.dto';
 
 export class CommentaryDto {
 
-  @Length(4, 512)
+  @Length(4, 154)
   @IsString()
   @IsDefined()
   public text: string;
