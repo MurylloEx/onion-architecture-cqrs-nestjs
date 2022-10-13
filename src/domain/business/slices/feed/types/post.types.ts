@@ -1,5 +1,5 @@
 export enum PostType {
   LOST = 'LOST',
-  LOVE = 'FOUND',
+  LOVE = 'LOVE',
   ADOPTION = 'ADOPTION',
 }
