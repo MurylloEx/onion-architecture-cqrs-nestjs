@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AuthenticationModule } from './authentication.module';
 import { BucketModule } from './bucket.module';
+import { CommentaryModule } from './commentary.module';
 import { EstablishmentModule } from './establishment.module';
 import { FeedModule } from './feed.module';
 import { LoggingModule } from './logging.module';
@@ -13,6 +14,7 @@ import { UserModule } from './user.module';
   imports: [
     AuthenticationModule,
     BucketModule,
+    CommentaryModule,
     EstablishmentModule,
     FeedModule,
     LoggingModule,
@@ -24,6 +26,7 @@ import { UserModule } from './user.module';
   exports: [
     AuthenticationModule,
     BucketModule,
+    CommentaryModule,
     EstablishmentModule,
     FeedModule,
     LoggingModule,
