@@ -39,6 +39,7 @@ import {
   Bucket,
   Logging,
   Message,
+  Commentary,
   Confirmation,
   Recovery,
   User,
@@ -188,6 +189,7 @@ export class ConfigurationDomainService {
     return [
       Authentication,
       Bucket,
+      Commentary,
       Confirmation,
       Establishment,
       Logging,
