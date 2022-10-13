@@ -1,10 +1,14 @@
 import { Exclude } from 'class-transformer';
 import { ApiHideProperty } from '@nestjs/swagger';
-import { IsDate, IsDefined, IsString, Length } from 'class-validator';
+import { IsDate, IsDefined, IsString, IsUUID, Length } from 'class-validator';
 import { PostDto } from './post.dto';
 import { UserDto } from './user.dto';
 
 export class CommentaryDto {
+
+  @IsUUID('4')
+  @IsDefined()
+  public id: string;
 
   @Length(4, 154)
   @IsString()

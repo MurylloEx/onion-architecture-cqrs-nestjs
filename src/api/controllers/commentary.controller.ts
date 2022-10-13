@@ -8,7 +8,8 @@ import {
   CommentaryDto,
   Jwt,
   JwtDto,
-  CommentaryService
+  CommentaryService,
+  CreateCommentaryDto
 } from 'src/common';
 
 @ApiTags('Commentary')
@@ -39,7 +40,7 @@ export class CommentaryController {
   createByPostId(
     @Param('postId') postId: string, 
     @Jwt() jwt: JwtDto, 
-    @Body() commentary: CommentaryDto
+    @Body() commentary: CreateCommentaryDto
   ): Promise<CommentaryDto> 
   {
     return this.commentaryService.create(jwt.id, postId, commentary.text);
