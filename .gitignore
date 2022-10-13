@@ -44,3 +44,6 @@ lerna-debug.log*
 # Ignore database directories
 **/*.sqlite
 **/*.db
+
+# Ignore lock files
+package-lock.json
