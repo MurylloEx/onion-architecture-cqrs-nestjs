@@ -1,5 +1,6 @@
 export * from './authentication';
 export * from './bucket';
+export * from './commentary';
 export * from './establishment';
 export * from './feed';
 export * from './logging';
