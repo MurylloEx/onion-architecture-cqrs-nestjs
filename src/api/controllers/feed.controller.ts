@@ -30,20 +30,8 @@ export class FeedController {
 
   @Get('/post/my')
   @Permissions(Access.READ_OWN_POSTS)
-  fetchMyPosts(@Jwt() jwt: JwtDto) {
+  fetchMyPosts(@Jwt() jwt: JwtDto): Promise<PostDto[]> {
     return this.postService.fetchByUserId(jwt.id);
-  }
-
-  @Get('/post/filter/rules')
-  @Permissions(Access.READ_POST_FILTER_RULES)
-  fetchPostFilterRules() {
-    return this.postService.fetchFilterRules();
-  }
-
-  @Get('/post/filter')
-  @Permissions(Access.READ_POSTS)
-  fetchPostsByFilters() {
-    return this.postService.fetchByFilter('filter', 'type');
   }
 
   @Post('/post')
@@ -51,7 +39,7 @@ export class FeedController {
     Access.CREATE_POSTS,
     Access.READ_OWN_POSTS
   )
-  createPost(@Body() post: CreatePostDto) {
+  createPost(@Body() post: CreatePostDto): Promise<PostDto> {
     return this.postService.create(post);
   }
 
@@ -60,10 +48,7 @@ export class FeedController {
     Access.UPDATE_POSTS, 
     Access.READ_POSTS
   )
-  updatePost(
-    @Param('id') id: string, 
-    @Body() post: UpdatePostDto
-  ) {	
+  updatePost(@Param('id') id: string, @Body() post: UpdatePostDto): Promise<PostDto> {	
     return this.postService.updateById(id, post);
   }
 
@@ -72,7 +57,7 @@ export class FeedController {
     Access.DELETE_POSTS, 
     Access.READ_POSTS
   )
-  deletePost(@Param('id') id: string) {
+  deletePost(@Param('id') id: string): Promise<PostDto> {
     return this.postService.deleteById(id);
   }
 
