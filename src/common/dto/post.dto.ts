@@ -1,4 +1,4 @@
-import { PostType } from 'src/domain';
+import { ApiHideProperty } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
 import {
   IsInt,
@@ -11,6 +11,9 @@ import {
   Min,
   IsDate
 } from 'class-validator';
+
+import { PostType } from 'src/domain';
+
 import { UserDto } from './user.dto';
 import { PetDto } from './pet.dto';
 
@@ -20,6 +23,7 @@ export class PostDto {
   @IsInt()
   @IsNumber()
   @IsPositive()
+  @ApiHideProperty()
   public offset: number;
 
   @IsString()
@@ -43,6 +47,7 @@ export class PostDto {
   @Min(0)
   @IsInt()
   @IsNumber()
+  @ApiHideProperty()
   public reports: number;
 
   @IsDate()
@@ -65,6 +70,7 @@ export class PostDto {
 
   @Exclude()
   @IsDate()
+  @ApiHideProperty()
   public deletedAt: Date;
 
 }

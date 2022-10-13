@@ -13,6 +13,7 @@ export class PostService {
   async create(post: CreatePostDto): Promise<PostDto> {
     const entity = await this.postDomainService.create(
       <PostType>post.type,
+      post.petId,
       post.pictureBuffer,
       post.localization,
       post.description,

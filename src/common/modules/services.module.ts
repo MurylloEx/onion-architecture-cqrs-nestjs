@@ -3,6 +3,7 @@ import { DomainModule } from 'src/domain';
 import {
   AuthenticationService,
   BucketService,
+  CommentaryService,
   ConfigurationService,
   ConfirmationService,
   EstablishmentService,
@@ -30,6 +31,7 @@ import { ConfigurationModule } from './configuration.module';
   providers: [
     AuthenticationService,
     BucketService,
+    CommentaryService,
     ConfigurationService,
     ConfirmationService,
     EstablishmentService,
@@ -43,6 +45,7 @@ import { ConfigurationModule } from './configuration.module';
   exports: [
     AuthenticationService,
     BucketService,
+    CommentaryService,
     ConfigurationService,
     ConfirmationService,
     EstablishmentService,

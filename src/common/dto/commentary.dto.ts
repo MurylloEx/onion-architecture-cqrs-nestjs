@@ -1,17 +1,27 @@
 import { Exclude } from 'class-transformer';
 import { ApiHideProperty } from '@nestjs/swagger';
-import { IsDate, IsString } from 'class-validator';
+import { IsDate, IsDefined, IsString, IsUUID, Length } from 'class-validator';
+import { PostDto } from './post.dto';
 import { UserDto } from './user.dto';
 
-export class RecoveryDto {
+export class CommentaryDto {
 
-  @Exclude()
+  @IsUUID('4')
+  @IsDefined()
+  public id: string;
+
+  @Length(4, 154)
+  @IsString()
+  @IsDefined()
+  public text: string;
+
+  @IsDefined()
   public user: UserDto;
 
   @Exclude()
-  @IsString()
+  @IsDefined()
   @ApiHideProperty()
-  public code: string;
+  public post: PostDto;
 
   @Exclude()
   @IsDate()

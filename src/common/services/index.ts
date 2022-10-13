@@ -1,5 +1,6 @@
 export * from './authentication.service';
 export * from './bucket.service';
+export * from './commentary.service';
 export * from './configuration.service';
 export * from './confirmation.service';
 export * from './establishment.service';

@@ -9,6 +9,7 @@ import {
   IsNumber,
   IsPositive,
   IsString,
+  IsUUID,
   ValidateIf
 } from 'class-validator';
 
@@ -18,6 +19,10 @@ export class CreatePostDto {
   @IsNotEmpty()
   @IsEnum(PostType)
   public type: string;
+
+  @IsDefined()
+  @IsUUID('4')
+  public petId: string;
 
   @IsDefined()
   @SafeBufferTransform()

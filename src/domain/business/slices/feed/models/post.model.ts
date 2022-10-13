@@ -1,4 +1,4 @@
-import { Column, Entity, Generated, ManyToOne, Unique } from 'typeorm';
+import { Column, Entity, Generated, JoinColumn, ManyToOne, OneToMany, Unique } from 'typeorm';
 import {
   IsDate,
   IsDefined,
@@ -16,6 +16,7 @@ import { DomainModel } from 'src/domain/models';
 import { Pet } from 'src/domain/business/slices/pet/models';
 import { User } from 'src/domain/business/slices/user/models';
 import { PostType } from 'src/domain/business/slices/feed/types';
+import { Commentary } from 'src/domain/business/slices/commentary/models';
 import { 
   AssignIfPostTypeIs, 
   ValidateIfPostTypeIs 
@@ -89,5 +90,9 @@ export class Post extends DomainModel {
   @IsDefined()
   @ManyToOne(() => User, user => user.posts)
   public user: User;
+
+  @OneToMany(() => Commentary, commentary => commentary.post)
+  @JoinColumn()
+  public commentaries: Commentary[];
 
 }

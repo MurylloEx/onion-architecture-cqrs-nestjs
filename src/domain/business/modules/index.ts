@@ -1,6 +1,7 @@
 export * from './authentication.module';
 export * from './bucket.module';
 export * from './business-domain.module';
+export * from './commentary.module';
 export * from './establishment.module';
 export * from './feed.module';
 export * from './logging.module';
