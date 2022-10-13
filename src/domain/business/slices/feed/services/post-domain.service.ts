@@ -28,6 +28,7 @@ export class PostDomainService {
 
   create(
     type: PostType,
+    petId: string,
     pictureBuffer: Buffer,
     localization: string,
     description: string,
@@ -37,6 +38,7 @@ export class PostDomainService {
   ): Promise<Post> {
     const command = new CreatePostCommandBuilder()
       .withType(type)
+      .withPetId(petId)
       .withPictureBuffer(pictureBuffer)
       .withLocalization(localization)
       .withDescription(description)
