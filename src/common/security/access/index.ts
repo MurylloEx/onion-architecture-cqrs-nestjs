@@ -1,3 +1,4 @@
+import { CommentaryPermissions } from './commentary.permissions';
 import { EstablishmentPermissions } from './establishment.permissions';
 import { FeedPermissions } from './feed.permissions';
 import { MessagePermissions } from './message.permissions';
@@ -9,5 +10,6 @@ export const Access = {
   ...UserPermissions,
   ...PetPermissions,
   ...EstablishmentPermissions,
-  ...FeedPermissions
+  ...FeedPermissions,
+  ...CommentaryPermissions
 };
