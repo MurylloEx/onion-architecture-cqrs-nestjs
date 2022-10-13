@@ -1,3 +1,4 @@
+import { ApiHideProperty } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
 import {
   IsDate,
@@ -37,6 +38,7 @@ export class UserDto {
   @Exclude()
   @IsString()
   @MinLength(6)
+  @ApiHideProperty()
   public password: string;
 
   @Exclude()
@@ -44,11 +46,13 @@ export class UserDto {
   @IsNumber()
   @IsPositive()
   @Max(Number.MAX_SAFE_INTEGER)
+  @ApiHideProperty()
   public descriptor: number;
 
   @Exclude()
   @IsString()
   @IsDefined()
+  @ApiHideProperty()
   public pushToken: string;
 
   @IsString()
@@ -60,10 +64,12 @@ export class UserDto {
 
   @Exclude()
   @IsDate()
+  @ApiHideProperty()
   public updatedAt: Date;
 
   @Exclude()
   @IsDate()
+  @ApiHideProperty()
   public deletedAt: Date;
 
 }

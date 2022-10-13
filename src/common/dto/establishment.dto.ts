@@ -1,3 +1,4 @@
+import { ApiHideProperty } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
 import {
   IsString,
@@ -45,10 +46,12 @@ export class EstablishmentDto {
 
   @Exclude()
   @IsDate()
+  @ApiHideProperty()
   public updatedAt: Date;
 
   @Exclude()
   @IsDate()
+  @ApiHideProperty()
   public deletedAt: Date;
 
 }

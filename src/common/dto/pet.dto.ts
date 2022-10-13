@@ -1,3 +1,4 @@
+import { ApiHideProperty } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
 import { 
   IsDate,
@@ -91,14 +92,17 @@ export class PetDto {
   public pictureId: string;
 
   @Exclude()
+  @ApiHideProperty()
   public user: UserDto;
 
   @Exclude()
   @IsDate()
+  @ApiHideProperty()
   public updatedAt: Date;
 
   @Exclude()
   @IsDate()
+  @ApiHideProperty()
   public deletedAt: Date;
 
 }

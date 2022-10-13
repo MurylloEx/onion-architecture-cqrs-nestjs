@@ -1,5 +1,7 @@
+import { Exclude } from 'class-transformer';
+import { ApiHideProperty } from '@nestjs/swagger';
+import { IsString, IsDefined, IsEnum, IsBoolean, IsDate } from 'class-validator';
 import { PostType } from 'src/domain';
-import { IsString, IsDefined, IsEnum, IsBoolean } from 'class-validator';
 
 export class PostFilterRuleDto {
 
@@ -19,5 +21,18 @@ export class PostFilterRuleDto {
   @IsBoolean()
   @IsDefined()
   public hidden: boolean;
+
+  @IsDate()
+  public createdAt: Date;
+
+  @Exclude()
+  @IsDate()
+  @ApiHideProperty()
+  public updatedAt: Date;
+
+  @Exclude()
+  @IsDate()
+  @ApiHideProperty()
+  public deletedAt: Date;
 
 }
