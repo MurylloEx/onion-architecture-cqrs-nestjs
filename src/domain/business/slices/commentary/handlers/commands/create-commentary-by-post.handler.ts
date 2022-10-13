@@ -17,10 +17,10 @@ export class CreateCommentaryByPostHandler implements ICommandHandler<CreateComm
   ) {}
 
   async execute(command: CreateCommentaryByPostCommand): Promise<Commentary> {
-    const post = await this.postDomainService.fetchById(command.postId);
-    const user = await this.userDomainService.fetchById(command.userId);
-
     try {
+      const post = await this.postDomainService.fetchById(command.postId);
+      const user = await this.userDomainService.fetchById(command.userId);
+
       return await this.commentaryRepository.create(user, post, command.text);
     } catch (error) {
       throw new CannotCreateCommentaryDomainException();
