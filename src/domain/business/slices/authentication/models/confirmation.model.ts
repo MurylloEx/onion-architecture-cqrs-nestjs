@@ -11,7 +11,7 @@ export class Confirmation extends DomainModel {
   public user: User;
 
   @IsString()
-  @IsUUID()
+  @IsUUID('4')
   @Column()
   public code: string;
 
