@@ -1,8 +1,18 @@
 import { ApiTags } from '@nestjs/swagger';
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Render } from '@nestjs/common';
 
 import { PetService } from 'src/common/services';
-import { Security, Permissions, Jwt, JwtDto, CreatePetDto, Access, PetDto } from 'src/common';
+import {
+  Jwt,
+  Access,
+  Security,
+  Permissions,
+  JwtDto,
+  PetDto,
+  CreatePetDto,
+  IgnoreAppVersion,
+  IgnoreResponseDefault
+} from 'src/common';
 
 @ApiTags('Pets')
 @Security()
@@ -10,6 +20,15 @@ import { Security, Permissions, Jwt, JwtDto, CreatePetDto, Access, PetDto } from
 export class PetController {
 
   constructor(private readonly petService: PetService) { }
+
+  @IgnoreAppVersion()
+  @IgnoreResponseDefault()
+  @Render('pet-details')
+  @Get('/:id/details')
+  async showPetDetails(@Param('id') id: string): Promise<object> {
+    const details = await this.petService.fetchPetDetails(id);
+    return { details };
+  }
 
   @Get('/me')
   @Permissions(Access.READ_OWN_PETS)
@@ -29,7 +48,7 @@ export class PetController {
     Access.DELETE_PET
   )
   deletePet(@Param('id') petId: string): Promise<PetDto> {
-    return this.petService.delete(petId);
+    return this.petService.deleteById(petId);
   }
 
 }

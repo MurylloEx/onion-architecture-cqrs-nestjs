@@ -39,8 +39,8 @@ export class FeedController {
     Access.CREATE_POSTS,
     Access.READ_OWN_POSTS
   )
-  createPost(@Body() post: CreatePostDto): Promise<PostDto> {
-    return this.postService.create(post);
+  createPost(@Jwt() jwt: JwtDto, @Body() post: CreatePostDto): Promise<PostDto> {
+    return this.postService.create(jwt.id, post);
   }
 
   @Patch('/post/:id')

@@ -1,6 +1,6 @@
+import { Request } from 'express';
 import { ApiTags } from '@nestjs/swagger';
-import { Request, Response } from 'express';
-import { Body, Controller, Get, Param, Post, Put, Req, Res } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Render, Req } from '@nestjs/common';
 import {
   AuthenticationService,
   ConfirmationService,
@@ -41,23 +41,15 @@ export class AuthenticationController {
 
   @IgnoreAppVersion()
   @IgnoreResponseDefault()
+  @Render('confirmation')
   @Get('/confirm/:confirmationCode')
-  async confirmAccount(
-    @Param('confirmationCode') confirmationCode: string, 
-    @Res() response: Response
-  ): Promise<void> 
-  {
-    const confirmation = await this.confirmationService.confirmAccount(confirmationCode);
-    response.render('confirmation', { 
-      confirmation: Boolean(confirmation)
-    });
+  async confirmAccount(@Param('confirmationCode') confirmationCode: string): Promise<object> {
+    const confirmation = !!await this.confirmationService.confirmAccount(confirmationCode);
+    return { confirmation };
   }
 
   @Post('/recovery/request/:userEmail')
-  requestRecoveryCode(
-    @Param('userEmail') userEmail: string
-  ): Promise<RecoveryDto> 
-  {
+  requestRecoveryCode(@Param('userEmail') userEmail: string): Promise<RecoveryDto> {
     return this.recoveryService.requestRecoveryCode(userEmail);
   }
 
