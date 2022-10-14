@@ -8,20 +8,20 @@
 </head>
 <body>
   <% if (details) { %> 
-    <%= details.id %>
-    <%= details.name %>
-    <%= details.species %>
-    <%= details.breed %>
-    <%= details.place %>
-    <%= details.color %>
-    <%= details.sex %>
-    <%= details.age %>
-    <%= details.description %>
-    <%= details.habits %>
-    <%= details.allergies %>
-    <%= details.fears %>
-    <%= details.pictureId %>
-    <%= details.user %>
+    <b>ID: </b><%= details.id %><br>
+    <b>NOME: </b><%= details.name %><br>
+    <b>ESPÉCIE: </b><%= details.species %><br>
+    <b>RAÇÃO: </b><%= details.breed %><br>
+    <b>LOCAL: </b><%= details.place %><br>
+    <b>COR: </b><%= details.color %><br>
+    <b>SEXO: </b><%= details.sex %><br>
+    <b>IDADE: </b><%= details.age %><br>
+    <b>DESCRIÇÃO: </b><%= details.description %><br>
+    <b>HÁBITOS: </b><%= details.habits %><br>
+    <b>ALERGIAS: </b><%= details.allergies %><br>
+    <b>MEDOS: </b><%= details.fears %><br>
+    <b>PICTURE ID: </b><%= details.pictureId %><br>
+    <b>USUÁRIO: </b><%= JSON.stringify(details.user) %><br>
   <% } else { %>
     <h1>Não foi possível encontrar o pet</h1>
   <% } %>
