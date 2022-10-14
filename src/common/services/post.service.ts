@@ -10,10 +10,11 @@ export class PostService {
     private readonly postDomainService: PostDomainService
   ) { }
 
-  async create(post: CreatePostDto): Promise<PostDto> {
+  async create(userId: string, post: CreatePostDto): Promise<PostDto> {
     const entity = await this.postDomainService.create(
-      <PostType>post.type,
+      userId,
       post.petId,
+      post.type as PostType,
       post.pictureBuffer,
       post.localization,
       post.description,

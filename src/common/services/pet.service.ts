@@ -14,6 +14,15 @@ export class PetService {
     return entities.map(entity => entity.toDto(PetDto));
   }
 
+  async fetchPetDetails(id: string): Promise<PetDto | null> {
+    try {
+      const entity = await this.petDomainService.fetchById(id);
+      return entity.toDto(PetDto);
+    } catch (error) {
+      return null;
+    }
+  }
+
   async create(userId: string, pet: CreatePetDto): Promise<PetDto> {
     const entity = await this.petDomainService.create(
       userId,
@@ -34,8 +43,8 @@ export class PetService {
     return entity.toDto(PetDto);
   }
 
-  async delete(id: string): Promise<PetDto> {
-    const entity = await this.petDomainService.delete(id);
+  async deleteById(id: string): Promise<PetDto> {
+    const entity = await this.petDomainService.deleteById(id);
     return entity.toDto(PetDto);
   }
 

@@ -62,7 +62,7 @@ export class PetDomainService {
     return this.commandBus.execute<ICommand, Pet>(command);
   }
 
-  delete(id: string): Promise<Pet> {
+  deleteById(id: string): Promise<Pet> {
     const command = new DeletePetCommand(id);
     return this.commandBus.execute<ICommand, Pet>(command);
   }

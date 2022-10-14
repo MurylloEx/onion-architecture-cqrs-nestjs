@@ -27,8 +27,9 @@ export class PostDomainService {
   ) {}
 
   create(
-    type: PostType,
+    userId: string,
     petId: string,
+    type: PostType,
     pictureBuffer: Buffer,
     localization: string,
     description: string,
@@ -37,8 +38,9 @@ export class PostDomainService {
     lostCircumstance?: string
   ): Promise<Post> {
     const command = new CreatePostCommandBuilder()
-      .withType(type)
+      .withUserId(userId)
       .withPetId(petId)
+      .withType(type)
       .withPictureBuffer(pictureBuffer)
       .withLocalization(localization)
       .withDescription(description)
