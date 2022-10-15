@@ -13,6 +13,10 @@
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
     integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" 
     crossorigin="anonymous">
+  <link 
+    rel="stylesheet" 
+    type="text/css" 
+    href="/css/confirmation.style.css">
   <!-- JS, Popper.js, jQuery and FontAwesome -->
   <script 
     type="text/javascript" 
@@ -37,81 +41,12 @@
     src="https://use.fontawesome.com/8074153868.js" 
     crossorigin="anonymous">
   </script>
-
-  <style>
-    body {
-      min-width: 564px;
-      background-color: rgb(202, 202, 202) !important;
-    }
-
-    .top-main-box-logo {
-      margin: 9rem auto;
-      background-image: url(https://i.imgur.com/Aq1Xifr.png);
-      background-repeat: no-repeat;
-      background-position: center center;
-      width: 220px;
-      height: 61px;
-    }
-
-    .main-box {
-      margin: -8.75rem auto;
-      -webkit-box-shadow: 1px 1px 9px -2px black;
-      -moz-box-shadow: 1px 1px 9px -2px black;
-      box-shadow: 1px 1px 9px -2px black;
-      background-color: #f4f5f8;
-      border-radius: 8px;
-      min-width: 256px;
-      max-width: 512px;
-      min-height: 256px;
-      width: 80%;
-      margin-bottom: 5rem;
-    }
-
-    .main-box-title {
-      color: #ffffff;
-      background-image: linear-gradient(to bottom right, #EC374F, #FEB008);
-      border-top-right-radius: 7px;
-      border-top-left-radius: 7px;
-      height: 28px;
-      font-family: Optima, Arial, Helvetica, sans-serif;
-      font-size: 0.75em;
-      font-weight: bold;
-      line-height: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  </style>
 </head>
 
 <body>
-  <script type="text/javascript">
-    function Alert(type, title, body) {
-      const alert = $("[element-type='alert']");
-      const alert_title = $("[element-type='alert-title']");
-      const alert_body = $("[element-type='alert-body']");
-      alert.addClass({
-        0: 'alert-primary', 
-        1: 'alert-secondary', 
-        2: 'alert-success',
-        3: 'alert-danger', 
-        4: 'alert-warning', 
-        5: 'alert-info',
-        6: 'alert-light', 
-        7: 'alert-dark'
-      }[type]);
-      alert.removeClass('d-none');
-      alert_title.text(title);
-      alert_body.text(body);
-    }
-    $(function () {
-      const confirmation = JSON.parse($("[element-type='output']").attr('data-value'));
-      if (confirmation) {
-        Alert(2, 'Sucesso!', `Parabéns! Sua conta foi ativada com sucesso.`);
-      } else {
-        Alert(4, 'Atenção!', `Este usuário não existe ou já foi ativado com êxito.`);
-      }
-    });
+  <script 
+    type="text/javascript"
+    src="/js/confirmation.script.js">
   </script>
 
   <input type="hidden" element-type="output" data-value="<%= confirmation %>"></input>
