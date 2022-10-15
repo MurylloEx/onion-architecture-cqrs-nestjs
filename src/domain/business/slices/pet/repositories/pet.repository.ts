@@ -53,7 +53,10 @@ export class PetRepository {
   }
 
   fetchById(id: string): Promise<Pet> {
-    return this.repository.findOneByOrFail({ id });
+    return this.repository.findOneOrFail({
+      where: { id },
+      relations: ['user']
+    });
   }
 
   fetchByUserId(userId: string): Promise<Pet[]> {

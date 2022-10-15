@@ -27,9 +27,9 @@ export class EmailNotificationDomainService {
 
   private sandboxCallback(result: MailerSandboxResult) {
     this.loggingService.verbose(
-      'Email sent to sandbox', 
-      'This email was sandboxed and not sent to the recipient.' + 
-      'To send properly this email, set SMTP_SANDBOX to false.', 
+      'Email sent to sandbox',
+      'This email was sandboxed and not sent to the recipient.' +
+      'To send properly this email, set SMTP_SANDBOX to false.',
       {
         sender: result.sender,
         to: result.to,
@@ -58,12 +58,12 @@ export class EmailNotificationDomainService {
   }
 
   async sendWelcomeEmail(
-    userId: string, 
-    userName: string, 
+    userId: string,
+    userName: string,
     confirmationUrl: string
   ): Promise<MailerResponse> {
     const mailer: Mailer = await this.createMailer(userId, 'welcome');
-    
+
     const mail = mailer
       .subject('Bem vindo ao Inclusive Pet!')
       .set('user_name', userName)
@@ -73,8 +73,8 @@ export class EmailNotificationDomainService {
   }
 
   async sendRecoveryEmail(
-    userId: string, 
-    userName: string, 
+    userId: string,
+    userName: string,
     recoveryCode: string
   ): Promise<MailerResponse> {
     const mailer: Mailer = await this.createMailer(userId, 'recovery');
@@ -83,7 +83,7 @@ export class EmailNotificationDomainService {
       .subject('Redefinição de Senha - Inclusive Pet')
       .set('user_name', userName)
       .set('recovery_code', recoveryCode);
-    
+
     return await mail.send();
   }
 
@@ -108,6 +108,25 @@ export class EmailNotificationDomainService {
       .set('dosage_number', dosageNumber)
       .set('dosage_name', dosageName)
       .set('dosage_date', dosageDate);
+
+    return mail.send();
+  }
+
+  async sendCommentaryEmail(
+    userId: string,
+    userName: string,
+    lastSenderName: string,
+    petName: string,
+    amountOfSenders: number
+  ) {
+    const mailer: Mailer = await this.createMailer(userId, 'commentary');
+
+    const mail: Mailer = mailer
+      .subject('As pessoas estão comentando sobre o seu Post!')
+      .set('user_name', userName)
+      .set('last_sender_name', lastSenderName)
+      .set('pet_name', petName)
+      .set('amount_of_senders', amountOfSenders)
 
     return mail.send();
   }
