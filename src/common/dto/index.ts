@@ -10,6 +10,7 @@ export * from './imgur-response.dto';
 export * from './jwt.dto';
 export * from './message.dto';
 export * from './recovery.dto';
+export * from './pet-with-owner.dto';
 export * from './pet.dto';
 export * from './post-filter-rule.dto';
 export * from './post.dto';

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreatePetDto, PetDto } from 'src/common/dto';
+import { CreatePetDto, PetDto, PetWithOwnerDto } from 'src/common/dto';
 import { PetDomainService } from 'src/domain';
 
 @Injectable()
@@ -14,10 +14,10 @@ export class PetService {
     return entities.map(entity => entity.toDto(PetDto));
   }
 
-  async fetchPetDetails(id: string): Promise<PetDto | null> {
+  async fetchPetDetails(id: string): Promise<PetWithOwnerDto | null> {
     try {
       const entity = await this.petDomainService.fetchById(id);
-      return entity.toDto(PetDto);
+      return entity.toDto(PetWithOwnerDto);
     } catch (error) {
       return null;
     }

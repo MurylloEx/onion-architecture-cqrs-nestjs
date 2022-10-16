@@ -26,8 +26,8 @@ export class PetController {
   @Render('pet-details')
   @Get('/:id/details')
   async showPetDetails(@Param('id') id: string): Promise<object> {
-    const details = await this.petService.fetchPetDetails(id);
-    return { details };
+    const pet = await this.petService.fetchPetDetails(id);
+    return { pet };
   }
 
   @Get('/me')
