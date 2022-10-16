@@ -1,8 +1,8 @@
 {
   "name": "inclusive-pet-api",
   "version": "0.0.1",
-  "description": "",
-  "author": "Software Engineering UPE",
+  "description": "Um projeto idealizado por alunos do 7° período para resolver problemas relacionados ao mundo dos Pets",
+  "author": "Muryllo Pimenta de Oliveira",
   "private": true,
   "license": "MIT",
   "scripts": {
