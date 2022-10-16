@@ -49,6 +49,9 @@ export class CommentaryRepository {
       relations: ['user'],
       where: {
         post: { id },
+      },
+      order: {
+        createdAt: 'ASC'
       }
     });
   }

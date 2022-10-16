@@ -90,7 +90,10 @@ export class PostService {
 
   async fetch(): Promise<PostDto[]> {
     const entities = await this.postDomainService.fetch({
-      relations: ['user', 'pet']
+      relations: ['user', 'pet'],
+      order: {
+        createdAt: 'DESC'
+      }
     });
 
     return entities.map(entity => {
