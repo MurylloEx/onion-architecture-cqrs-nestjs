@@ -24,7 +24,7 @@ export class PetController {
   @IgnoreAppVersion()
   @IgnoreResponseDefault()
   @Render('pet-details')
-  @Get('/:id/details')
+  @Get('/:id/detail')
   async showPetDetails(@Param('id') id: string): Promise<object> {
     const pet = await this.petService.fetchPetDetails(id);
     return { pet };
