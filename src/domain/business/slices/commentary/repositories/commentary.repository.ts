@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindManyOptions, Repository, UpdateResult } from 'typeorm';
+import { Between, FindManyOptions, Repository, UpdateResult } from 'typeorm';
 
 import { Post } from 'src/domain/business/slices/feed/models';
 import { User } from 'src/domain/business/slices/user/models';
@@ -62,6 +62,15 @@ export class CommentaryRepository {
 
   deleteById(id: string): Promise<UpdateResult> {
     return this.repository.softDelete(id);
+  }
+
+  countByPeriodAndPostId(postId: string, startDate: Date, endDate: Date): Promise<number> {
+    return this.repository.count({
+      where: {
+        post: { id: postId },
+        createdAt: Between(startDate, endDate)
+      }
+    });
   }
 
 }
