@@ -4,55 +4,49 @@
     <mj-preview>Inclusive Pet</mj-preview>
     <mj-attributes>
       <mj-all font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"></mj-all>
-      <mj-text 
-        font-weight="400" 
-        font-size="16px" 
-        font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-        line-height="24px" 
-        color="#000000">
-      </mj-text>
+      <mj-text font-weight="400" font-size="16px" color="#000000" line-height="24px" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"></mj-text>
     </mj-attributes>
     <mj-style inline="inline">
       .body-section {
-        -webkit-box-shadow: 1px 4px 11px 0px rgba(0, 0, 0, 0.15);
-        -moz-box-shadow: 1px 4px 11px 0px rgba(0, 0, 0, 0.15);
-        box-shadow: 1px 4px 11px 0px rgba(0, 0, 0, 0.15);
+      -webkit-box-shadow: 1px 4px 11px 0px rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 1px 4px 11px 0px rgba(0, 0, 0, 0.15);
+      box-shadow: 1px 4px 11px 0px rgba(0, 0, 0, 0.15);
+      }
+    </mj-style>
+    <mj-style inline="inline">
+      .text-link {
+      color: #5e6ebf
+      }
+    </mj-style>
+    <mj-style inline="inline">
+      .footer-link {
+      color: #888888
       }
     </mj-style>
 
   </mj-head>
   <mj-body background-color="#fff" width="600px">
-    <mj-section 
-      full-width="full-width" 
-      background-color="#fff" 
-      padding-bottom="0"
-    >
+    <mj-section full-width="full-width" background-color="#fff" padding-bottom="0">
       <mj-column width="100%">
-        <mj-image 
-          src="https://imgur.com/PZMwJel.png" 
-          width="600px" 
-          alt="Banner" 
-          padding="0" 
-        />
+        <mj-image src="https://imgur.com/PZMwJel.png" width="600px" alt="" padding="0" />
       </mj-column>
     </mj-section>
-    <mj-wrapper 
-      padding-top="0" 
-      padding-bottom="0" 
-      css-class="body-section"
-    >
-      <mj-section 
-        background-color="#ffffff" 
-        padding-left="15px" 
-        padding-right="15px"
-      >
+    <mj-wrapper padding-top="0" padding-bottom="0" css-class="body-section">
+      <mj-section background-color="#ffffff" padding-left="15px" padding-right="15px">
         <mj-column width="100%">
-          <mj-text 
-            color="#637381" 
-            font-size="16px" 
-            align="center"
-          >
-            Template indisponível
+          <mj-text color="#212b35" font-weight="bold" font-size="20px">
+            Olá ${{ user_name }}, as pessoas estão comentando no seu Post sobre o Pet ${{ pet_name }}!
+          </mj-text>
+          <mj-divider border-color="#F45E43"></mj-divider>
+          <mj-text color="#637381" font-size="16px">
+            <b>${{ last_sender_name }}</b> e mais <b>${{ amount_of_senders }}</b> pessoas já interagiram com o seu post sobre o pet ${{ pet_name }} desde a sua última visita ao App!
+          </mj-text>
+          <mj-text color="#637381" font-size="16px">
+            Entre e confira :)
+          </mj-text>
+          <mj-divider border-color="#F45E43"></mj-divider>
+          <mj-text color="#637381" font-size="16px">
+            Este é um email automático, favor não responder.
           </mj-text>
         </mj-column>
       </mj-section>

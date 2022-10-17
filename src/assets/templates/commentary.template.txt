@@ -1,1 +1,5 @@
-Template indisponível
+Olá ${{ user_name }}, as pessoas estão comentando no seu Post sobre o Pet ${{ pet_name }}!
+
+${{ last_sender_name }} e mais ${{ amount_of_senders }} pessoas já interagiram com o seu post sobre o pet ${{ pet_name }} desde a sua última visita ao App!
+
+Entre e confira :)
