@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CommandBus, QueryBus, ICommand, IQuery } from '@nestjs/cqrs';
 import { Commentary } from 'src/domain/business/slices/commentary/models';
-import { FetchCommentariesByPostQuery } from 'src/domain/business/slices/commentary/queries';
+import { FetchCommentariesByPeriodAndPostQuery, FetchCommentariesByPostQuery } from 'src/domain/business/slices/commentary/queries';
 import { CreateCommentaryByPostCommand } from 'src/domain/business/slices/commentary/commands';
 
 @Injectable()
@@ -20,6 +20,11 @@ export class CommentaryDomainService {
   fetchByPostId(postId: string): Promise<Commentary[]> {
     const query = new FetchCommentariesByPostQuery(postId);
     return this.queryBus.execute<IQuery, Commentary[]>(query);
+  }
+
+  countByPeriodAndPostId(postId: string, startDate: Date, endDate: Date): Promise<number> {
+    const query = new FetchCommentariesByPeriodAndPostQuery(postId, startDate, endDate);
+    return this.queryBus.execute<IQuery, number>(query);
   }
 
 }
