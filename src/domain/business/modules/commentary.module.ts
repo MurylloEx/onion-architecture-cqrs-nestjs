@@ -4,10 +4,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { FeedModule } from './feed.module';
 import { UserModule } from './user.module';
+import { NotificationModule } from './notification.module';
 
 import { 
+  CommentaryCreatedHandler,
   CreateCommentaryByPostHandler,
-  FetchCommentariesByPostHandler
+  FetchCommentariesByPostHandler,
+  FetchCommentariesByPeriodAndPostHandler
 } from 'src/domain/business/slices/commentary';
 
 import { 
@@ -21,11 +24,14 @@ import {
     CqrsModule,
     FeedModule,
     UserModule,
+    NotificationModule,
     TypeOrmModule.forFeature([Commentary])
   ],
   providers: [
+    CommentaryCreatedHandler,
     CreateCommentaryByPostHandler,
     FetchCommentariesByPostHandler,
+    FetchCommentariesByPeriodAndPostHandler,
     CommentaryRepository,
     CommentaryDomainService
   ],
