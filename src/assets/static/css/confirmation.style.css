@@ -1,0 +1,42 @@
+body {
+  min-width: 564px;
+  background-color: rgb(202, 202, 202) !important;
+}
+
+.top-main-box-logo {
+  margin: 9rem auto;
+  background-image: url(https://i.imgur.com/Aq1Xifr.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 220px;
+  height: 61px;
+}
+
+.main-box {
+  margin: -8.75rem auto;
+  -webkit-box-shadow: 1px 1px 9px -2px black;
+  -moz-box-shadow: 1px 1px 9px -2px black;
+  box-shadow: 1px 1px 9px -2px black;
+  background-color: #f4f5f8;
+  border-radius: 8px;
+  min-width: 256px;
+  max-width: 512px;
+  min-height: 256px;
+  width: 80%;
+  margin-bottom: 5rem;
+}
+
+.main-box-title {
+  color: #ffffff;
+  background-image: linear-gradient(to bottom right, #EC374F, #FEB008);
+  border-top-right-radius: 7px;
+  border-top-left-radius: 7px;
+  height: 28px;
+  font-family: Optima, Arial, Helvetica, sans-serif;
+  font-size: 0.75em;
+  font-weight: bold;
+  line-height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

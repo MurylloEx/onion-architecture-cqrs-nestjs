@@ -36,3 +36,14 @@ lerna-debug.log*
 
 # Ignore environment files
 *.env
+*.env.testing
+*.env.local
+*.env.development
+*.env.production
+
+# Ignore database directories
+**/*.sqlite
+**/*.db
+
+# Ignore lock files
+package-lock.json

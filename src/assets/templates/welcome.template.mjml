@@ -1,0 +1,123 @@
+<mjml>
+  <mj-head>
+    <mj-title>Inclusive Pet</mj-title>
+    <mj-preview>Inclusive Pet</mj-preview>
+    <mj-attributes>
+      <mj-all font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"></mj-all>
+      <mj-text 
+        font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+        font-weight="400" 
+        font-size="16px" 
+        line-height="24px" 
+        color="#000000" 
+      ></mj-text>
+    </mj-attributes>
+    <mj-style inline="inline">
+      .body-section {
+        -webkit-box-shadow: 1px 4px 11px 0px rgba(0, 0, 0, 0.15);
+        -moz-box-shadow: 1px 4px 11px 0px rgba(0, 0, 0, 0.15);
+        box-shadow: 1px 4px 11px 0px rgba(0, 0, 0, 0.15);
+      }
+    </mj-style>
+  </mj-head>
+  <mj-body background-color="#fff" width="600px">
+    <mj-section 
+      full-width="full-width" 
+      background-color="#fff" 
+      padding-bottom="0"
+    >
+      <mj-column width="100%">
+        <mj-image 
+          src="https://imgur.com/PZMwJel.png" 
+          width="600px" 
+          alt="" 
+          padding="0" 
+        />
+      </mj-column>
+    </mj-section>
+    <mj-wrapper 
+      padding-top="0" 
+      padding-bottom="0" 
+      css-class="body-section"
+    >
+      <mj-section 
+        background-color="#ffffff" 
+        padding-left="15px" 
+        padding-right="15px"
+      >
+        <mj-column width="100%">
+          <mj-text 
+            color="#212b35" 
+            font-weight="bold" 
+            font-size="20px"
+            align="center"
+          >
+            Olá ${{ user_name }}, seja bem vindo ao Inclusive Pet!
+          </mj-text>
+          <mj-text 
+            color="#637381" 
+            font-size="16px" 
+            align="center"
+          >
+            Agradeçemos o seu cadastro no aplicativo Inclusive Pet! Nele será possível:
+          </mj-text>
+          <mj-text 
+            color="#637381" 
+            font-size="16px" 
+            align="justify"
+          >
+            <ul>
+              <li style="padding-bottom: 20px">
+                <strong>
+                  Anunciar PET desaparecido:
+                </strong> 
+                Caso um dos seus animais de estimação se perca você pode 
+                compartilhar um post na comunidade, buscando ajuda para 
+                encontra-lo e até oferecer recompensas.
+              </li>
+              <li style="padding-bottom: 20px">
+                <strong>
+                  Anunciar PET para cruzamento:
+                </strong>
+                Você pode compartilhar a fotinha do seu pet para buscar 
+                outro dono de pet que esteja interessado em ter filhotinhos!
+              </li>
+              <li>
+                <strong>
+                  Anunciar PET para Adoção:
+                </strong>
+                É possivel também divulgar animais para adoção.
+              </li>
+              <li>
+                <strong>
+                  Acompanhar o cronograma vacinal:
+                </strong>
+                Cadastre as vacinas do seu pet e receba um lembrete quando a data estiver proxima.
+              </li>
+            </ul>
+          </mj-text>
+          <mj-text 
+            color="#637381" 
+            font-size="16px" 
+            padding-bottom="30px" 
+            align="center"
+          >
+            Para confirmar o cadastro da sua conta, clique no botão abaixo.
+          </mj-text>
+          <mj-button 
+            background-color="#C22156" 
+            align="center" 
+            color="#ffffff" 
+            font-size="17px" 
+            font-weight="bold" 
+            href="${{confirmation_url}}" 
+            width="300px"
+          >
+            Confirmar Cadastro
+          </mj-button>
+        </mj-column>
+      </mj-section>
+    </mj-wrapper>
+
+  </mj-body>
+</mjml>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <title>Confirmação de Cadastro</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--CSS Files-->
+  <link 
+    rel="stylesheet" 
+    type="text/css" 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
+    integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" 
+    crossorigin="anonymous">
+  <link 
+    rel="stylesheet" 
+    type="text/css" 
+    href="/css/confirmation.style.css">
+  <!-- JS, Popper.js, jQuery and FontAwesome -->
+  <script 
+    type="text/javascript" 
+    src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous">
+  </script>
+  <script 
+    type="text/javascript" 
+    src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous">
+  </script>
+  <script 
+    type="text/javascript" 
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js"
+    integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J"
+    crossorigin="anonymous">
+  </script>
+  <script 
+    type="text/javascript" 
+    src="https://use.fontawesome.com/8074153868.js" 
+    crossorigin="anonymous">
+  </script>
+</head>
+
+<body>
+  <script 
+    type="text/javascript"
+    src="/js/confirmation.script.js">
+  </script>
+
+  <input type="hidden" element-type="output" data-value="<%= confirmation %>"></input>
+  <!--LOGO PRINCIPAL DO INCLUSIVE PET-->
+  <div class="top-main-box-logo"></div>
+  <!--CAIXA DE DIÁLOGO DE INTERAÇÃO-->
+  <div class="main-box pb-1">
+    <!--TÍTULO-->
+    <div class="main-box-title">
+      Inclusive Pet - Confirmação de Cadastro
+    </div>
+    <div 
+      element-type="alert" 
+      class="alert fade show d-none mt-3 ml-3 mr-3 text-justify" 
+      role="alert"
+    >
+      <i class="fa fa-info-circle" aria-hidden="true"></i> 
+      <strong element-type="alert-title"></strong> 
+      <span element-type="alert-body"></span>
+    </div>
+  </div>
+</body>
+
+</html>

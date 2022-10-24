@@ -22,6 +22,7 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         username: ${{ secrets.SERVER_USERNAME }}
         script: |
+          set -e
           echo "Running script to test into server..."
           pwd
 
@@ -50,10 +51,5 @@ jobs:
 
           ${{ env.TEST_COMMAND }}
 
-          if [ $? -eq 0 ]; then
-            cd ${{ env.TEST_DIRECTORY }}
-            rm -rf $SAFE_BRANCH_NAME
-          else
-            echo -e "Tests failed. Check out the logs and try again"
-            exit 1
-          fi
+          cd ${{ env.TEST_DIRECTORY }}
+          rm -rf $SAFE_BRANCH_NAME

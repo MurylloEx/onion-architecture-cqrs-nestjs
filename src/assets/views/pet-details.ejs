@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <% if (pet) { %>
+    <title>Perfil de <%= pet.name %></title>
+  <% } else { %>
+    <title>Perfil não encontrado %></title>
+  <% } %>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--CSS Files-->
+  <link 
+    rel="stylesheet" 
+    href="https://fonts.googleapis.com/css?family=Montserrat"
+    crossorigin="anonymous">
+  <link 
+    rel="stylesheet" 
+    type="text/css" 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
+    integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" 
+    crossorigin="anonymous">
+  <link 
+    rel="stylesheet" 
+    type="text/css" 
+    href="/css/details.style.css">
+  <!-- JS, Popper.js, jQuery and FontAwesome -->
+  <script 
+    type="text/javascript" 
+    src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous">
+  </script>
+  <script 
+    type="text/javascript" 
+    src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous">
+  </script>
+  <script 
+    type="text/javascript" 
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js"
+    integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J"
+    crossorigin="anonymous">
+  </script>
+  <script 
+    type="text/javascript" 
+    src="https://use.fontawesome.com/8074153868.js" 
+    crossorigin="anonymous">
+  </script>
+
+</head>
+
+<body>
+  <div class="top-header">
+    <div class="logo-container mx-auto">
+      <img 
+        src="https://i.imgur.com/kU0pSxS.png" 
+        alt="Inclusive Pet" 
+        class="img-fluid">
+    </div>
+  </div>
+  <div class="container main-container">
+    <% if (pet) { %>
+
+      <div class="row">
+        <div class="col-lg-5 pb-5">
+          <img 
+          class="photo-image"
+          src="https://i.imgur.com/<%= pet.pictureId %>.jpeg">
+        </div>
+  
+        <div class="col-lg-7 pt-3">
+          <div class="row">
+            <div class="col">
+              <div class="item-row">
+                <div class="item-icon">
+                  <img 
+                    class="icon-image"
+                    src="/img/name_icon.svg">
+                </div>
+                <div class="item-info">
+                  <b>Nome do animal:</b>
+                  <p><%= pet.name %></p>
+                </div>
+              </div>
+              <div class="item-row">
+                <div class="item-icon">
+                  <img 
+                    class="icon-image"
+                    src="/img/species_icon.svg">
+                </div>
+                <div class="item-info">
+                  <b>Espécie:</b>
+                  <p><%= pet.species %></p>
+                </div>
+              </div>
+              <div class="item-row">
+                <div class="item-icon">
+                  <img 
+                    class="icon-image"
+                    src="/img/breed_icon.svg">
+                </div>
+                <div class="item-info">
+                  <b>Raça:</b>
+                  <p><%= pet.breed %></p>
+                </div>
+              </div>
+              <div class="item-row">
+                <div class="item-icon">
+                  <img 
+                    class="icon-image"
+                    src="/img/sex_icon.svg">
+                </div>
+                <div class="item-info">
+                  <b>Sexo:</b>
+                  <p><%= pet.sex %></p>
+                </div>
+              </div>
+              <div class="item-row">
+                <div class="item-icon">
+                  <img 
+                    class="icon-image"
+                    src="/img/color_icon.svg">
+                </div>
+                <div class="item-info">
+                  <b>Cor:</b>
+                  <p><%= pet.color %></p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="item-row">
+                <div class="item-icon">
+                  <img 
+                    class="icon-image"
+                    src="/img/age_icon.svg">
+                </div>
+                <div class="item-info">
+                  <b>Idade:</b>
+                  <p><%= pet.age %></p>
+                </div>
+              </div>
+              <div class="item-row">
+                <div class="item-icon">
+                  <img 
+                    class="icon-image"
+                    src="/img/allergies_icon.svg">
+                </div>
+                <div class="item-info">
+                  <b>Alergias:</b>
+                  <p><%= pet.allergies %></p>
+                </div>
+              </div>
+              <div class="item-row">
+                <div class="item-icon">
+                  <img 
+                    class="icon-image"
+                    src="/img/fears_icon.svg">
+                </div>
+                <div class="item-info">
+                  <b>Medos:</b>
+                  <p><%= pet.fears %></p>
+                </div>
+              </div>
+              <div class="item-row">
+                <div class="item-icon">
+                  <img 
+                    class="icon-image"
+                    src="/img/phone_icon.svg">
+                </div>
+                <div class="item-info">
+                  <b>Contato do dono:</b>
+                  <p><%= pet.user.phone %></p>
+                </div>
+              </div>
+              <div class="item-row">
+                <div class="item-icon">
+                  <img 
+                    class="icon-image"
+                    src="/img/description_icon.svg">
+                </div>
+                <div class="item-info">
+                  <b>Descrição:</b>
+                  <p><%= pet.description %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    
+    <% } else { %>
+      <h1 class="pt-5 text-center">Não foi possível encontrar o perfil especificado!</h1>
+      <h1 class="text-center">Verifique se a URL digitada está correta e tente novamente.</h1>
+    <% } %>
+  </div>
+  <div class="bottom-footer">
+    <b>Bacharelado em Engenharia de Software 2022 - Licença MIT</b>
+    <p>Página produzida por José Edgleyson, Muryllo Oliveira e Jonas Soares</p>
+  </div>
+</body>
+
+</html>
