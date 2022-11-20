@@ -87,48 +87,4 @@ export class EmailNotificationDomainService {
     return await mail.send();
   }
 
-  async sendVacinationEmail(
-    userId: string,
-    userName: string,
-    remainingDays: number,
-    vaccineName: string,
-    vaccineDate: string,
-    dosageNumber: number,
-    dosageName: string,
-    dosageDate: string
-  ) {
-    const mailer: Mailer = await this.createMailer(userId, 'vaccination');
-
-    const mail: Mailer = mailer
-      .subject('A vacinação do seu Pet está próxima!')
-      .set('user_name', userName)
-      .set('remaining_days', remainingDays)
-      .set('vaccine_name', vaccineName)
-      .set('vaccine_date', vaccineDate)
-      .set('dosage_number', dosageNumber)
-      .set('dosage_name', dosageName)
-      .set('dosage_date', dosageDate);
-
-    return mail.send();
-  }
-
-  async sendCommentaryEmail(
-    userId: string,
-    userName: string,
-    lastSenderName: string,
-    petName: string,
-    amountOfSenders: number
-  ) {
-    const mailer: Mailer = await this.createMailer(userId, 'commentary');
-
-    const mail: Mailer = mailer
-      .subject('As pessoas estão comentando sobre o seu Post!')
-      .set('user_name', userName)
-      .set('last_sender_name', lastSenderName)
-      .set('pet_name', petName)
-      .set('amount_of_senders', amountOfSenders)
-
-    return mail.send();
-  }
-
 }

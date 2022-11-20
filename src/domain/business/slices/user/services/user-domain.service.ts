@@ -64,9 +64,8 @@ export class UserDomainService {
     phone: string,
     email: string,
     password: string,
-    descriptor: number,
-    pushToken: string,
-    pictureBuffer: Buffer
+    permissions: string,
+    pushToken: string
   ) {
     const command = new CreateUserCommand(
       fullName,
@@ -74,9 +73,8 @@ export class UserDomainService {
       phone,
       email,
       password,
-      descriptor,
-      pushToken,
-      pictureBuffer
+      permissions,
+      pushToken
     );
     return this.commandBus.execute<ICommand, User>(command);
   }
@@ -91,16 +89,14 @@ export class UserDomainService {
     fullName?: string,
     nickName?: string,
     phone?: string,
-    email?: string,
-    pictureBuffer?: Buffer
+    email?: string
   ) {
     const command = new UpdateUserProfileCommand(
       id,
       fullName,
       nickName,
       phone,
-      email,
-      pictureBuffer
+      email
     );
     return this.commandBus.execute<ICommand, User>(command);
   }

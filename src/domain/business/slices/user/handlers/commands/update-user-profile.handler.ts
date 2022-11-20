@@ -1,10 +1,9 @@
 import { CommandHandler, EventBus, ICommandHandler } from '@nestjs/cqrs';
 
 import { User } from 'src/domain/business/slices/user/models';
-import { BucketDomainService } from 'src/domain/business/slices/bucket';
 import { UserUpdatedEvent } from 'src/domain/business/slices/user/events';
-import { UpdateUserProfileCommand } from 'src/domain/business/slices/user/commands';
 import { UserRepository } from 'src/domain/business/slices/user/repositories';
+import { UpdateUserProfileCommand } from 'src/domain/business/slices/user/commands';
 
 import {
   UserEmailAlreadyExistsDomainException,
@@ -16,8 +15,7 @@ export class UpdateUserProfileHandler implements ICommandHandler<UpdateUserProfi
 
   constructor(
     private readonly repository: UserRepository,
-    private readonly eventBus: EventBus,
-    private readonly bucketDomainService: BucketDomainService
+    private readonly eventBus: EventBus
   ) { }
 
   async execute(command: UpdateUserProfileCommand): Promise<User> {
@@ -40,16 +38,6 @@ export class UpdateUserProfileHandler implements ICommandHandler<UpdateUserProfi
     user.nickName = command.nickName ?? user.nickName;
     user.phone = command.phone ?? user.phone;
     user.email = command.email ?? user.email;
-
-    if (command.pictureBuffer) {
-      const picture = await this.bucketDomainService.createImage(
-        command.pictureBuffer,
-        user.nickName,
-        user.fullName
-      );
-
-      user.pictureId = picture.id;
-    }
 
     const updatedUser = await this.repository.updateById(command.id, user);
 

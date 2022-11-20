@@ -1,3 +1,4 @@
+export * from './comma-separated-string.decorator';
 export * from './ignore-response-default.decorator';
 export * from './ignore-version.decorator';
 export * from './security.decorator';

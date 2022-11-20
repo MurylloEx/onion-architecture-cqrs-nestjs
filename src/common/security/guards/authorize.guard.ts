@@ -3,8 +3,7 @@ import { Observable } from 'rxjs';
 import { Reflector } from '@nestjs/core';
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 
-import { Access } from 'src/common/security/access';
-import { parseDescriptor } from 'src/common/security/parser';
+import { Request } from 'express';
 
 @Injectable()
 export class AuthorizeGuard implements CanActivate {
@@ -21,13 +20,15 @@ export class AuthorizeGuard implements CanActivate {
       return true;
 
     if (ctx.getType() === 'http') {
-      const request = ctx.switchToHttp().getRequest();
+      const request = ctx.switchToHttp().getRequest<Request>();
+
+      const user = request.user as any;
 
       //The descriptor is the array of Permissions of user in number format
-      const userPerms = parseDescriptor(request.user?.descriptor ?? 0, Access);
+      const userPerms = user?.permissions;
 
       return requiredPerms.every((reqPerm) =>
-        userPerms.some((userPerm) => reqPerm == userPerm));
+        userPerms.some((userPerm: string) => reqPerm == userPerm));
     }
     else if (ctx.getType() === 'ws') {
       const client = ctx.switchToWs().getClient<WebSocket>();

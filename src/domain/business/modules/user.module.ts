@@ -28,12 +28,9 @@ import {
   UserRepository,
 } from 'src/domain/business/slices/user';
 
-import { BucketModule } from './bucket.module';
-
 @Module({
   imports: [
     CqrsModule,
-    BucketModule,
     TypeOrmModule.forFeature([User])
   ],
   providers: [

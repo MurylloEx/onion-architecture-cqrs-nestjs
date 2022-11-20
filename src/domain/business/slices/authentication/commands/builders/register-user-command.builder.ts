@@ -7,9 +7,8 @@ export class RegisterUserCommandBuilder {
   private phone: string;
   private email: string;
   private password: string;
-  private descriptor: number;
+  private permissions: string;
   private pushToken: string;
-  private pictureBuffer: Buffer;
 
   withFullName(fullName: string): RegisterUserCommandBuilder {
     this.fullName = fullName;
@@ -36,18 +35,13 @@ export class RegisterUserCommandBuilder {
     return this;
   }
 
-  withDescriptor(descriptor: number): RegisterUserCommandBuilder {
-    this.descriptor = descriptor;
+  withPermissions(permissions: string): RegisterUserCommandBuilder {
+    this.permissions = permissions;
     return this;
   }
 
   withPushToken(pushToken: string): RegisterUserCommandBuilder {
     this.pushToken = pushToken;
-    return this;
-  }
-
-  withPictureBuffer(pictureBuffer: Buffer): RegisterUserCommandBuilder {
-    this.pictureBuffer = pictureBuffer;
     return this;
   }
 
@@ -58,9 +52,8 @@ export class RegisterUserCommandBuilder {
       this.phone,
       this.email,
       this.password,
-      this.descriptor,
+      this.permissions,
       this.pushToken,
-      this.pictureBuffer
     );
   }
 

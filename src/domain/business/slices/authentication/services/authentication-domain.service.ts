@@ -66,9 +66,8 @@ export class AuthenticationDomainService {
     phone: string,
     email: string,
     password: string,
-    descriptor: number,
-    pushToken: string,
-    pictureBase64: Buffer
+    permissions: string,
+    pushToken: string
   ): Promise<User>
   {
     const command = new RegisterUserCommandBuilder()
@@ -78,8 +77,7 @@ export class AuthenticationDomainService {
       .withEmail(email)
       .withPassword(password)
       .withPushToken(pushToken)
-      .withPictureBuffer(pictureBase64)
-      .withDescriptor(descriptor)
+      .withPermissions(permissions)
       .build();
 
     return this.commandBus.execute<ICommand, User>(command);

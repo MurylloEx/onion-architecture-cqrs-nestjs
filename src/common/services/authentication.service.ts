@@ -19,16 +19,15 @@ export class AuthenticationService {
   ) {}
 
   async registerUser(user: UserSignUpDto): Promise<UserDto> {
-    const userDescriptor = createDescriptor(Object.values(Access), Access);
+    const userPermissions = Object.values(Access).join(',');
     const entity = await this.authenticationDomainService.registerUser(
       user.fullName,
       user.nickName,
       user.phone,
       user.email,
       user.password,
-      userDescriptor,
-      user.pushToken,
-      user.pictureBuffer
+      userPermissions,
+      user.pushToken
     );
     return entity.toDto(UserDto);
   }

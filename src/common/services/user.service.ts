@@ -30,8 +30,7 @@ export class UserService {
       user.fullName,
       user.nickName,
       user.phone,
-      user.email,
-      user.pictureBuffer
+      user.email
     );
     return entity.toDto(UserDto);
   }

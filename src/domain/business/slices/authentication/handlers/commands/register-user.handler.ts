@@ -25,9 +25,8 @@ export class RegisterUserHandler implements ICommandHandler<RegisterUserCommand>
       command.phone,
       command.email,
       hashedPassword,
-      command.descriptor,
-      command.pushToken,
-      command.pictureBuffer
+      command.permissions,
+      command.pushToken
     );
 
     let isCodeAlreadyUsed = false;

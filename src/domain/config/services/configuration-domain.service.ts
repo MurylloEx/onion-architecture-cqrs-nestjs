@@ -35,24 +35,17 @@ import {
 } from 'src/domain/config/slices';
 
 import {
-  Authentication,
-  Bucket,
+  User,
   Logging,
   Message,
-  Commentary,
-  Confirmation,
   Recovery,
-  User,
-  Pet,
-  Establishment,
-  Post,
-  PostFilterRule
+  Confirmation,
+  Authentication,
 } from 'src/domain/business';
 
 import {
   CreateLoggingTableMigration1660625313012,
   CreateMessageTableMigration1659920828672,
-  CreateBucketTableMigration1660506725676,
   CreateUserTableMigration1660624358399,
   AddConfirmationForeignKeyToUserTable1660780764696,
   CreateAuthenticationTableMigration1660780461390,
@@ -187,30 +180,23 @@ export class ConfigurationDomainService {
 
   configureEntities(): Function[] {
     return [
-      Authentication,
-      Bucket,
-      Commentary,
-      Confirmation,
-      Establishment,
+      User,
       Logging,
       Message,
-      User,
       Recovery,
-      Pet,
-      Post,
-      PostFilterRule,
+      Confirmation,
+      Authentication,
     ];
   }
 
   configureMigrations(): Function[] {
     return [
-      CreateBucketTableMigration1660506725676,
+      CreateUserTableMigration1660624358399,
       CreateLoggingTableMigration1660625313012,
       CreateMessageTableMigration1659920828672,
-      CreateUserTableMigration1660624358399,
-      CreateAuthenticationTableMigration1660780461390,
-      CreateConfirmationTableMigration1660780443848,
       CreateRecoveryTableMigration1660780424112,
+      CreateConfirmationTableMigration1660780443848,
+      CreateAuthenticationTableMigration1660780461390,
       AddConfirmationForeignKeyToUserTable1660780764696
     ];
   }

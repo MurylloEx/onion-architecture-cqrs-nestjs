@@ -7,19 +7,13 @@ import {
 } from 'typeorm';
 
 import {
-  IsInt,
-  IsNumber,
+  IsNotEmpty,
   IsPhoneNumber,
-  IsPositive,
-  IsString,
-  Max
+  IsString
 } from 'class-validator';
 
 import { DomainModel } from 'src/domain/models';
 
-import { Pet } from 'src/domain/business/slices/pet/models';
-import { Post } from 'src/domain/business/slices/feed/models';
-import { Commentary } from 'src/domain/business/slices/commentary/models';
 import { 
   Authentication,
   Confirmation,
@@ -57,12 +51,10 @@ export class User extends DomainModel {
   @Column()
   public pictureId: string;
 
-  @IsInt()
-  @IsNumber()
-  @IsPositive()
-  @Max(Number.MAX_SAFE_INTEGER)
+  @IsString()
+  @IsNotEmpty()
   @Column()
-  public descriptor: number;
+  public permissions: string;
 
   @OneToOne(() => Confirmation, confirmation => confirmation.user)
   @JoinColumn()
@@ -76,16 +68,4 @@ export class User extends DomainModel {
   @JoinColumn()
   public authentications: Authentication[];
 
-  @OneToMany(() => Pet, pet => pet.user)
-  @JoinColumn()
-  public pets: Pet[];
-
-  @OneToMany(() => Post, post => post.user)
-  @JoinColumn()
-  public posts: Post[];
-
-  @OneToMany(() => Commentary, commentary => commentary.user)
-  @JoinColumn()
-  public commentaries: Commentary[];
-  
 }

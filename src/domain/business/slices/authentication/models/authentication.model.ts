@@ -1,5 +1,5 @@
 import { IsString } from 'class-validator';
-import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 import { DomainModel } from 'src/domain/models';
 import { User } from 'src/domain/business/slices/user';
 

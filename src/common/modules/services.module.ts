@@ -2,15 +2,10 @@ import { Module } from '@nestjs/common';
 import { DomainModule } from 'src/domain';
 import {
   AuthenticationService,
-  BucketService,
-  CommentaryService,
   ConfigurationService,
   ConfirmationService,
-  EstablishmentService,
   LoggingService,
   MessageService,
-  PetService,
-  PostService,
   RecoveryService,
   UserService
 } from 'src/common/services';
@@ -30,29 +25,19 @@ import { ConfigurationModule } from './configuration.module';
   ],
   providers: [
     AuthenticationService,
-    BucketService,
-    CommentaryService,
     ConfigurationService,
     ConfirmationService,
-    EstablishmentService,
     LoggingService,
     MessageService,
-    PetService,
-    PostService,
     RecoveryService,
     UserService
   ],
   exports: [
     AuthenticationService,
-    BucketService,
-    CommentaryService,
     ConfigurationService,
     ConfirmationService,
-    EstablishmentService,
     LoggingService,
     MessageService,
-    PetService,
-    PostService,
     RecoveryService,
     UserService
   ]
