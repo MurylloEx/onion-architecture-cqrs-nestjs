@@ -2,7 +2,11 @@ import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { ConfigurationService } from 'src/common/services';
-import { JwtAuthorizeProvider, JwtStrategy, ThrottlerProvider } from 'src/common/security';
+import {
+  HttpJwtStrategy,
+  WsJwtStrategy,
+  ThrottlerProvider
+} from 'src/common/security';
 
 import { ConfigurationModule } from './configuration.module';
 
@@ -29,9 +33,9 @@ const JwtModuleAsync = JwtModule.registerAsync({
     ThrottlerModuleAsync,
   ],
   providers: [
-    JwtStrategy,
-    ThrottlerProvider,
-    JwtAuthorizeProvider
+    HttpJwtStrategy,
+    WsJwtStrategy,
+    ThrottlerProvider
   ]
 })
 export class SecurityModule { }

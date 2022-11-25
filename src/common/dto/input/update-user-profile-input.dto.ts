@@ -6,8 +6,6 @@ import {
   Length
 } from 'class-validator';
 
-import { SafeBufferTransform } from 'src/common/security';
-
 export class UpdateUserProfileDto {
 
   @IsString()

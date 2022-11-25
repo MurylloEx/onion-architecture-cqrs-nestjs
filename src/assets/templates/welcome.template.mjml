@@ -1,7 +1,7 @@
 <mjml>
   <mj-head>
-    <mj-title>Inclusive Pet</mj-title>
-    <mj-preview>Inclusive Pet</mj-preview>
+    <mj-title>NestJS Boilerplate</mj-title>
+    <mj-preview>NestJS Boilerplate</mj-preview>
     <mj-attributes>
       <mj-all font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"></mj-all>
       <mj-text 
@@ -52,49 +52,14 @@
             font-size="20px"
             align="center"
           >
-            Olá ${{ user_name }}, seja bem vindo ao Inclusive Pet!
+            Olá ${{ user_name }}, seja bem vindo ao NestJS Boilerplate!
           </mj-text>
           <mj-text 
             color="#637381" 
             font-size="16px" 
             align="center"
           >
-            Agradeçemos o seu cadastro no aplicativo Inclusive Pet! Nele será possível:
-          </mj-text>
-          <mj-text 
-            color="#637381" 
-            font-size="16px" 
-            align="justify"
-          >
-            <ul>
-              <li style="padding-bottom: 20px">
-                <strong>
-                  Anunciar PET desaparecido:
-                </strong> 
-                Caso um dos seus animais de estimação se perca você pode 
-                compartilhar um post na comunidade, buscando ajuda para 
-                encontra-lo e até oferecer recompensas.
-              </li>
-              <li style="padding-bottom: 20px">
-                <strong>
-                  Anunciar PET para cruzamento:
-                </strong>
-                Você pode compartilhar a fotinha do seu pet para buscar 
-                outro dono de pet que esteja interessado em ter filhotinhos!
-              </li>
-              <li>
-                <strong>
-                  Anunciar PET para Adoção:
-                </strong>
-                É possivel também divulgar animais para adoção.
-              </li>
-              <li>
-                <strong>
-                  Acompanhar o cronograma vacinal:
-                </strong>
-                Cadastre as vacinas do seu pet e receba um lembrete quando a data estiver proxima.
-              </li>
-            </ul>
+            Agradeçemos o seu cadastro no aplicativo NestJS Boilerplate!
           </mj-text>
           <mj-text 
             color="#637381" 

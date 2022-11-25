@@ -25,6 +25,14 @@ export class AuthenticationController {
     private readonly recoveryService: RecoveryService
   ) { }
 
+  @IgnoreAppVersion()
+  @IgnoreResponseDefault()
+  @Get('/index')
+  @Render('websocket')
+  index(): object {
+    return {};
+  }
+
   @Post('/signup')
   registerUser(@Body() user: UserSignUpDto): Promise<UserDto> {
     return this.authenticationService.registerUser(user);

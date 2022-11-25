@@ -48,10 +48,6 @@ export class User extends DomainModel {
   public pushToken: string;
 
   @IsString()
-  @Column()
-  public pictureId: string;
-
-  @IsString()
   @IsNotEmpty()
   @Column()
   public permissions: string;

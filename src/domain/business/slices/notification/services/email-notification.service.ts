@@ -65,7 +65,7 @@ export class EmailNotificationDomainService {
     const mailer: Mailer = await this.createMailer(userId, 'welcome');
 
     const mail = mailer
-      .subject('Bem vindo ao Inclusive Pet!')
+      .subject('Bem vindo ao NestJS Boilerplate!')
       .set('user_name', userName)
       .set('confirmation_url', confirmationUrl);
 
@@ -80,7 +80,7 @@ export class EmailNotificationDomainService {
     const mailer: Mailer = await this.createMailer(userId, 'recovery');
 
     const mail: Mailer = mailer
-      .subject('Redefinição de Senha - Inclusive Pet')
+      .subject('Redefinição de Senha - NestJS Boilerplate')
       .set('user_name', userName)
       .set('recovery_code', recoveryCode);
 

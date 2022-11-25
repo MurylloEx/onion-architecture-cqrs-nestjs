@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
 import { Access } from 'src/common/security/access';
-import { createDescriptor } from 'src/common/security/parser';
 import { AuthenticationDomainService } from 'src/domain';
 
 import {

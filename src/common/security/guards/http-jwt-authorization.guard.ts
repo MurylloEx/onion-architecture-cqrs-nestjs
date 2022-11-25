@@ -4,20 +4,20 @@ import { AuthGuard } from '@nestjs/passport';
 import { ExecutionContext, Injectable, Provider } from '@nestjs/common';
 
 @Injectable()
-export class JwtAuthorizeGuard extends AuthGuard('jwt') {
+export class HttpJwtAuthorizationGuard extends AuthGuard('jwt') {
 
   canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
     return super.canActivate(context);
   }
 
-  handleRequest(err: any, user: any) {
+  override handleRequest(err: any, user: any) {
     if (err) throw err;
     return user;
   }
 
 }
 
-export const JwtAuthorizeProvider: Provider = {
+export const HttpJwtAuthorizeProvider: Provider = {
   provide: APP_GUARD,
-  useClass: JwtAuthorizeGuard
+  useClass: HttpJwtAuthorizationGuard
 };

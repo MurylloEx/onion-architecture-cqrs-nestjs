@@ -1,4 +1,4 @@
-Olá ${{ user_name }}, você recentemente solicitou a recuperação de senha da sua conta no Inclusive Pet? Use o codigo abaixo para liberar o acesso no seu app.
+Olá ${{ user_name }}, você recentemente solicitou a recuperação de senha da sua conta no NestJS Boilerplate? Use o codigo abaixo para liberar o acesso no seu app.
 
 Código: ${{ recovery_code }}
 

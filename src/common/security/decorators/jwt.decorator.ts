@@ -7,7 +7,7 @@ export const Jwt = createParamDecorator((_, ctx: ExecutionContext) => {
     const request = ctx.switchToHttp().getRequest<Request>();
     return request['user'];
   }
-  else if (ctx.getType() === 'ws') {
+  if (ctx.getType() === 'ws') {
     const client = ctx.switchToWs().getClient<WebSocket>();
     return client['user'];
   }

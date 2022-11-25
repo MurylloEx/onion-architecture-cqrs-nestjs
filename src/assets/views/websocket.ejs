@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <script>
+      const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE4N2EwOGFhLWMxNmEtNGQ2OC04M2MxLWQ2ZmFiNzEzOGI2NiIsImNyZWF0ZWRBdCI6IjIwMjItMTEtMjNUMTc6MzM6NDEuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjItMTEtMjRUMDc6MTk6MTIuMDAwWiIsImRlbGV0ZWRBdCI6bnVsbCwiZnVsbE5hbWUiOiJzdHJpbmciLCJuaWNrTmFtZSI6InN0cmluZyIsInBob25lIjoiODE5OTY0NTcwMjEiLCJlbWFpbCI6Im11cnlsbG9waW1lbnRhQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJFRaN2xoM1VGTWNMMUxoYzd6SmVNRi5ub3lMNGJ5WnhwNUtvUi9UNzE5TWlZTWpNQThTZExpIiwicHVzaFRva2VuIjoic3RyaW5nIiwicGVybWlzc2lvbnMiOiJjcmVhdGVfbWVzc2FnZSxyZWFkX21lc3NhZ2UsdXBkYXRlX21lc3NhZ2UsZGVsZXRlX21lc3NhZ2UscmVhZF9hbm90aGVyX3VzZXIscmVhZF91c2VyLHVwZGF0ZV91c2VyLGRlbGV0ZV91c2VyIiwiaWF0IjoxNjY5Mjc0MzUyLCJleHAiOjE2NzE4NjYzNTIsImlzcyI6ImluY2x1c2l2ZXBldC5jb20uYnIiLCJzdWIiOiJhODdhMDhhYS1jMTZhLTRkNjgtODNjMS1kNmZhYjcxMzhiNjYifQ.tpQM_6ZHXHFPP5mRR0eswCqvVs_7VBY5eZdfHMopQEQ';
+      const socket = new WebSocket('ws://localhost?Jwt=' + jwt);
+      socket.onopen = function() {
+        console.log('Connected');
+        socket.send(
+          JSON.stringify({
+            event: 'broadcast',
+            data: { message: 'Olá, meu nome é Muryllo!' },
+          }),
+        );
+        socket.onmessage = function(data) {
+          console.log(data);
+        };
+      };
+    </script>
+  </head>
+
+  <body></body>
+</html>

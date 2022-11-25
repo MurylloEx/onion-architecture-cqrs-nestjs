@@ -1,7 +1,7 @@
 <mjml>
   <mj-head>
-    <mj-title>Inclusive Pet</mj-title>
-    <mj-preview>Inclusive Pet</mj-preview>
+    <mj-title>NestJS Boilerplate</mj-title>
+    <mj-preview>NestJS Boilerplate</mj-preview>
     <mj-attributes>
       <mj-all font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"></mj-all>
       <mj-text 
@@ -61,7 +61,7 @@
             align="justify"
           >
             Olá ${{ user_name }}, você recentemente solicitou a recuperação de senha da sua conta no 
-            Inclusive Pet? Use o codigo abaixo para liberar o acesso no seu app.
+            NestJS Boilerplate? Use o codigo abaixo para liberar o acesso no seu app.
           </mj-text>
           <mj-text 
             color="#EA3541" 

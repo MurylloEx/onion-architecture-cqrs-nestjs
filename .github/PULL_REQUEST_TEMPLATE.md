@@ -1,4 +1,4 @@
-<h1 align="center">🐾 Inclusive Pet API</h1>
+<h1 align="center">🐾 NestJS Boilerplate API</h1>
 
 # Descrição
 

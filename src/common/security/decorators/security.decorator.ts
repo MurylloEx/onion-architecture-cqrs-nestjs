@@ -1,7 +1,14 @@
 import { applyDecorators, UseGuards } from '@nestjs/common';
-import { AuthorizeGuard } from 'src/common/security/guards';
+import { 
+  AuthorizationGuard, 
+  HttpJwtAuthorizationGuard, 
+  WsJwtAuthorizationGuard 
+} from 'src/common/security/guards';
 
 export const Security = (): ClassDecorator & MethodDecorator => applyDecorators(
-  UseGuards(AuthorizeGuard)
+  UseGuards(
+    AuthorizationGuard, 
+    HttpJwtAuthorizationGuard, 
+    WsJwtAuthorizationGuard
+  )
 );
-

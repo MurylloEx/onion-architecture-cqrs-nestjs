@@ -2,10 +2,9 @@ import { WebSocket } from 'ws';
 import { MessageBody } from '@nestjs/websockets';
 import { SubscribeMessage, WebSocketGateway } from '@nestjs/websockets';
 import { OnGatewayConnection, OnGatewayDisconnect } from '@nestjs/websockets';
-import { AuthorizeGuard, Jwt, JwtDto } from 'src/common';
-import { UseGuards } from '@nestjs/common';
+import { Access, Jwt, JwtDto, Permissions, Security } from 'src/common';
 
-@UseGuards(AuthorizeGuard)
+@Security()
 @WebSocketGateway()
 export class WebSockGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
@@ -14,15 +13,16 @@ export class WebSockGateway implements OnGatewayConnection, OnGatewayDisconnect 
   handleConnection(client: WebSocket) {
     this.clients.push(client);
   }
-  
+
   handleDisconnect(client: WebSocket) {
     let k = this.clients.indexOf(client);
     this.clients.splice(k, 1);
   }
 
+  @Permissions(Access.CREATE_MESSAGE)
   @SubscribeMessage('broadcast')
   onBroadcast(@MessageBody() data: any, @Jwt() jwt: JwtDto) {
-    console.log('Message received: ', data);
+    console.log('Message received: ', data, jwt);
   }
 
 }
