@@ -11,7 +11,7 @@ export class MessageController {
 
   @Post()
   @Permissions(Access.CREATE_MESSAGE)
-  create(@Body() message: MessageDto) {
+  create(@Body() message: MessageDto): Promise<MessageDto> {
     return this.messageService.create(message.title, message.description);
   }
 
@@ -41,7 +41,7 @@ export class MessageController {
     Access.DELETE_MESSAGE,
     Access.READ_MESSAGE
   )
-  delete(@Param('id') id: string) {
+  delete(@Param('id') id: string): Promise<MessageDto> {
     return this.messageService.delete(id);
   }
 

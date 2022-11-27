@@ -26,7 +26,7 @@ export type SecurityConfigSlice = {
 
 export const SECURITY_CONFIG = 'SECURITY_CONFIG';
 
-export const SecurityConfig = registerAs<SecurityConfigSlice>(SECURITY_CONFIG, (): any => ({
+export const SecurityConfig = registerAs<SecurityConfigSlice>(SECURITY_CONFIG, () => ({
   throttler: {
     ttl: cast(process.env.SECURITY_THROTTLER_TTL, 'Number'),
     limit: cast(process.env.SECURITY_THROTTLER_LIMIT, 'Number'),

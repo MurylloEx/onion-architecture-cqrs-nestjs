@@ -12,7 +12,7 @@ export type ServerConfigSlice = {
 
 export const SERVER_CONFIG = 'SERVER_CONFIG';
 
-export const ServerConfig = registerAs<ServerConfigSlice>(SERVER_CONFIG, (): any => ({
+export const ServerConfig = registerAs<ServerConfigSlice>(SERVER_CONFIG, () => ({
   host: cast(process.env.SERVER_HOST, 'String'),
   port: cast(process.env.SERVER_PORT, 'Number'),
   globalPrefix: cast(process.env.SERVER_GLOBAL_PREFIX, 'String'),

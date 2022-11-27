@@ -5,8 +5,8 @@ import { INestApplicationContext } from '@nestjs/common';
 
 export class WsCommonAdapter extends WsAdapter {
 
-  private constructor(appOrHttpServer?: any) {
-    super(appOrHttpServer);
+  private constructor(protected readonly app: INestApplicationContext) {
+    super(app);
   }
 
   override bindClientConnect(server: WebSocketServer, callback: Function): void {
@@ -18,10 +18,6 @@ export class WsCommonAdapter extends WsAdapter {
 
   static fromApp(app: INestApplicationContext): WsAdapter {
     return new WsCommonAdapter(app);
-  }
-
-  static fromServer(server: any): WsAdapter {
-    return new WsCommonAdapter(server);
   }
 
 }

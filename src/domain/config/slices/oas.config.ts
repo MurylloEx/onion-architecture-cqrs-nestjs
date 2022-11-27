@@ -28,7 +28,7 @@ export type OasConfigSlice = {
 
 export const OAS_CONFIG = 'OAS_CONFIG';
 
-export const OasConfig = registerAs<OasConfigSlice>(OAS_CONFIG, (): any => ({
+export const OasConfig = registerAs<OasConfigSlice>(OAS_CONFIG, () => ({
   path: cast(process.env.OAS_PATH, 'String'),
   tag: cast(process.env.OAS_TAG, 'String'),
   title: cast(process.env.OAS_TITLE, 'String'),

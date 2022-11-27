@@ -27,8 +27,8 @@ export class AuthenticationController {
 
   @IgnoreAppVersion()
   @IgnoreResponseDefault()
-  @Get('/index')
   @Render('websocket')
+  @Get('/index')
   index(): object {
     return {};
   }

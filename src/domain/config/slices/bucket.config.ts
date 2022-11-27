@@ -12,7 +12,7 @@ export type BucketConfigSlice = {
 
 export const BUCKET_CONFIG = 'BUCKET_CONFIG';
 
-export const BucketConfig = registerAs<BucketConfigSlice>(BUCKET_CONFIG, (): any => ({
+export const BucketConfig = registerAs<BucketConfigSlice>(BUCKET_CONFIG, () => ({
   imgur: {
     id: cast(process.env.BUCKET_IMGUR_ID, 'String'),
     secret: cast(process.env.BUCKET_IMGUR_SECRET, 'String')

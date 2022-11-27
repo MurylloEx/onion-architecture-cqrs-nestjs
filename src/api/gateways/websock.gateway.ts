@@ -2,9 +2,9 @@ import { WebSocket } from 'ws';
 import { MessageBody } from '@nestjs/websockets';
 import { SubscribeMessage, WebSocketGateway } from '@nestjs/websockets';
 import { OnGatewayConnection, OnGatewayDisconnect } from '@nestjs/websockets';
-import { Access, Jwt, JwtDto, Permissions, Security } from 'src/common';
+import { Access, Jwt, JwtDto, Permissions, WsSecurity } from 'src/common';
 
-@Security()
+@WsSecurity()
 @WebSocketGateway()
 export class WebSockGateway implements OnGatewayConnection, OnGatewayDisconnect {
 

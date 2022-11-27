@@ -8,7 +8,7 @@ export type CacheConfigSlice = {
 
 export const CACHE_CONFIG = 'CACHE_CONFIG';
 
-export const CacheConfig = registerAs<CacheConfigSlice>(CACHE_CONFIG, (): any => ({
+export const CacheConfig = registerAs<CacheConfigSlice>(CACHE_CONFIG, () => ({
   ttl: cast(process.env.CACHE_TTL, 'Number'),
   max: cast(process.env.CACHE_MAX, 'Number')
 }));

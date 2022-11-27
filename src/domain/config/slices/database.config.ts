@@ -13,7 +13,7 @@ export type DatabaseConfigSlice = {
 
 export const DATABASE_CONFIG = 'DATABASE_CONFIG';
 
-export const DatabaseConfig = registerAs<DatabaseConfigSlice>(DATABASE_CONFIG, (): any => ({
+export const DatabaseConfig = registerAs<DatabaseConfigSlice>(DATABASE_CONFIG, () => ({
   type: cast(process.env.DATABASE_TYPE, 'String'),
   storage: cast(process.env.DATABASE_STORAGE, 'String'),
   synchronize: cast(process.env.DATABASE_SYNCHRONIZE, 'Boolean'),

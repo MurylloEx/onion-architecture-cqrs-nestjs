@@ -14,7 +14,7 @@ export type RootConfigSlice = {
 
 export const ROOT_CONFIG = 'ROOT_CONFIG';
 
-export const RootConfig = registerAs<RootConfigSlice>(ROOT_CONFIG, (): any => ({
+export const RootConfig = registerAs<RootConfigSlice>(ROOT_CONFIG, () => ({
   environment: cast(process.env.ENVIRONMENT, 'String')
 }));
 

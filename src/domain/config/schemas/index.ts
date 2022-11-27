@@ -1,4 +1,4 @@
-import * as Joi from 'joi';
+import { object } from 'joi';
 import { AppSchema } from './app.schema';
 import { BucketSchema } from './bucket.schema';
 import { ServerSchema } from './server.schema';
@@ -23,7 +23,7 @@ export * from './oas.schema';
 export * from './security.schema';
 export * from './smtp.schema';
 
-export const ConfigSchema = Joi.object()
+export const ConfigSchema = object()
   .concat(AppSchema)
   .concat(BucketSchema)
   .concat(CacheSchema)

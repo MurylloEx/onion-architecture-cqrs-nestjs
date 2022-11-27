@@ -13,7 +13,7 @@ export type DiscordConfigSlice = {
 
 export const DISCORD_CONFIG = 'DISCORD_CONFIG';
 
-export const DiscordConfig = registerAs<DiscordConfigSlice>(DISCORD_CONFIG, (): any => ({
+export const DiscordConfig = registerAs<DiscordConfigSlice>(DISCORD_CONFIG, () => ({
   webhook: {
     deployUrl: cast(process.env.DISCORD_WEBHOOK_DEPLOY_URL, 'String'),
     commonUrl: cast(process.env.DISCORD_WEBHOOK_COMMON_URL, 'String')
